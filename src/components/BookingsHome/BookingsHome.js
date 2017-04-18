@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 // var ReactDOM = require('react-dom');
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button} from "react-bootstrap";
 
 
 
@@ -8,28 +8,49 @@ import './BookingsHome.css';
 
 class BookingsHome extends Component {
     render() {
-        return (np
+        return (
           <Grid>
               <Row>
                    <Col xs={12} md={8}>
-                        <h1 className="active_bookings_text">0 Active Bookings</h1>
+
+                            <h1 className="active_bookings_text"> <span className="active_number"> 0</span> Active Bookings</h1>
 
                    </Col>
 
                    <Col xs={6} md={4}>
-                     <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Help
-                            <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                            <li><a href="#">Test 1</a></li>
-                            <li><a href="#">Test 2</a></li>
-                            <li><a href="#">Test 3</a></li>
 
-                            </ul>
-                      </div>
+
+
                    </Col>
               </Row>
-        </Grid>
+              <Row>
+                <Col md={8}>
+                  <button className="schedule_username_buttons btn btn-default btn-lg send_schedule"> Send Schedule </button>
+
+                <DropdownButton className="schedule_username_buttons btn btn-default btn-lg" title="All Active Bookings" id="bg-nested-dropdown">
+                      <MenuItem eventKey="1">Upcoming Bookings</MenuItem>
+                      <MenuItem eventKey="2">Completed Bookings</MenuItem>
+                      <MenuItem eventKey="3">All Active Bookings</MenuItem>
+                  </DropdownButton>
+                </Col>
+
+                <Col md={4} className="search-bookings">
+                  <FormGroup>
+                     <InputGroup>
+                       <InputGroup.Addon><button className="fa fa-search"></button></InputGroup.Addon>
+                       <FormControl type="text" placeholder="Search Bookings ..." />
+                     </InputGroup>
+                   </FormGroup>
+                </Col>
+              </Row>
+
+
+        <Jumbotron>
+           <h1>{0} Bookings found.</h1>
+           <p>We couldn't find any bookings that matched your search.</p>
+           <p><Button bsStyle="info">Create a Booking</Button></p>
+        </Jumbotron>
+          </Grid>
         )
     }
 }

@@ -3,4 +3,37 @@
 
 .active_bookings_text{
   text-align: left;
+
+}
+
+
+.help-username_buttons{
+  border: none;
+}
+
+
+.send_schedule{
+  margin-right: 20px;
+}
+
+
+.schedule_username_buttons{
+  border: 1px solid #ccc;
+}
+
+
+.active_number{
+  background-color: #343544;
+    color: #98E061;
+    font-weight: 700;
+    line-height: 34px;
+    font-size: 31px;
+    padding: 1px 9px;
+    border-radius: 20px;
+}
+
+.fa{
+  background-color: #eee;
+  border: none;
+  color: #556;
 }
