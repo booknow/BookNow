@@ -1,0 +1,8 @@
+.summary-col h3 {
+  color: white;
+}
+
+.summary-col .panel-default .panel-heading {
+  background-color: #00ad9a !important;
+  border: 0;
+}
