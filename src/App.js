@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import Nav from './components/Nav/Nav'
+import Nav from './components/Nav/Nav';
+import LogIn from './components/LogIn/LogIn';
+
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Nav / >
-
+        <LogIn / >
       </div>
     );
   }

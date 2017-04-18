@@ -1,0 +1,15 @@
+.LogIn_Container{
+  background-color: #EBF1F4;
+  height: 90vh;
+}
+
+
+.LogIn_Box{
+  position: relative;
+  top:25%;
+}
+
+.form_group{
+  margin-bottom: 15px;
+  width: 20%;
+}
