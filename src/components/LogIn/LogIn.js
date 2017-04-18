@@ -20,8 +20,7 @@ class LogIn extends Component {
                         <br/>
                         <input className = "form_group" type="text" name="password"/>
                     </form>
-                    <button className="sign_in_button"> Sign In </button>
-                    <button className ="sign_up_button"> Sign Up </button>
+                    <button> Sign In </button>
                 </div>
             </div>
         )
