@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
+import {InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
 
 class AddAppointment extends Component {
   constructor(props) {
@@ -23,32 +23,83 @@ class AddAppointment extends Component {
 
   render() {
 
+    const topHeading = {
+      marginBottom: '25px',
 
+    }
+
+    const headingMargin = {
+      textAlign: 'left',
+      marginBottom: '25px',
+      marginTop: '55px'
+    }
 
     return (
-      <div>
-      <div>
-        <h1>Add Appointment</h1>
-        <p>Here</p>
-      </div>
+      <Grid>
+        <Row>
+          <Col md={12}>
+            <h1 style={topHeading}>New Appointment</h1>
+          </Col>
 
-      <form>
-        <FormGroup
-          controlId="formBasicText"
-          validationState={this.getValidationState()}
-        >
-          <ControlLabel>Working example with validation</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.value}
-            placeholder="Enter text"
-            onChange={this.handleChange}
-          />
-          <FormControl.Feedback />
-          <HelpBlock>Validation is based on string length.</HelpBlock>
-        </FormGroup>
-      </form>
-      </div>
+          <Col md={12}>
+          <Form horizontal>
+          <h2 style={headingMargin}>Client Info</h2>
+            <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>
+               Email
+             </Col>
+             <Col sm={10}>
+               <FormControl type="email" placeholder="Email" />
+             </Col>
+            </FormGroup>
+
+            <FormGroup>
+            <Col componentClass={ControlLabel} sm={2}>
+               Name
+             </Col>
+             <Col sm={5}>
+               <FormControl type="text" placeholder="First Name" />
+             </Col>
+             <Col sm={5}>
+               <FormControl type="text" placeholder="Last Name" />
+             </Col>
+            </FormGroup>
+
+            <h2 style={headingMargin}>Appointment Service</h2>
+
+            <FormGroup controlId="formControlsSelect">
+
+              <Col componentClass={ControlLabel} sm={2}>
+                <ControlLabel>Type of Service</ControlLabel>
+              </Col>
+              <Col sm={10}>
+              <FormControl componentClass="select" placeholder="select">
+                <option value="WebAppDev">Web App Development</option>
+                <option value="socialMedia">Social Media</option>
+                <option value="consulting">Consulting</option>
+                <option value="simpleWebsite">Simple Website</option>
+              </FormControl>
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={2}>
+                <ControlLabel>Final Price</ControlLabel>
+              </Col>
+              <Col sm={5}>
+                <InputGroup>
+                  <InputGroup.Addon>$</InputGroup.Addon>
+                  <FormControl type="text" />
+                  <InputGroup.Addon>.00</InputGroup.Addon>
+                </InputGroup>
+              </Col>
+            </FormGroup>
+
+
+          </Form>
+        </Col>
+      </Row>
+    </Grid>
 
 
 
