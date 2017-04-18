@@ -3,10 +3,14 @@ import React, {Component} from "react";
 import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button} from "react-bootstrap";
 
 
+import MyComponent from "../DayPicker/DayPicker";
+
 
 import './BookingsHome.css';
 
 class BookingsHome extends Component {
+
+
     render() {
         return (
           <Grid>
@@ -18,7 +22,6 @@ class BookingsHome extends Component {
                    </Col>
 
                    <Col xs={6} md={4}>
-
 
 
                    </Col>
@@ -44,13 +47,24 @@ class BookingsHome extends Component {
                 </Col>
               </Row>
 
+<Row>
 
-        <Jumbotron>
-           <h1>{0} Bookings found.</h1>
-           <p>We couldn't find any bookings that matched your search.</p>
-           <p><Button bsStyle="info">Create a Booking</Button></p>
-        </Jumbotron>
+<Col sm={8}>
+
+  <Jumbotron>
+    <h1>{0} Bookings found.</h1>
+    <p>We couldn't find any bookings that matched your search.</p>
+    <p><Button bsStyle="info">Create a Booking</Button></p>
+  </Jumbotron>
+</Col>
+
+<Col sm={4}>
+<MyComponent />
+</Col>
+
+</Row>
           </Grid>
+
         )
     }
 }

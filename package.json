@@ -7,11 +7,8 @@
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
-<<<<<<< HEAD
     "react-router": "^4.1.1",
-=======
     "react-router-dom": "^4.1.1",
->>>>>>> master
     "redux": "^3.6.0"
   },
   "devDependencies": {
