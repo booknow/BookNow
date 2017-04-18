@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import {InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
-
+import {Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
+import './apptmnt.css'
 class AddAppointment extends Component {
   constructor(props) {
     super(props)
@@ -24,14 +24,27 @@ class AddAppointment extends Component {
   render() {
 
     const topHeading = {
-      marginBottom: '25px',
-
+      marginBottom: '0px',
     }
 
     const headingMargin = {
       textAlign: 'left',
       marginBottom: '25px',
       marginTop: '55px'
+    }
+
+    const blueBg = {
+      backgroundColor: '#00AD9A',
+      color: 'white'
+    }
+
+    const title = (
+      <h3>Summary</h3>
+    )
+
+    const titleSt = {
+      backgroundColor: '#00AD9A',
+      color: 'white'
     }
 
     return (
@@ -41,7 +54,7 @@ class AddAppointment extends Component {
             <h1 style={topHeading}>New Appointment</h1>
           </Col>
 
-          <Col md={12}>
+          <Col sm={8}>
           <Form horizontal>
           <h2 style={headingMargin}>Client Info</h2>
             <FormGroup>
@@ -97,6 +110,19 @@ class AddAppointment extends Component {
 
 
           </Form>
+        </Col>
+        <Col className="summary-col" sm={4}>
+          <Panel header={title} style={blueBg}>
+
+            <p>Service</p>
+            <p>Extras</p>
+            <p>Discount</p>
+            <p>Adjustment</p>
+            <p>Tip</p>
+            <p>Total</p>
+          </Panel>
+
+
         </Col>
       </Row>
     </Grid>
