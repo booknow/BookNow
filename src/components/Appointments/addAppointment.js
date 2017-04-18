@@ -43,15 +43,19 @@ class AddAppointment extends Component {
       <h3>Summary</h3>
     )
 
+    const beforeTot = {
+      paddingBottom: '20px'
+    }
 
     const totalSt = {
         fontWeight: 'bold',
         fontSize: '1.25em',
-        marginTop: '10px'
+        paddingTop: '30px',
+        borderTop:'2px solid #00B29E'
     }
 
     return (
-      <Grid>
+      <Grid className="apptcon">
         <Row>
           <Col md={12}>
             <h1 style={topHeading}>New Appointment</h1>
@@ -138,6 +142,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
+
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
                 <ControlLabel>Frequency</ControlLabel>
@@ -177,6 +182,14 @@ class AddAppointment extends Component {
                   Extra Item 5
                 </Checkbox>
               </Col>
+            </FormGroup>
+
+            <FormGroup>
+
+            <Col sm={4} smOffset={3} className="addservice">
+              <Button block>Add Service</Button>
+            </Col>
+
             </FormGroup>
 
             <FormGroup>
@@ -220,6 +233,33 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
+            <h2 style={headingMargin}>When</h2>
+
+            <FormGroup controlId="formControlsSelect">
+              <Col componentClass={ControlLabel} sm={3}>
+                <ControlLabel>Date / Time</ControlLabel>
+              </Col>
+
+              <Col sm={7}>
+
+              </Col>
+            </FormGroup>
+
+            <h2 style={headingMargin}>Comments</h2>
+
+            <FormGroup controlId="formControlsTextarea">
+              <Col componentClass={ControlLabel} sm={3}>
+                <ControlLabel>By Staff</ControlLabel>
+              </Col>
+
+              <Col sm={9}>
+
+
+                  <FormControl componentClass="textarea" placeholder="Comments" />
+
+              </Col>
+            </FormGroup>
+
           </Form>
         </Col>
         <Col className="summary-col" sm={4}>
@@ -249,7 +289,7 @@ class AddAppointment extends Component {
               </tr>
 
               <tr>
-                <td>Tip</td>
+                <td style={beforeTot}>Tip</td>
                 <td>$</td>
               </tr>
 

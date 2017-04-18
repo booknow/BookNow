@@ -3,10 +3,17 @@ form h2 {
   padding-bottom:5px;
   }
 
+.apptcon {
+  padding-bottom:50px;
+}
+
 form .checkbox {
   text-align: left;
 }
-
+.addservice {
+  margin-top:25px;
+  margin-bottom:50px;
+}
 .summary-col .panel-default {
   max-width: 275px;
   margin-left:auto;
