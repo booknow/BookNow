@@ -7,7 +7,14 @@ class AddAppointment extends Component {
     super(props)
     this.state = {
       value: "",
-      servicetype: ""
+      servicetype: "",
+      serviceamt: 0,
+      extrasamt: 0,
+      discountamt:0,
+      adjustmentamt: 0,
+      tipamt:0,
+      totalamt: 0
+
     }
 
     console.log('this is the log', this.state);
@@ -21,10 +28,18 @@ class AddAppointment extends Component {
     else if (length > 0) return 'error';
   }
 
+  handleChange(e) {
+      if(e.target.value === ''){
+        this.setState({serviceamt: 0});
+      }
+      if (e.target.value === 'Web Development') {
+          this.setState({serviceamt: this.state.serviceamt = 10000});
+      }
 
-
-
-
+      if (e.target.value === 'Social Media') {
+        this.setState({serviceamt: this.state.serviceamt = 500000});
+      }
+  }
 
   render() {
 
@@ -140,10 +155,10 @@ class AddAppointment extends Component {
               <Col sm={7}>
                 <FormControl componentClass="select" placeholder="select" value={this.state.servicetype} onChange={ this.handleChange.bind(this) } >
                   <option value=""></option>
-                  <option value="Web Development">Web App Development</option>
-                  <option value="socialMedia">Social Media</option>
-                  <option value="consulting">Consulting</option>
-                  <option value="simpleWebsite">Simple Website</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Social Media">Social Media</option>
+                  <option value="Consulting">Consulting</option>
+                  <option value="Simple Website">Simple Website</option>
                 </FormControl>
               </Col>
             </FormGroup>
@@ -274,29 +289,33 @@ class AddAppointment extends Component {
             <Table responsive>
               <tr>
                 <td>Service</td>
-                <td>$</td>
+
+                <td>{this.state.serviceamt} </td>
               </tr>
 
 
 
               <tr>
                 <td>Extras</td>
-                <td>$</td>
+
+                <td></td>
               </tr>
 
               <tr>
                 <td>Discount</td>
-                <td>$</td>
+
+                <td></td>
               </tr>
 
               <tr>
                 <td>Adjustment</td>
-                <td>$</td>
+
+                <td></td>
               </tr>
 
               <tr>
                 <td style={beforeTot}>Tip</td>
-                <td>$</td>
+
               </tr>
 
               <tr>
@@ -324,11 +343,7 @@ class AddAppointment extends Component {
 
     }
 
-    handleChange(e) {
-      this.setState({ servicetype: e.target.value }, () => {
-        console.log( this.state.servicetype );
-      });
-    }
+
 
   }
 

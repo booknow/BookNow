@@ -17,6 +17,13 @@ form .checkbox {
 .summary-col .panel-default {
   max-width: 275px;
   margin-left:auto;
+
+}
+
+.summary-col {
+  position: fixed;
+  right: 4vw;
+  top: 100px;
 }
 
 .panel-underbtn {
@@ -68,4 +75,7 @@ form .checkbox {
     max-width:100vw;
   }
 
+  .summary-col {
+    position:relative;
+  }
 }
