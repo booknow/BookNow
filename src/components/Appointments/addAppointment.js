@@ -15,16 +15,13 @@ class AddAppointment extends Component {
       discountamt:0,
       adjustmentamt: 0,
       tipamt:0,
-      totalamt: 0,
+
       email: null,
       firstname: null,
       lastname: null
-
     }
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
   }
 
   getValidationState() {
@@ -34,22 +31,26 @@ class AddAppointment extends Component {
     else if (length > 0) return 'error';
   }
 
-  handleChange(e) {
-      if(e.target.value === ''){
-        this.setState({serviceamt: 0});
-      }
-      if (e.target.value === 'Web Development') {
-          this.setState({serviceamt: this.state.serviceamt = 10000});
-      }
-
-      if (e.target.value === 'Social Media') {
-        this.setState({serviceamt: this.state.serviceamt = 500000});
-      }
-
-  }
 
   handleChange(field, e) {
     this.setState({[field]: e.target.value})
+
+    if(e.target.value === ''){
+      this.setState({serviceamt: 0});
+    }
+
+    if (e.target.value === 'Web Development') {
+        this.setState({serviceamt: 10000 });
+    }
+
+    if (e.target.value === 'Social Media') {
+      this.setState({serviceamt:  500000});
+    }
+
+    if (e.target.value === 'Consulting') {
+      this.setState({serviceamt:  900});
+    }
+
   }
 
 
@@ -67,7 +68,12 @@ class AddAppointment extends Component {
   }
 
   render() {
-
+    let { serviceamt
+      , extrasamt
+      , discountamt
+      , adjustmentamt
+      , tipamt} = this.state
+    let total = parseInt(serviceamt) + parseInt(extrasamt) + parseInt(discountamt) + parseInt(adjustmentamt) + parseInt(tipamt)
     const topHeading = {
       marginBottom: '0px',
       textAlign: 'left'
@@ -245,7 +251,7 @@ class AddAppointment extends Component {
               <Col sm={5}>
                 <InputGroup>
                   <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="text" onChange={this.handleChange.bind(this, 'tipamt')}/>
+                  <FormControl type="number" onChange={this.handleChange.bind(this, 'tipamt')}/>
                   <InputGroup.Addon>.00</InputGroup.Addon>
                 </InputGroup>
               </Col>
@@ -259,7 +265,7 @@ class AddAppointment extends Component {
               <Col sm={5}>
                 <InputGroup>
                   <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="text" />
+                  <FormControl type="number" />
                   <InputGroup.Addon>.00</InputGroup.Addon>
                 </InputGroup>
               </Col>
@@ -348,7 +354,7 @@ class AddAppointment extends Component {
 
               <tr>
                 <td style={totalSt}>Total</td>
-                <td style={totalSt}>$</td>
+                <td style={totalSt}>$ {total}</td>
               </tr>
 
 
