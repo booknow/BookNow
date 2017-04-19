@@ -13,7 +13,7 @@ export default (
 		<Route
 				component={AddAppointment}
 				exact
-				path="/home"
+				path="/book"
 			/>
 		<Route
 				component={ AddAppointment }
@@ -25,7 +25,7 @@ export default (
 			/>
 		<Route
 				component={ BookingsHome }
-				path="/BookingsHome"
+				path="/home"
 			/>
 		</Switch>
   );
