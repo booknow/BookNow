@@ -30,7 +30,7 @@ class MyComponent extends React.Component {
   render() {
     return (
       <DayPicker
-        initialMonth={ new Date(2017, 1) }
+        initialMonth={ new Date() }
         disabledDays={ sundays }
         selectedDays={ this.state.selectedDay }
         onDayClick={ this.handleDayClick }
