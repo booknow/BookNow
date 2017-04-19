@@ -1,8 +1,11 @@
 import React, {Component} from "react";
+import axios from "axios"
 // var ReactDOM = require('react-dom');
 import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button} from "react-bootstrap";
 
+
 import { Link } from 'react-router-dom';
+
 import MyComponent from "../DayPicker/DayPicker";
 
 
@@ -10,7 +13,13 @@ import './BookingsHome.css';
 
 class BookingsHome extends Component {
 
+    componentWillMount() {
+      axios.get('http://localhost:3000/user', {withCredentials: true})
+      .then(response => {
+        console.log(response)
 
+      })
+    }
     render() {
         return (
           <Grid>
