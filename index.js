@@ -62,7 +62,11 @@ app.get("/getCurrentUser",(req,res)=>{
 	return res.status(200).send(req.user);
 })
 
-
+app.post('/api/book', (req,res,next) => {
+  console.log('Posting to book db', req.body);
+  // if (err) { return next(err) }
+  return res.status(200).send('working!')
+})
 
 
 
