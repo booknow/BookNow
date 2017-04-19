@@ -1,6 +1,7 @@
 .LogIn_Container{
   background-color: #EBF1F4;
   height: 90vh;
+  text-align: center;
 }
 
 
@@ -17,4 +18,9 @@
 
 .sign_up_button{
   margin-left: 1%;
+}
+
+
+.navbar{
+  border-radius: 0 !important;
 }

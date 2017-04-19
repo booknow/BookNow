@@ -21,6 +21,7 @@ class LogIn extends Component {
                         <input className = "form_group" type="text" name="password"/>
                     </form>
                     <button> Sign In </button>
+                    <button>Facebook </button>
                 </div>
             </div>
         )

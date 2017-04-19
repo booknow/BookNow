@@ -12,7 +12,7 @@ export default class NavComponent extends Component {
           <Navbar inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="#">Book Now</a>
+                <a href="#">Skema</a>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
