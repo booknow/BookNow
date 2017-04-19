@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from "react-bootstrap";
+import {Link} from "react-router-dom";
 import './Nav.css';
 
 
@@ -36,8 +37,11 @@ export default class NavComponent extends Component {
 
                 <NavDropdown eventKey={3} title="Username" id="basic-nav-dropdown">
                   <MenuItem eventKey={3.1}>My Account</MenuItem>
-                  <MenuItem eventKey={3.2}>Log Out</MenuItem>
-                </NavDropdown>
+
+               <MenuItem eventKey={3.2}>Log Out</MenuItem>
+
+              </NavDropdown>
+
 
 
 
