@@ -28,9 +28,11 @@ form .checkbox {
 
 .panel-underbtn {
   margin-left:auto;
+  margin-right:auto;
   max-width:275px;
   background-color: #1F232A;
   color: white;
+  margin-top:55px;
 }
 
 .panel-underbtn:hover {

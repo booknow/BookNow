@@ -41,6 +41,10 @@ class AddAppointment extends Component {
       }
   }
 
+  handleSubmit(e) {
+    console.log(e.target.value);
+  }
+
   render() {
 
     const topHeading = {
@@ -82,7 +86,7 @@ class AddAppointment extends Component {
           </Col>
 
           <Col sm={8}>
-          <Form horizontal>
+          <Form horizontal onSubmit={this.handleSubmit}>
           <h2 style={headingMargin}>Who</h2>
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
@@ -281,6 +285,8 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
+            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+
           </Form>
         </Col>
         <Col className="summary-col" sm={4}>
@@ -327,8 +333,6 @@ class AddAppointment extends Component {
 
             </Table>
           </Panel>
-
-          <Button className="panel-underbtn" bsSize="large" block>Save Changes</Button>
 
 
 
