@@ -178,7 +178,7 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" value={this.state.servicetype} onChange={ this.handleChange.bind(this) } >
+                <FormControl componentClass="select" placeholder="select" value={this.state.servicetype} onChange={ this.handleChange.bind(this, 'servicetype') } >
                   <option value=""></option>
                   <option value="Web Development">Web Development</option>
                   <option value="Social Media">Social Media</option>
@@ -245,7 +245,7 @@ class AddAppointment extends Component {
               <Col sm={5}>
                 <InputGroup>
                   <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="text" />
+                  <FormControl type="text" onChange={this.handleChange.bind(this, 'tipamt')}/>
                   <InputGroup.Addon>.00</InputGroup.Addon>
                 </InputGroup>
               </Col>
@@ -326,24 +326,24 @@ class AddAppointment extends Component {
               <tr>
                 <td>Extras</td>
 
-                <td></td>
+                <td>{this.state.extrasamt}</td>
               </tr>
 
               <tr>
                 <td>Discount</td>
 
-                <td></td>
+                <td>{this.state.discountamt}</td>
               </tr>
 
               <tr>
                 <td>Adjustment</td>
 
-                <td></td>
+                <td>{this.state.adjustmentamt}</td>
               </tr>
 
               <tr>
                 <td style={beforeTot}>Tip</td>
-
+                <td>{this.state.tipamt}</td>
               </tr>
 
               <tr>
