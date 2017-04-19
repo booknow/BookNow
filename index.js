@@ -7,6 +7,7 @@ const db = require('./db')
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./config.js')
+console.log(config);
 const port = 4000;
 console.log(config.facebook.clientId);
 
