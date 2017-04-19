@@ -2,7 +2,7 @@ import React, {Component} from "react";
 // var ReactDOM = require('react-dom');
 import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button} from "react-bootstrap";
 
-
+import { Link } from 'react-router';
 import MyComponent from "../DayPicker/DayPicker";
 
 
@@ -49,19 +49,25 @@ class BookingsHome extends Component {
 
 <Row>
 
-<Col sm={8}>
+    <Col sm={8}>
 
-  <Jumbotron className="jumbotron-booking">
-    <h1>{0} Bookings found.</h1>
-    <p>We couldn't find any bookings that matched your search.</p>
-    <p><Button bsStyle="info">Create a Booking</Button></p>
-  </Jumbotron>
-</Col>
+      <Jumbotron className="jumbotron-booking">
+        <h1>{0} Bookings found.</h1>
+        <p>We couldn't find any bookings that matched your search.</p>
+        <p><Button bsStyle="info">Create a Booking</Button></p>
+      </Jumbotron>
+    </Col>
 
-<Col className="calendar-picker" sm={4}>
-<MyComponent />
-</Col>
+    <Col className="calendar-picker" sm={4}>
+        <MyComponent />
+    </Col>
 
+</Row>
+    <hr />
+<Row>
+    <Col sm={4}>
+      &copy; 2017 username
+    </Col>
 </Row>
           </Grid>
 
