@@ -8,5 +8,5 @@ export function getUser() {
             console.log(response);
             return response;
           })
-    return userPromise
+    return userPromise;
 }

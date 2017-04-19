@@ -54,7 +54,7 @@ passport.deserializeUser(function(user, done) {
 
 app.get('/auth/facebook', (req, res, next) => {console.log("Authenticating"); next()}, passport.authenticate('facebook'))
 app.get('/auth/facebook/callback', (req, res, next) => {console.log("At callback"); next()}, passport.authenticate('facebook', {
-  successRedirect: "http://localhost:53549/home" ,failureRedirect:'http://localhost:53549/book'
+  successRedirect: "http://localhost:3000/home" ,failureRedirect:'http://localhost:3000/book'
 })
 )
 app.get("/getCurrentUser",(req,res)=>{
