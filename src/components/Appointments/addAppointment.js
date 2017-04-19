@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
+import axios from 'axios'
+import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
 class AddAppointment extends Component {
 
@@ -13,11 +15,15 @@ class AddAppointment extends Component {
       discountamt:0,
       adjustmentamt: 0,
       tipamt:0,
-      totalamt: 0
+      totalamt: 0,
+      email: null,
+      firstname: null,
+      lastname: null
 
     }
 
-    console.log('this is the log', this.state);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -39,11 +45,25 @@ class AddAppointment extends Component {
       if (e.target.value === 'Social Media') {
         this.setState({serviceamt: this.state.serviceamt = 500000});
       }
+
   }
 
-  handleSubmit(e) {
+  handleChange(field, e) {
+    this.setState({[field]: e.target.value})
+  }
 
-    console.log('Submit sni!');
+
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    console.log(this.state);
+
+    const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
+    .catch(function(err) {console.log(err);})
+
+    return booking;
+
   }
 
   render() {
@@ -94,7 +114,7 @@ class AddAppointment extends Component {
                Email
              </Col>
              <Col sm={9}>
-               <FormControl type="email" placeholder="Email" />
+               <FormControl type="email" onChange={this.handleChange.bind(this, 'email')} placeholder="Email" />
              </Col>
             </FormGroup>
 
@@ -103,10 +123,10 @@ class AddAppointment extends Component {
                Name
              </Col>
              <Col sm={4}>
-               <FormControl type="text" placeholder="First Name" />
+               <FormControl onChange={this.handleChange.bind(this, 'firstname')} type="text" placeholder="First Name" />
              </Col>
              <Col sm={5}>
-               <FormControl type="text" placeholder="Last Name" />
+               <FormControl onChange={this.handleChange.bind(this, 'lastname')} type="text" placeholder="Last Name" />
              </Col>
             </FormGroup>
 
@@ -288,6 +308,7 @@ class AddAppointment extends Component {
 
             <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
+
           </Form>
         </Col>
         <Col className="summary-col" sm={4}>
@@ -340,18 +361,8 @@ class AddAppointment extends Component {
         </Col>
       </Row>
     </Grid>
-
-
-
     )
-
-
     }
-
-
-
   }
-
-
 
 export default AddAppointment;
