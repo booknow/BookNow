@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
 import './apptmnt.css'
 class AddAppointment extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
-      value: ""
+      value: "",
+      servicetype: ""
     }
+
+    console.log('this is the log', this.state);
+
   }
 
   getValidationState() {
@@ -16,9 +21,9 @@ class AddAppointment extends Component {
     else if (length > 0) return 'error';
   }
 
-  handleChange(e) {
-    this.setState({ value: e.target.value });
-  }
+
+
+
 
 
   render() {
@@ -133,8 +138,9 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select">
-                  <option value="WebAppDev">Web App Development</option>
+                <FormControl componentClass="select" placeholder="select" value={this.state.servicetype} onChange={ this.handleChange.bind(this) } >
+                  <option value=""></option>
+                  <option value="Web Development">Web App Development</option>
                   <option value="socialMedia">Social Media</option>
                   <option value="consulting">Consulting</option>
                   <option value="simpleWebsite">Simple Website</option>
@@ -314,7 +320,18 @@ class AddAppointment extends Component {
 
 
     )
+
+
+    }
+
+    handleChange(e) {
+      this.setState({ servicetype: e.target.value }, () => {
+        console.log( this.state.servicetype );
+      });
+    }
+
   }
-}
+
+
 
 export default AddAppointment;
