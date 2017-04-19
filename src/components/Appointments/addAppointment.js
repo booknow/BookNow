@@ -42,7 +42,8 @@ class AddAppointment extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e.target.value);
+
+    console.log('Submit sni!');
   }
 
   render() {
