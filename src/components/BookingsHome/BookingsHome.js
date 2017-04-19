@@ -2,7 +2,7 @@ import React, {Component} from "react";
 // var ReactDOM = require('react-dom');
 import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button} from "react-bootstrap";
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import MyComponent from "../DayPicker/DayPicker";
 
 
@@ -54,7 +54,7 @@ class BookingsHome extends Component {
       <Jumbotron className="jumbotron-booking">
         <h1>{0} Bookings found.</h1>
         <p>We couldn't find any bookings that matched your search.</p>
-        <p><Button bsStyle="info">Create a Booking</Button></p>
+      <Link to="/book">  <p><Button bsStyle="info">Create a Booking</Button></p> </Link>
       </Jumbotron>
     </Col>
 
