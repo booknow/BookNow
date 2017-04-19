@@ -51,14 +51,14 @@ class BookingsHome extends Component {
 
 <Col sm={8}>
 
-  <Jumbotron>
+  <Jumbotron className="jumbotron-booking">
     <h1>{0} Bookings found.</h1>
     <p>We couldn't find any bookings that matched your search.</p>
     <p><Button bsStyle="info">Create a Booking</Button></p>
   </Jumbotron>
 </Col>
 
-<Col sm={4}>
+<Col className="calendar-picker" sm={4}>
 <MyComponent />
 </Col>
 
