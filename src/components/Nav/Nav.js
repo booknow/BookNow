@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import './Nav.css';
 
 
@@ -10,13 +11,13 @@ export default class NavComponent extends Component {
           <Navbar inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="#">Skema</a>
+                <a href="home">Skema</a>
               </Navbar.Brand>
               <Navbar.Toggle />
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-              
+                <NavItem eventKey={1}><Link to="/book">Book Appointment</Link></NavItem>
               </Nav>
               <Nav pullRight>
                 <NavDropdown eventKey={3} title="Help" id="basic-nav-dropdown">
