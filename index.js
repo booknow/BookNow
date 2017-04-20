@@ -64,7 +64,7 @@ app.get('/auth/facebook/callback', (req, res, next) => {console.log("At callback
 })
 )
 app.get("/user",(req,res)=>{
-  console.log("CUrrent User:", req.user)
+  console.log("Current User:", req.user)
 	res.redirect("http://localhost:4000/home")
 })
 
