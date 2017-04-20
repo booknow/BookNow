@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, HelpBlock, ControlLabel} from 'react-bootstrap'
+import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
@@ -72,7 +72,7 @@ class AddAppointment extends Component {
       , discountamt
       , adjustmentamt
       , tipamt} = this.state
-    let total = parseInt(serviceamt) + parseInt(extrasamt) + parseInt(discountamt) + parseInt(adjustmentamt) + parseInt(tipamt)
+    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) + parseInt(discountamt, 10) + parseInt(adjustmentamt, 10) + parseInt(tipamt, 10)
     const topHeading = {
       marginBottom: '0px',
       textAlign: 'left'
