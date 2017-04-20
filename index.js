@@ -77,9 +77,9 @@ app.post('/api/book', (req,res,next) => {
 
 
 //posting new appointment data
-app.post('/updateAppointment' , (req,res,next) => {
-  console.log("Here")
-  db.postApptData(["Daanish", "Qais", "16714 Canyon Whisper Dr", "Dallas", "TX", "75201", "cleaning", "weekly", "1000"], (err, data) => {
+app.post('/createAppointment' , (req,res,next) => {
+  console.log(req.body)
+  db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip,req.body.frequency], (err, data) => {
     if(err) {return next(err) }
     else{
       return res.status(200).json(data);
