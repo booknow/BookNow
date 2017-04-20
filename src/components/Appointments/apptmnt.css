@@ -50,6 +50,10 @@ form .checkbox {
   margin-bottom:0px;
 }
 
+.summary-col .table>tbody>tr>td {
+  border-top: 0px;
+}
+
 .summary-col table td {
   text-align: left;
   padding:3px;
