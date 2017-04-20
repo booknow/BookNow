@@ -9,7 +9,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./config.js')
 
 console.log(config);
-const port = 4000;
+const port = 3000;
 
 console.log(config.facebook.clientId);
 
@@ -75,6 +75,17 @@ app.post('/api/book', (req,res,next) => {
 })
 
 
+
+//posting new appointment data
+app.post('/updateAppointment' , (req,res,next) => {
+  console.log("Here")
+  db.postApptData(["Daanish", "Qais", "16714 Canyon Whisper Dr", "Dallas", "TX", "75201", "cleaning", "weekly", "1000"], (err, data) => {
+    if(err) {return next(err) }
+    else{
+      return res.status(200).json(data);
+    }
+  })
+})
 
 app.get('*', (req, res, next) => {
   res.sendFile(__dirname + "/public/index.html")
