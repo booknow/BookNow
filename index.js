@@ -7,7 +7,10 @@ const db = require('./db')
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./config.js')
-const port = 3000;
+
+console.log(config);
+const port = 4000;
+
 console.log(config.facebook.clientId);
 
 const app = express();
@@ -61,11 +64,15 @@ app.get('/auth/facebook/callback', (req, res, next) => {console.log("At callback
 })
 )
 app.get("/user",(req,res)=>{
-  console.log("CUrrent User:", req.user)
+  console.log("Current User:", req.user)
 	res.redirect("http://localhost:4000/home")
 })
 
-
+app.post('/api/book', (req,res,next) => {
+  console.log('Posting to book db', req.body);
+  // if (err) { return next(err) }
+  return res.status(200).send('working!')
+})
 
 
 

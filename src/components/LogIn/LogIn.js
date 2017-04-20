@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-var ReactDOM = require('react-dom');
 
 import './LogIn.css';
 
@@ -18,11 +17,11 @@ class LogIn extends Component {
                         <br/>
                         <b>Password:</b>
                         <br/>
-                        <input className = "form_group" type="text" name="password"/>
+                        <input className="form_group" type="text" name="password"/>
                     </form>
                     <button> Sign In </button>
                       <form>
-                          <button class="play-button"><a href="http://localhost:3000/auth/facebook">Login with Facebook</a></button>
+                          <button className="play-button"><a href="http://localhost:3000/auth/facebook">Login with Facebook</a></button>
                       </form>
                 </div>
             </div>
