@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import LogIn from "./components/LogIn/LogIn";
 import AddAppointment from "./components/Appointments/addAppointment";
 import BookingsHome from "./components/BookingsHome/BookingsHome";
+import UserInfo from "./components/userInfo/userInfo";
 export default (
 	<Switch>
 		<Route
@@ -16,7 +17,8 @@ export default (
 				path="/book"
 			/>
 		<Route
-				component={ AddAppointment }
+				component={ UserInfo }
+				exact
 				path="/userInfo"
 			/>
 			<Route
