@@ -8,16 +8,23 @@ class AddAppointment extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: "",
-      servicetype: "",
+      servicetype: null,
       serviceamt: 0,
       extrasamt: 0,
       discountamt:0,
-      adjustmentamt: 0,
       tipamt:0,
       email: null,
       firstname: null,
-      lastname: null
+      lastname: null,
+      address: null,
+      city: null,
+      state: null,
+      zip: null,
+      frequency: null,
+      extraitem: null,
+      paymentmethod: null,
+      comments: null,
+      totalamt: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -57,7 +64,11 @@ class AddAppointment extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
+
+
     console.log(this.state);
+
+
 
     const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
     .catch(function(err) {console.log(err);})
@@ -70,9 +81,9 @@ class AddAppointment extends Component {
     let { serviceamt
       , extrasamt
       , discountamt
-      , adjustmentamt
       , tipamt} = this.state
-    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) + parseInt(discountamt, 10) + parseInt(adjustmentamt, 10) + parseInt(tipamt, 10)
+    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
+
     const topHeading = {
       marginBottom: '0px',
       textAlign: 'left'
@@ -102,13 +113,6 @@ class AddAppointment extends Component {
         fontSize: '1.25em',
         paddingTop: '30px',
         borderTop:'2px solid #00B29E'
-    }
-
-    const address = {
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
     }
 
 
@@ -151,7 +155,7 @@ class AddAppointment extends Component {
                Address
              </Col>
              <Col sm={9}>
-               <FormControl onChange={(e)=>address.street = e.target.value} type="text" placeholder="Street" />
+               <FormControl onChange={this.handleChange.bind(this, 'address')} type="text" placeholder="Street" />
              </Col>
             </FormGroup>
 
@@ -160,12 +164,12 @@ class AddAppointment extends Component {
 
              </Col>
              <Col sm={4}>
-               <FormControl onChange={(e)=>address.city = e.target.value} type="text" placeholder="City" />
+               <FormControl onChange={this.handleChange.bind(this, 'city')} type="text" placeholder="City" />
              </Col>
 
              <Col sm={2}>
 
-               <FormControl onChange={ (e)=>address.state = e.target.value } componentClass="select" placeholder="ST">
+               <FormControl onChange={this.handleChange.bind(this, 'state')} componentClass="select" placeholder="ST">
                 <option value="ST"></option>
                  <option value="Arkansas">AK</option>
                  <option value="Alaska">AL</option>
@@ -180,7 +184,7 @@ class AddAppointment extends Component {
                </FormControl>
              </Col>
              <Col sm={3}>
-               <FormControl onChange = { (e) => address.zip = e.target.value } type="text" placeholder="Zip" />
+               <FormControl onChange={this.handleChange.bind(this, 'zip')} type="text" placeholder="Zip" />
              </Col>
             </FormGroup>
 
@@ -192,8 +196,8 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" value={this.state.servicetype} onChange={ this.handleChange.bind(this, 'servicetype') } >
-                  <option value=""></option>
+                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'servicetype') } >
+                  <option></option>
                   <option value="Web Development">Web Development</option>
                   <option value="Social Media">Social Media</option>
                   <option value="Consulting">Consulting</option>
@@ -209,11 +213,12 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select">
-                  <option value="valueHere">One Time</option>
-                  <option value="valueHere">Monthly</option>
-                  <option value="valueHere">Weekly</option>
-                  <option value="valueHere">Biweekly</option>
+                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'frequency') }>
+                  <option></option>
+                  <option value="One Time">One Time</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Biweekly">Biweekly</option>
                 </FormControl>
               </Col>
             </FormGroup>
@@ -225,20 +230,20 @@ class AddAppointment extends Component {
               </Col>
 
 
-              <Col className="extras" sm={7}>
-                <Checkbox>
+              <Col className="extras" sm={7} onChange={ this.handleChange.bind(this, 'extraitem') }>
+                <Checkbox value="Extra Item 1">
                   Extra Item 1
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 2">
                   Extra Item 2
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 3">
                   Extra Item 3
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 4">
                   Extra Item 4
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 5">
                   Extra Item 5
                 </Checkbox>
               </Col>
@@ -250,6 +255,19 @@ class AddAppointment extends Component {
               <Button block>Add Service</Button>
             </Col>
 
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={3}>
+                <ControlLabel>Discount</ControlLabel>
+              </Col>
+              <Col sm={5}>
+                <InputGroup>
+                  <InputGroup.Addon>$</InputGroup.Addon>
+                  <FormControl type="number" onChange={this.handleChange.bind(this, 'discountamt')}/>
+                  <InputGroup.Addon>.00</InputGroup.Addon>
+                </InputGroup>
+              </Col>
             </FormGroup>
 
             <FormGroup>
@@ -266,18 +284,7 @@ class AddAppointment extends Component {
             </FormGroup>
 
 
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Final Price</ControlLabel>
-              </Col>
-              <Col sm={5}>
-                <InputGroup>
-                  <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="number" />
-                  <InputGroup.Addon>.00</InputGroup.Addon>
-                </InputGroup>
-              </Col>
-            </FormGroup>
+
 
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
@@ -285,7 +292,7 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="ST">
+                <FormControl componentClass="select" placeholder="ST" onChange={this.handleChange.bind(this, 'paymentmethod')}>
                   <option value="Cash">Cash</option>
                   <option value="Check">Check</option>
                   <option value="Online">Online</option>
@@ -315,12 +322,12 @@ class AddAppointment extends Component {
               <Col sm={9}>
 
 
-                  <FormControl componentClass="textarea" placeholder="Comments" />
+                  <FormControl componentClass="textarea" placeholder="Comments" onChange={this.handleChange.bind(this, 'comments')}/>
 
               </Col>
             </FormGroup>
 
-            <Button onClick={() =>  console.log(address) } className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>
@@ -329,6 +336,7 @@ class AddAppointment extends Component {
           <Panel header={title} style={blueBg}>
 
             <Table responsive>
+            <tbody>
               <tr>
                 <td>Service</td>
 
@@ -349,11 +357,7 @@ class AddAppointment extends Component {
                 <td>{this.state.discountamt}</td>
               </tr>
 
-              <tr>
-                <td>Adjustment</td>
 
-                <td>{this.state.adjustmentamt}</td>
-              </tr>
 
               <tr>
                 <td style={beforeTot}>Tip</td>
@@ -366,7 +370,7 @@ class AddAppointment extends Component {
               </tr>
 
 
-
+              </tbody>
             </Table>
           </Panel>
 
