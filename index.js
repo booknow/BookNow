@@ -9,7 +9,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./config.js')
 
 console.log(config);
-const port = 4000;
+const port = 3000;
 
 console.log(config.facebook.clientId);
 
