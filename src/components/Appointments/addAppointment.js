@@ -17,7 +17,11 @@ class AddAppointment extends Component {
       tipamt:0,
       email: null,
       firstname: null,
-      lastname: null
+      lastname: null,
+      address: null,
+      city: null,
+      state: null,
+      zip: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -104,13 +108,6 @@ class AddAppointment extends Component {
         borderTop:'2px solid #00B29E'
     }
 
-    const address = {
-        street: '',
-        city: '',
-        state: '',
-        zip: ''
-    }
-
 
 
     return (
@@ -151,7 +148,7 @@ class AddAppointment extends Component {
                Address
              </Col>
              <Col sm={9}>
-               <FormControl onChange={(e)=>address.street = e.target.value} type="text" placeholder="Street" />
+               <FormControl onChange={this.handleChange.bind(this, 'address')} type="text" placeholder="Street" />
              </Col>
             </FormGroup>
 
@@ -160,12 +157,12 @@ class AddAppointment extends Component {
 
              </Col>
              <Col sm={4}>
-               <FormControl onChange={(e)=>address.city = e.target.value} type="text" placeholder="City" />
+               <FormControl onChange={this.handleChange.bind(this, 'city')} type="text" placeholder="City" />
              </Col>
 
              <Col sm={2}>
 
-               <FormControl onChange={ (e)=>address.state = e.target.value } componentClass="select" placeholder="ST">
+               <FormControl onChange={this.handleChange.bind(this, 'state')} componentClass="select" placeholder="ST">
                 <option value="ST"></option>
                  <option value="Arkansas">AK</option>
                  <option value="Alaska">AL</option>
@@ -180,7 +177,7 @@ class AddAppointment extends Component {
                </FormControl>
              </Col>
              <Col sm={3}>
-               <FormControl onChange = { (e) => address.zip = e.target.value } type="text" placeholder="Zip" />
+               <FormControl onChange={this.handleChange.bind(this, 'zip')} type="text" placeholder="Zip" />
              </Col>
             </FormGroup>
 
@@ -320,7 +317,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button onClick={() =>  console.log(address) } className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>
