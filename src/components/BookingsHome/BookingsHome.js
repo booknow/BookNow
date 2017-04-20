@@ -78,6 +78,11 @@ class BookingsHome extends Component {
       &copy; 2017 username
     </Col>
 </Row>
+
+
+
+
+
           </Grid>
 
         )
