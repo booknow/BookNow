@@ -4,9 +4,7 @@ import './Nav.css';
 
 
 export default class NavComponent extends Component {
-  // constructor(){
-  //   super()
-  // }
+  
   render(){
       return (
           <Navbar inverse collapseOnSelect>
