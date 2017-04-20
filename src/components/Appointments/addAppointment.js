@@ -20,6 +20,8 @@ class AddAppointment extends Component {
       city: null,
       state: null,
       zip: null,
+      frequency: null,
+      extraitem: null,
       paymentmethod: null,
       comments: null,
       totalamt: null
@@ -80,7 +82,7 @@ class AddAppointment extends Component {
       , extrasamt
       , discountamt
       , tipamt} = this.state
-    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) + parseInt(discountamt, 10) + parseInt(tipamt, 10)
+    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
 
     const topHeading = {
       marginBottom: '0px',
@@ -211,11 +213,12 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select">
-                  <option value="valueHere">One Time</option>
-                  <option value="valueHere">Monthly</option>
-                  <option value="valueHere">Weekly</option>
-                  <option value="valueHere">Biweekly</option>
+                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'frequency') }>
+                  <option></option>
+                  <option value="One Time">One Time</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Biweekly">Biweekly</option>
                 </FormControl>
               </Col>
             </FormGroup>
@@ -227,20 +230,20 @@ class AddAppointment extends Component {
               </Col>
 
 
-              <Col className="extras" sm={7}>
-                <Checkbox>
+              <Col className="extras" sm={7} onChange={ this.handleChange.bind(this, 'extraitem') }>
+                <Checkbox value="Extra Item 1">
                   Extra Item 1
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 2">
                   Extra Item 2
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 3">
                   Extra Item 3
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 4">
                   Extra Item 4
                 </Checkbox>
-                <Checkbox>
+                <Checkbox value="Extra Item 5">
                   Extra Item 5
                 </Checkbox>
               </Col>
