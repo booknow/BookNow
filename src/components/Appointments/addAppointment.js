@@ -8,12 +8,10 @@ class AddAppointment extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: "",
-      servicetype: "",
+      servicetype: null,
       serviceamt: 0,
       extrasamt: 0,
       discountamt:0,
-      adjustmentamt: 0,
       tipamt:0,
       email: null,
       firstname: null,
@@ -21,7 +19,10 @@ class AddAppointment extends Component {
       address: null,
       city: null,
       state: null,
-      zip: null
+      zip: null,
+      paymentmethod: null,
+      comments: null,
+      totalamt: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -61,7 +62,11 @@ class AddAppointment extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
+
+
     console.log(this.state);
+
+
 
     const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
     .catch(function(err) {console.log(err);})
@@ -74,9 +79,9 @@ class AddAppointment extends Component {
     let { serviceamt
       , extrasamt
       , discountamt
-      , adjustmentamt
       , tipamt} = this.state
-    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) + parseInt(discountamt, 10) + parseInt(adjustmentamt, 10) + parseInt(tipamt, 10)
+    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) + parseInt(discountamt, 10) + parseInt(tipamt, 10)
+
     const topHeading = {
       marginBottom: '0px',
       textAlign: 'left'
@@ -189,8 +194,8 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" value={this.state.servicetype} onChange={ this.handleChange.bind(this, 'servicetype') } >
-                  <option value=""></option>
+                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'servicetype') } >
+                  <option></option>
                   <option value="Web Development">Web Development</option>
                   <option value="Social Media">Social Media</option>
                   <option value="Consulting">Consulting</option>
@@ -251,6 +256,19 @@ class AddAppointment extends Component {
 
             <FormGroup>
               <Col componentClass={ControlLabel} sm={3}>
+                <ControlLabel>Discount</ControlLabel>
+              </Col>
+              <Col sm={5}>
+                <InputGroup>
+                  <InputGroup.Addon>$</InputGroup.Addon>
+                  <FormControl type="number" onChange={this.handleChange.bind(this, 'discountamt')}/>
+                  <InputGroup.Addon>.00</InputGroup.Addon>
+                </InputGroup>
+              </Col>
+            </FormGroup>
+
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={3}>
                 <ControlLabel>Tips</ControlLabel>
               </Col>
               <Col sm={5}>
@@ -263,18 +281,7 @@ class AddAppointment extends Component {
             </FormGroup>
 
 
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Final Price</ControlLabel>
-              </Col>
-              <Col sm={5}>
-                <InputGroup>
-                  <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="number" />
-                  <InputGroup.Addon>.00</InputGroup.Addon>
-                </InputGroup>
-              </Col>
-            </FormGroup>
+
 
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
@@ -282,7 +289,7 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="ST">
+                <FormControl componentClass="select" placeholder="ST" onChange={this.handleChange.bind(this, 'paymentmethod')}>
                   <option value="Cash">Cash</option>
                   <option value="Check">Check</option>
                   <option value="Online">Online</option>
@@ -312,7 +319,7 @@ class AddAppointment extends Component {
               <Col sm={9}>
 
 
-                  <FormControl componentClass="textarea" placeholder="Comments" />
+                  <FormControl componentClass="textarea" placeholder="Comments" onChange={this.handleChange.bind(this, 'comments')}/>
 
               </Col>
             </FormGroup>
@@ -326,6 +333,7 @@ class AddAppointment extends Component {
           <Panel header={title} style={blueBg}>
 
             <Table responsive>
+            <tbody>
               <tr>
                 <td>Service</td>
 
@@ -346,11 +354,7 @@ class AddAppointment extends Component {
                 <td>{this.state.discountamt}</td>
               </tr>
 
-              <tr>
-                <td>Adjustment</td>
 
-                <td>{this.state.adjustmentamt}</td>
-              </tr>
 
               <tr>
                 <td style={beforeTot}>Tip</td>
@@ -363,7 +367,7 @@ class AddAppointment extends Component {
               </tr>
 
 
-
+              </tbody>
             </Table>
           </Panel>
 
