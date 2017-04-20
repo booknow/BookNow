@@ -36,9 +36,9 @@ export default class NavComponent extends Component {
                 </NavDropdown>
 
                 <NavDropdown eventKey={3} title="Username" id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}>My Account</MenuItem>
+                  <MenuItem eventKey={3.1}> <Link to="/userInfo">My Account</Link></MenuItem>
 
-               <MenuItem eventKey={3.2}>Log Out</MenuItem>
+               <MenuItem eventKey={3.2}><Link to="/">Log Out</Link></MenuItem>
 
               </NavDropdown>
 
