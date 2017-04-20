@@ -15,7 +15,6 @@ class AddAppointment extends Component {
       discountamt:0,
       adjustmentamt: 0,
       tipamt:0,
-
       email: null,
       firstname: null,
       lastname: null
@@ -105,6 +104,15 @@ class AddAppointment extends Component {
         borderTop:'2px solid #00B29E'
     }
 
+    const address = {
+        street: '',
+        city: '',
+        state: '',
+        zip: ''
+    }
+
+
+
     return (
       <Grid className="apptcon">
         <Row>
@@ -143,7 +151,7 @@ class AddAppointment extends Component {
                Address
              </Col>
              <Col sm={9}>
-               <FormControl type="text" placeholder="Street" />
+               <FormControl onChange={(e)=>address.street = e.target.value} type="text" placeholder="Street" />
              </Col>
             </FormGroup>
 
@@ -152,12 +160,12 @@ class AddAppointment extends Component {
 
              </Col>
              <Col sm={4}>
-               <FormControl type="text" placeholder="City" />
+               <FormControl onChange={(e)=>address.city = e.target.value} type="text" placeholder="City" />
              </Col>
 
              <Col sm={2}>
 
-               <FormControl componentClass="select" placeholder="ST">
+               <FormControl onChange={ (e)=>address.state = e.target.value } componentClass="select" placeholder="ST">
                 <option value="ST"></option>
                  <option value="Arkansas">AK</option>
                  <option value="Alaska">AL</option>
@@ -172,7 +180,7 @@ class AddAppointment extends Component {
                </FormControl>
              </Col>
              <Col sm={3}>
-               <FormControl type="text" placeholder="Zip" />
+               <FormControl onChange = { (e) => address.zip = e.target.value } type="text" placeholder="Zip" />
              </Col>
             </FormGroup>
 
@@ -312,7 +320,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button onClick={() =>  console.log(address) } className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>
@@ -372,3 +380,4 @@ class AddAppointment extends Component {
   }
 
 export default AddAppointment;
+// createAppt(total, address )
