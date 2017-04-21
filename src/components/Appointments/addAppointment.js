@@ -30,6 +30,9 @@ class AddAppointment extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+
+
   getValidationState() {
     const length = this.state.value.length;
     if (length > 10) return 'success';
