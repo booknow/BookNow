@@ -4,7 +4,6 @@ import LogIn from "./components/LogIn/LogIn";
 import AddAppointment from "./components/Appointments/addAppointment";
 import BookingsHome from "./components/BookingsHome/BookingsHome";
 import UserInfo from "./components/userInfo/userInfo";
-import Test from "./components/testing/testing"
 
 export default (
 	<Switch>
