@@ -34,7 +34,8 @@ passport.use(new FacebookStrategy({
     }
     else {
       db.createUser([profile.displayName, profile.id], function(err, newUsers) {
-        return done(null, newUsers[0])
+        console.log(newUsers, err);
+        return done(null, null)
       })
     }
   })
