@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
-// import axios from 'axios'
-// import API_BASE_URL from '../../utils/api-helper'
+import axios from 'axios'
+import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
+import MyCalendar from './bookingCal';
+import './clientappt.css'
+
 
 
 class ClientAppointment extends Component {
@@ -30,9 +33,44 @@ class ClientAppointment extends Component {
       totalamt: null
     }
 
-    // console.log(this.state);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
+    console.log(this.state);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(field, e) {
+    this.setState({[field]: e.target.value})
+
+    if(e.target.value === ''){
+      this.setState({serviceamt: 0});
+    }
+
+    if (e.target.value === 'Web Development') {
+        this.setState({serviceamt: 10000 });
+    }
+
+    if (e.target.value === 'Social Media') {
+      this.setState({serviceamt:  500000});
+    }
+
+    if (e.target.value === 'Consulting') {
+      this.setState({serviceamt:  900});
+    }
+
+  }
+
+
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    console.log(this.state);
+
+    const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
+    .catch(function(err) {console.log(err);})
+
+    return booking;
+
   }
 
   render() {
@@ -45,7 +83,7 @@ class ClientAppointment extends Component {
 
     const topHeading = {
       marginBottom: '0px',
-      textAlign: 'left'
+      textAlign: 'center'
     }
 
     const headingMargin = {
@@ -74,17 +112,18 @@ class ClientAppointment extends Component {
         borderTop:'2px solid #00B29E'
     }
 
-    
+
     return (
       <Grid className="apptcon">
         <Row>
           <Col md={12}>
-            <h1 style={topHeading}>New Appointment</h1>
+            <h1 style={topHeading}>Client, Book Me!</h1>
+            <p>Complete the fields below to get my awesome services</p>
           </Col>
 
           <Col sm={8}>
           <Form horizontal onSubmit={this.handleSubmit}>
-          <h2 style={headingMargin}>Who</h2>
+          <h2 style={headingMargin}>Your Info</h2>
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
                Email
@@ -106,7 +145,25 @@ class ClientAppointment extends Component {
              </Col>
             </FormGroup>
 
-            <h2 style={headingMargin}>Where</h2>
+            <h2 style={headingMargin}>Booking Location</h2>
+
+            <FormGroup>
+
+              <Col componentClass={ControlLabel} sm={3}>
+                <ControlLabel>Location</ControlLabel>
+              </Col>
+
+
+              <Col className="extras" sm={7} onChange={ this.handleChange.bind(this, 'extraitem') }>
+                <Checkbox value="Extra Item 1">
+                  Not Applicable
+                </Checkbox>
+                <Checkbox value="Extra Item 2">
+                  Specific Location
+                </Checkbox>
+              </Col>
+            </FormGroup>
+
 
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
@@ -146,7 +203,7 @@ class ClientAppointment extends Component {
              </Col>
             </FormGroup>
 
-            <h2 style={headingMargin}>What</h2>
+            <h2 style={headingMargin}>Service Info</h2>
 
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
@@ -215,35 +272,10 @@ class ClientAppointment extends Component {
 
             </FormGroup>
 
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Discount</ControlLabel>
-              </Col>
-              <Col sm={5}>
-                <InputGroup>
-                  <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="number" onChange={this.handleChange.bind(this, 'discountamt')}/>
-                  <InputGroup.Addon>.00</InputGroup.Addon>
-                </InputGroup>
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Tips</ControlLabel>
-              </Col>
-              <Col sm={5}>
-                <InputGroup>
-                  <InputGroup.Addon>$</InputGroup.Addon>
-                  <FormControl type="number" onChange={this.handleChange.bind(this, 'tipamt')}/>
-                  <InputGroup.Addon>.00</InputGroup.Addon>
-                </InputGroup>
-              </Col>
-            </FormGroup>
 
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Payment Method</ControlLabel>
+                <ControlLabel>Payment</ControlLabel>
               </Col>
 
               <Col sm={7}>
@@ -257,6 +289,10 @@ class ClientAppointment extends Component {
 
             <h2 style={headingMargin}>When</h2>
 
+            <Col sm={12}>
+              <MyCalendar />
+            </Col>
+
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
                 <ControlLabel>Date / Time</ControlLabel>
@@ -267,14 +303,12 @@ class ClientAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <h2 style={headingMargin}>Comments</h2>
+            <h2 style={headingMargin}>Additional Info</h2>
 
             <FormGroup controlId="formControlsTextarea">
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>By Staff</ControlLabel>
-              </Col>
 
-              <Col sm={9}>
+
+              <Col sm={12}>
 
 
                   <FormControl componentClass="textarea" placeholder="Comments" onChange={this.handleChange.bind(this, 'comments')}/>
