@@ -3,10 +3,10 @@ import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from "react-bootstrap";
 import {Link} from "react-router-dom";
 import './Nav.css';
 
-
 export default class NavComponent extends Component {
 
   render(){
+    console.dir(window.location)
       return (
           <Navbar inverse collapseOnSelect>
             <Navbar.Header>
@@ -25,15 +25,16 @@ export default class NavComponent extends Component {
                   <MenuItem eventKey={3.2}>Take a Tour</MenuItem>
                 </NavDropdown>
 
-                <NavDropdown eventKey={3} title="Username" id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.1}> <Link to="/userInfo">My Account</Link></MenuItem>
+                {window.location.pathname !== "/"
+                  ?
+                  <NavDropdown eventKey={3} title="Username" id="basic-nav-dropdown">
+                    <MenuItem eventKey={3.1}> <Link to="/userInfo">My Account</Link></MenuItem>
 
-               <MenuItem eventKey={3.2}><Link to="/">Log Out</Link></MenuItem>
+                    <MenuItem eventKey={3.2}><Link to="/">Log Out</Link></MenuItem>
 
-              </NavDropdown>
-
-
-
+                  </NavDropdown>
+              :
+              null   }
 
               </Nav>
             </Navbar.Collapse>
