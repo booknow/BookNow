@@ -89,6 +89,7 @@ app.post('/createAppointment' , (req,res,next) => {
   db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
     if(err) {return next(err) }
     else{
+      console.log(data);
       return res.status(200).json(data);
     }
   })
