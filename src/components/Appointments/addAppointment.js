@@ -36,7 +36,7 @@ class AddAppointment extends Component {
 
 
 
-  createAppt({email,firstname,lastname,address,city,state,zip,frequency}){
+  createAppt({email,firstname,lastname,address,city,state,zip,servicetype,frequency}){
     axios.post("http://localhost:3000/createAppointment", arguments[0])
   }
 

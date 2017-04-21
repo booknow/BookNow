@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios"
 // var ReactDOM = require('react-dom');
-import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button} from "react-bootstrap";
+import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
 
 
 import { Link } from 'react-router-dom';
@@ -60,11 +60,61 @@ class BookingsHome extends Component {
 
     <Col sm={8}>
 
-      <Jumbotron className="jumbotron-booking">
-        <h1>{0} Bookings found.</h1>
-        <p>We couldn't find any bookings that matched your search.</p>
-      <Link to="/book">  <p><Button bsStyle="info">Create a Booking</Button></p> </Link>
-      </Jumbotron>
+      {
+        //If there are appointments show table appointment list
+        true  ?
+        <Col sm={8}>
+
+
+          <Table responsive>
+ <thead>
+   <tr>
+     <th>Service Date</th>
+     <th>Customer</th>
+     <th>Service Location</th>
+     <th>Frequency</th>
+     <th>Total Price</th>
+
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td>1</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+   </tr>
+
+   <tr>
+     <td>2</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+   </tr>
+
+   <tr>
+     <td>3</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+     <td>Table cell</td>
+   </tr>
+
+ </tbody>
+</Table>
+
+
+        </Col>
+
+        :
+        <Jumbotron className="jumbotron-booking">
+          <h1>{0} Bookings found.</h1>
+          <p>We couldn't find any bookings that matched your search.</p>
+        <Link to="/book">  <p><Button bsStyle="info">Create a Booking</Button></p> </Link>
+        </Jumbotron>
+      }
     </Col>
 
     <Col className="calendar-picker" sm={4}>
@@ -78,8 +128,6 @@ class BookingsHome extends Component {
       &copy; 2017 username
     </Col>
 </Row>
-
-
 
 
 
