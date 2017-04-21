@@ -14,19 +14,62 @@ import './BookingsHome.css';
 class BookingsHome extends Component {
 
     componentWillMount() {
+
       axios.get('http://localhost:3000/user', {withCredentials: true})
       .then(response => {
-        console.log(response)
+        // console.log(response)
 
       })
+
+      axios.get("http://localhost:3000/getApptCount").then((response)=>{
+        console.log(response);
+        this.setState({ApptCount: response.data[0].count})
+      })
+
+
     }
+
+
+
+
+    constructor(){
+      super()
+      this.state = {
+            appointments : [],
+            ApptCount: 0
+
+      }
+
+      axios.get('http://localhost:3000/appointments').then((response)=>{
+        this.setState({appointments: response.data})
+      })
+
+
+
+    }
+
     render() {
+
+      const {ApptCount} = this.state;
+
+      const appointments = this.state.appointments.map(function(appointment){
+          return (
+            <tr>
+              <td>{appointment.address_city}</td>
+              <td>{appointment.first_name} {appointment.last_name} </td>
+              <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
+              <td>{appointment.frequency}</td>
+              <td>{appointment.email}</td>
+            </tr>
+
+          )
+      })
         return (
           <Grid>
               <Row>
                    <Col xs={12} md={8}>
 
-                            <h1 className="active_bookings_text"> <span className="active_number"> 0</span> Active Bookings</h1>
+                            <h1 className="active_bookings_text"> <span className="active_number"> {ApptCount}</span> Active Bookings</h1>
 
                    </Col>
 
@@ -58,55 +101,30 @@ class BookingsHome extends Component {
 
 <Row>
 
-    <Col sm={8}>
+    <Col className="whole-table" sm={9}>
 
       {
         //If there are appointments show table appointment list
-        true  ?
-        <Col sm={8}>
-
-
+        this.state.appointments.length > 0  ?
           <Table responsive>
- <thead>
-   <tr>
-     <th>Service Date</th>
-     <th>Customer</th>
-     <th>Service Location</th>
-     <th>Frequency</th>
-     <th>Total Price</th>
+           <thead className="table-head">
+             <tr>
+               <th>Service Date</th>
+               <th>Customer</th>
+               <th>Service Location</th>
+               <th>Frequency</th>
+               <th>Total Price</th>
+             </tr>
+           </thead>
 
-   </tr>
- </thead>
- <tbody>
-   <tr>
-     <td>1</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-   </tr>
-
-   <tr>
-     <td>2</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-   </tr>
-
-   <tr>
-     <td>3</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-     <td>Table cell</td>
-   </tr>
-
+           <tbody className="table-body">
+            {
+              appointments
+            }
  </tbody>
 </Table>
 
 
-        </Col>
 
         :
         <Jumbotron className="jumbotron-booking">
@@ -117,7 +135,10 @@ class BookingsHome extends Component {
       }
     </Col>
 
-    <Col className="calendar-picker" sm={4}>
+
+{/*calendar-------------------------------------*/}
+
+    <Col className="calendar-picker" sm={3}>
         <MyComponent />
     </Col>
 

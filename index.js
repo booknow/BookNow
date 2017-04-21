@@ -101,7 +101,9 @@ app.get("/getCurrentUser", (req,res,next)=>{
 })
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
+  console.log(req.body.total);
   db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
+
     if(err) {return next(err) }
     else{
       console.log(data);
@@ -109,6 +111,20 @@ app.post('/createAppointment' , (req,res,next) => {
     }
   })
 })
+
+
+app.get('/getApptCount', function(req,res,next){
+  db.getApptCount(function(err, ApptCount){
+    console.log(err);
+    if(err){
+      return next (err);
+    }
+    console.log("the total number of appointments:", ApptCount);
+    return res.status(200).json(ApptCount);
+  })
+})
+
+
 
 // app.get('*', (req, res, next) => {
 //   res.sendFile(__dirname + "/public/index.html")
