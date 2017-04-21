@@ -43,3 +43,19 @@
 .calendar-picker{
   margin-top:3%;
 }
+
+.table-head{
+  background-color: #7C8798;
+}
+
+.table-head th{
+  color: white;
+}
+
+.table-body {
+  background-color: #D2D4E1;
+}
+
+.whole-table{
+  margin-top: 4%;
+}
