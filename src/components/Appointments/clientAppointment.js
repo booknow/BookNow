@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
-import axios from 'axios'
-import API_BASE_URL from '../../utils/api-helper'
+// import axios from 'axios'
+// import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
 
 
@@ -36,6 +36,45 @@ class ClientAppointment extends Component {
   }
 
   render() {
+
+    let { serviceamt
+      , extrasamt
+      , discountamt
+      , tipamt} = this.state
+    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
+
+    const topHeading = {
+      marginBottom: '0px',
+      textAlign: 'left'
+    }
+
+    const headingMargin = {
+      textAlign: 'left',
+      marginBottom: '25px',
+      marginTop: '55px'
+    }
+
+    const blueBg = {
+      backgroundColor: '#00AD9A',
+      color: 'white'
+    }
+
+    const title = (
+      <h3>Summary</h3>
+    )
+
+    const beforeTot = {
+      paddingBottom: '20px'
+    }
+
+    const totalSt = {
+        fontWeight: 'bold',
+        fontSize: '1.25em',
+        paddingTop: '30px',
+        borderTop:'2px solid #00B29E'
+    }
+
+    
     return (
       <Grid className="apptcon">
         <Row>
