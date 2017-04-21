@@ -75,6 +75,13 @@ app.post('/api/book', (req,res,next) => {
   return res.status(200).send('working!')
 })
 
+app.get('/appointments', (req,res,next) => {
+  db.readAppts([], (err, appts)=> {
+    if (err) {return next(err)}
+    return res.status(200).json(appts);
+  })
+})
+
 
 
 //posting new appointment data
