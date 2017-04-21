@@ -26,7 +26,7 @@ class AddAppointment extends Component {
       extraitem: null,
       paymentmethod: null,
       comments: null,
-      totalamt: null
+
     }
 
     // console.log(this.state);
@@ -35,9 +35,9 @@ class AddAppointment extends Component {
   }
 
 
-
   createAppt({email,firstname,lastname,address,city,state,zip,servicetype,frequency}){
-    axios.post("http://localhost:3000/createAppointment", arguments[0])
+    let total = null;
+    axios.post("http://localhost:3000/createAppointment", arguments[0], total)
   }
 
 
