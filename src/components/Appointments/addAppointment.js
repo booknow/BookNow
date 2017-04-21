@@ -3,12 +3,10 @@ import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormCo
 import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
-
 class AddAppointment extends Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
       servicetype: null,
       serviceamt: 0,
@@ -28,18 +26,9 @@ class AddAppointment extends Component {
       comments: null,
       totalamt: null
     }
-
-    // console.log(this.state);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
-
-  createAppt({email,firstname,lastname,address,city,state,zip,frequency}){
-    axios.post("http://localhost:3000/createAppointment", arguments[0])
-  }
-
-
 
   getValidationState() {
     const length = this.state.value.length;
@@ -77,7 +66,7 @@ class AddAppointment extends Component {
 
 
 
-    // console.log(this.state);
+    console.log(this.state);
 
 
 
@@ -339,7 +328,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button onClick = { () => this.createAppt(this.state)} className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>
@@ -396,3 +385,4 @@ class AddAppointment extends Component {
   }
 
 export default AddAppointment;
+// createAppt(total, address )
