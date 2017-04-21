@@ -18,7 +18,11 @@ app.use(cors({
   origin: 'http://localhost:4000',
   credentials: true
 }))
-app.use(session({ secret: config.sessionSecret }));
+app.use(session({
+  secret: config.sessionSecret,
+  saveUninitialized: true,
+  resave: true
+}));
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -34,7 +38,8 @@ passport.use(new FacebookStrategy({
     }
     else {
       db.createUser([profile.displayName, profile.id], function(err, newUsers) {
-        return done(null, newUsers[0])
+        console.log(newUsers, err);
+        return done(null, users[0])
       })
     }
   })
@@ -49,11 +54,19 @@ passport.deserializeUser(function(user, done) {
   return done(null, user);
 })
 
+app.use((req, res, next) => {
+  console.log('--------------');
+  console.log(req.session);
+  console.log(req.user);
+  console.log('--------------');
+  next();
+})
+
 //END POINTS
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: "/user" ,failureRedirect:'http://localhost:4000/book'
+    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/book'
   })
 )
 
@@ -65,10 +78,6 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 //     }
 //   })
 // })
-
-app.get("/user",(req,res)=>{
-  res.redirect("http://localhost:4000/home")
-})
 
 app.post('/api/book', (req,res,next) => {
   // if (err) { return next(err) }
@@ -83,7 +92,13 @@ app.get('/appointments', (req,res,next) => {
 })
 
 
+app.get("/getCurrentUser", (req,res,next)=>{
+  if (req.user) {
+    return res.status(200).json(req.user)
+  }
 
+  return res.status(200).send('no user info')
+})
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
   db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
