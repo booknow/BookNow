@@ -4,7 +4,7 @@ import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
 import MyCalendar from './bookingCal';
-import './clientappt.css'
+// import './clientappt.css'
 
 
 
