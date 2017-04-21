@@ -35,9 +35,11 @@ class AddAppointment extends Component {
   }
 
 
-  createAppt({email,firstname,lastname,address,city,state,zip,frequency}){
+
+  createAppt({email,firstname,lastname,address,city,state,zip,servicetype,frequency}){
     axios.post("http://localhost:3000/createAppointment", arguments[0])
   }
+
 
 
 
@@ -75,11 +77,7 @@ class AddAppointment extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
-
-
     console.log(this.state);
-
-
 
     const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
     .catch(function(err) {console.log(err);})
@@ -125,9 +123,6 @@ class AddAppointment extends Component {
         paddingTop: '30px',
         borderTop:'2px solid #00B29E'
     }
-
-
-
 
     return (
       <Grid className="apptcon">
@@ -295,9 +290,6 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-
-
-
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
                 <ControlLabel>Payment Method</ControlLabel>
@@ -355,8 +347,6 @@ class AddAppointment extends Component {
                 <td>{this.state.serviceamt} </td>
               </tr>
 
-
-
               <tr>
                 <td>Extras</td>
 
@@ -370,7 +360,6 @@ class AddAppointment extends Component {
               </tr>
 
 
-
               <tr>
                 <td style={beforeTot}>Tip</td>
                 <td>{this.state.tipamt}</td>
@@ -381,13 +370,9 @@ class AddAppointment extends Component {
                 <td style={totalSt}>$ {total}</td>
               </tr>
 
-
               </tbody>
             </Table>
           </Panel>
-
-
-
         </Col>
       </Row>
     </Grid>

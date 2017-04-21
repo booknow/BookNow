@@ -84,6 +84,13 @@ app.post('/api/book', (req,res,next) => {
   return res.status(200).send('working!')
 })
 
+app.get('/appointments', (req,res,next) => {
+  db.readAppts([], (err, appts)=> {
+    if (err) {return next(err)}
+    return res.status(200).json(appts);
+  })
+})
+
 
 app.get("/getCurrentUser", (req,res,next)=>{
   if (req.user) {
@@ -97,6 +104,7 @@ app.post('/createAppointment' , (req,res,next) => {
   db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
     if(err) {return next(err) }
     else{
+      console.log(data);
       return res.status(200).json(data);
     }
   })
