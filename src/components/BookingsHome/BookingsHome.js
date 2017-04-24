@@ -28,31 +28,54 @@ class BookingsHome extends Component {
 
 
     }
-
-
-
-
     constructor(){
       super()
       this.state = {
             appointments : [],
-            ApptCount: 0
-
+            ApptCount: 0,
+            inputText: "",
+            filteredAppointments: []
       }
 
       axios.get('http://localhost:3000/appointments').then((response)=>{
         this.setState({appointments: response.data})
       })
-
-
-
+    }
+    searchTestHandler(e){
+      const searchText = this.state.inputText
+      const filteredArray = this.state.appointments.filter((object)=>{
+        for (var variable in object) {
+          if (object[variable]) {
+            if (object[variable].toString().toLowerCase() === searchText.toLowerCase()) {
+              return object
+            }
+          }
+        }
+      })
+      filteredArray.length > 0 ? this.setState({filteredAppointments: filteredArray}) : null
+    }
+    updateInputText(e, that){
+      that.setState({inputText: e.target.value})
     }
 
     render() {
 
-      const {ApptCount} = this.state;
+      const { ApptCount } = this.state;
+      let { filteredAppointments } = this.state
 
       const appointments = this.state.appointments.map(function(appointment){
+          return (
+            <tr>
+              <td>{appointment.address_city}</td>
+              <td>{appointment.first_name} {appointment.last_name} </td>
+              <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
+              <td>{appointment.frequency}</td>
+              <td>{appointment.email}</td>
+            </tr>
+
+          )
+      })
+      filteredAppointments = filteredAppointments.map(function(appointment){
           return (
             <tr>
               <td>{appointment.address_city}</td>
@@ -91,8 +114,8 @@ class BookingsHome extends Component {
 
                 <Col md={4} className="search-bookings">
                   <FormGroup>
-                     <InputGroup>
-                       <InputGroup.Addon><button className="fa fa-search"></button></InputGroup.Addon>
+                     <InputGroup onChange={(e)=>this.updateInputText(e, this)}>
+                       <InputGroup.Addon><button onClick={()=>this.searchTestHandler()} className="fa fa-search"></button></InputGroup.Addon>
                        <FormControl type="text" placeholder="Search Bookings ..." />
                      </InputGroup>
                    </FormGroup>
@@ -119,7 +142,7 @@ class BookingsHome extends Component {
 
            <tbody className="table-body">
             {
-              appointments
+              filteredAppointments.length > 0 ? filteredAppointments : appointments
             }
  </tbody>
 </Table>

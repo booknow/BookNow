@@ -120,12 +120,6 @@ app.get('/getApptCount', function(req,res,next){
   })
 })
 
-
-
-// app.get('*', (req, res, next) => {
-//   res.sendFile(__dirname + "/public/index.html")
-// })
-
 app.listen(port , () => {
   console.log(`listenin' to port ${port}`);
 });
