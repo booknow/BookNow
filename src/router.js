@@ -6,6 +6,7 @@ import BookingsHome from "./components/BookingsHome/BookingsHome";
 import UserInfo from "./components/userInfo/userInfo";
 
 import ClientAppointment from "./components/Appointments/clientAppointment";
+import CustomerInfo from "./components/CustomerInfo/CustomerInfo";
 
 export default (
 	<Switch>
@@ -36,6 +37,10 @@ export default (
 				component={ ClientAppointment }
 				exact
 				path="/client/book"
+			/>
+		<Route
+				component={ CustomerInfo }
+				path = "/CustomerInfo"
 			/>
 	</Switch>
 );
