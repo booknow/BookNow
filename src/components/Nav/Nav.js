@@ -20,7 +20,7 @@ export default class NavComponent extends Component {
 
   render(){
     getUser().then(res=>{
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({user: res.data})
     })
        return (
