@@ -33,12 +33,17 @@ class CustomerInfo extends Component {
           </Row>
 
           <Row>
-              <Col sm={4}>
-                  <h2>Customer Info</h2>
+              <Col sm={4} className="white-back">
+                  <h3>Customer Info</h3>
               </Col>
 
               <Col sm={8}>
-                    <h2>Completed Bookings</h2>
+                <Col sm={6}>
+                  <h3>Completed Bookings</h3>
+                </Col>
+                <Col sm={6}>
+                    <button>Book Appointment</button>
+                </Col>
               </Col>
           </Row>
 
