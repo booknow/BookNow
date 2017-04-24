@@ -34,7 +34,10 @@ class BookingsHome extends Component {
             appointments : [],
             ApptCount: 0,
             inputText: "",
-            filteredAppointments: []
+            filteredAppointments: [],
+            user: {
+              first_name: null,
+            }
       }
 
       axios.get('http://localhost:3000/appointments').then((response)=>{
@@ -169,7 +172,7 @@ class BookingsHome extends Component {
     <hr />
 <Row>
     <Col sm={4}>
-      &copy; 2017 username
+      &copy; 2017 {this.state.user.first_name}
     </Col>
 </Row>
 
