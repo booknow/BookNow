@@ -36,7 +36,7 @@ export default (
 		<Route
 				component={ ClientAppointment }
 				exact
-				path="/client/book"
+				path="/client"
 			/>
 		<Route
 				component={ CustomerInfo }
