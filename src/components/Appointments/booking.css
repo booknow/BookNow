@@ -1,0 +1,17 @@
+.rbc-event {
+
+  color: red;
+  border-radius:0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.2),
+    rgba(255, 0, 0, 0.2) 10px,
+    rgba(255, 255, 255, 0.3) 10px,
+    rgba(255, 255, 255, 0.3) 20px
+  );
+  height:25px;
+}
+
+.rbc-month-view {
+  background-color:white;
+}

@@ -1,37 +1,105 @@
-import React, { Component } from 'react';
+import React, {
+    Component
+} from 'react';
 import BigCalendar from 'react-big-calendar';
-import myEventsList from '../../utils/events';
+import axios from 'axios';
 import moment from 'moment';
+import API_BASE_URL from '../../utils/api-helper';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-// this weird syntax is just a shorthand way of specifying loaders
-// require('style!css!react-big-calendar/lib/css/react-big-calendar.css')
+import later from 'later'
+import './booking.css'
 
-// Setup the localizer by providing the moment (or globalize) Object
-// to the correct localizer.
-  BigCalendar.momentLocalizer(moment);
+BigCalendar.momentLocalizer(moment);
 
 
 class MyCalendar extends Component {
 
-  constructor () {
-   super()
-  }
+    constructor() {
+        super()
+        this.state = {
+          events: []
+        }
+        let tempArr = []
+        axios.get(API_BASE_URL + '/api/setuppref')
+                .then((response) => {
 
-  render() {
-    console.log(new Date);
-    return (
-      <div>
-        <BigCalendar
+                    console.log(response);
 
-        startAccessor='start'
-        endAccessor='end'
-        style={{height: '420px'}}
-        timeslots={8}
-        events={myEventsList}
-        />
-      </div>
-    )
-  }
+                    let schedPrefs = response.data[0]
+
+                    var dayNum;
+                    var occurrences;
+
+                    function sched(num) {
+                        return later.parse.recur().on(num).dayOfWeek();
+                    }
+                    var  stateSetter = (occurence, idx) => {
+                      occurrences = later.schedule(sched(occurence)).next(100);
+
+                      this.setState({events:[...this.state.events,{
+                          'title': '',
+                          'allDay': true,
+                          'start': occurrences[idx],
+                          'end': occurrences[idx]
+                      }]})
+                    }
+                    for (var prop in schedPrefs) {
+                        for (var i = 0; i < 30; i++) {
+                            if (schedPrefs[prop] === 'false') {
+                                switch (prop) {
+                                  case 'pa_monday':
+                                      stateSetter(3, i)
+                                      break;
+
+                                    case 'pa_tuesday':
+                                        stateSetter(4, i)
+                                        break;
+                                    case 'pa_wednesday':
+                                      stateSetter(5, i)
+                                        break;
+                                    case 'pa_thursday':
+                                        stateSetter(6, i)
+                                        break;
+                                  case 'pa_friday':
+                                      stateSetter(7, i)
+                                      break;
+                                    case 'pa_saturday':
+                                        stateSetter(1, i)
+                                        break;
+                                  case 'pa_sunday':
+                                      stateSetter(2, i)
+                                      break;
+                                }
+                            }
+                        }
+                    }
+                    console.log(tempArr);
+                })
+    }
+
+    render() {
+        return ( <
+            div >
+            <
+            BigCalendar
+
+            startAccessor = 'start'
+            endAccessor = 'end'
+            style = {
+                {
+                    height: '420px'
+                }
+            }
+            timeslots = {
+                8
+            }
+            events = {
+                this.state.events
+            }
+            />
+            </div>
+        )
+    }
 }
 
 

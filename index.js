@@ -120,6 +120,14 @@ app.get('/getApptCount', function(req,res,next){
   })
 })
 
+app.get('/api/setuppref', (req,res,next) => {
+  console.log(req.body);
+  db.readUserPref([3], (err, pref) => {
+    if (err) {return next(err)}
+    return res.status(200).json(pref)
+  })
+})
+
 app.listen(port , () => {
   console.log(`listenin' to port ${port}`);
 });

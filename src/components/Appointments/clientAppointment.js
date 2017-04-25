@@ -83,7 +83,7 @@ class ClientAppointment extends Component {
 
     const topHeading = {
       marginBottom: '0px',
-      textAlign: 'center'
+      textAlign: 'left'
     }
 
     const headingMargin = {
