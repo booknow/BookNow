@@ -23,12 +23,26 @@ import {
     Table
 } from "react-bootstrap";
 
+
 class CustomerInfo extends Component {
+
+
 
     constructor(props) {
         super(props);
 
+
         this.state = {
+            customer: {
+              email:null,
+              address_city:null,
+              address_state:null,
+              address_street:null,
+              first_name:null,
+              last_name:null,
+              frequency:null,
+              service_name:null,
+            },
             tags: [
                 {
                     id: 1,
@@ -73,8 +87,35 @@ class CustomerInfo extends Component {
         this.setState({tags: tags});
     }
 
+    componentWillMount(){
+      axios.get("http://localhost:3000/customer/" + this.props.match.params.id).then(response => {
+        console.log(response.data);
+        this.setState({
+          customer:{
+            email:response.data.email,
+            address_city:response.data.address_city,
+            address_state:response.data.address_state,
+            address_street: response.data.address_street,
+            address_zip:response.data.address_zip,
+            first_name: response.data.first_name,
+            last_name:response.data.last_name,
+            frequency:response.data.frequency,
+            service_name:response.data.service_name
+          }
+        })
+      })
+      console.log(this.props.match.params.id);
+    }
+
+
+
     render() {
         const {tags, suggestions} = this.state;
+
+
+
+        const {customer} = this.state;
+
         return (
 
             <Grid>
@@ -95,10 +136,12 @@ class CustomerInfo extends Component {
                         <Col sm={12}>
                             <fieldset>
                                 <div className="text-center">
-                                    <strong>Qais La La
+                                    <strong>
+                                       {customer.first_name} {customer.last_name}
                                     </strong>
                                     <p className="margin-none">281 201 2910</p>
-                                    <span>qais@gmail.com
+                                    <span>
+                                      {customer.email}
                                     </span>
                                     <p className="customer-since">Customer since 2017
                                     </p>
@@ -112,7 +155,9 @@ class CustomerInfo extends Component {
                                         <legend className="legend-text">Addresses</legend>
                                         <label>Default Address:</label>
                                         <br/>
-                                        <span>500 S Ervay St, dallas, TX 75201
+                                        <span>
+                                          {customer.address_street}, {customer.address_city}, {customer.address_state} {customer.address_zip}
+
                                         </span>
 
                                     </p>
@@ -150,9 +195,9 @@ class CustomerInfo extends Component {
                                 <Col sm={12}>
                                     <div>
                                         <button className="btn btn-lg btn-white dropdown-toggle">Completed Bookings</button>
-                                        <button className="btn btn-lg btn-primary pull-right create-booking-btn">
+                                      <Link to="/book">  <button className="btn btn-lg btn-primary pull-right create-booking-btn">
                                             Create Booking
-                                        </button>
+                                        </button></Link>
                                     </div>
                                 </Col>
                             </Row>
@@ -168,13 +213,14 @@ class CustomerInfo extends Component {
                             </Row>
                             <Row>
                                 <Col lg={6}>
-                                    <strong className="address-title">500 S Ervay St, Dallas, TX 75201
+                                    <strong className="address-title">
+                                        {customer.address_street}, {customer.address_city}, {customer.address_state} {customer.address_zip}
                                     </strong>
                                 </Col>
                             </Row>
                             <p>04/20/2017 4:00PM</p>
                             <p>
-                                One Time
+                                {customer.frequency}
                             </p>
                             <strong>
                                 Small Car

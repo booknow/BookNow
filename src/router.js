@@ -40,7 +40,7 @@ export default (
 			/>
 		<Route
 				component={ CustomerInfo }
-				path = "/CustomerInfo"
+				path = "/customerInfo/:id"
 			/>
 	</Switch>
 );
