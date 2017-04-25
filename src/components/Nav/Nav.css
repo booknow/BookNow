@@ -5,3 +5,8 @@
   padding: 20px;
   color: white;
 }
+
+
+.navbar navbar-inverse{
+  margin-bottom:0 !important;
+}
