@@ -18,12 +18,7 @@ class MyCalendar extends Component {
   constructor () {
    super()
 
-
-
-
   }
-
-
 
 
   render() {
