@@ -38,7 +38,7 @@ class CustomerInfo extends Component {
                     text: "Intelligent"
                 }
             ],
-            // suggestions: Personalties
+            suggestions: ["Greedy", "Angry"]
         };
         this.handleDelete = this.handleDelete.bind(this);
         this.handleAddition = this.handleAddition.bind(this);
@@ -46,6 +46,8 @@ class CustomerInfo extends Component {
     }
 
     handleDelete(i) {
+        // console.log(this.state.tags.length)
+        // console.log(i)
         let tags = this.state.tags;
         tags.splice(i, 1);
         this.setState({tags: tags});
@@ -123,12 +125,12 @@ class CustomerInfo extends Component {
                                     "To attach a special tag to this Customer, type a tag name and press enter or select from available tags:"
                                 </label>
                                 <div>
-                                    {/*}<ReactTags tags={tags}
+                                    <ReactTags tags={tags}
                                       suggestions={suggestions}
                                       handleDelete={this.handleDelete}
                                       handleAddition={this.handleAddition}
                                       handleDrag={this.handleDrag}/>
-                                      */}
+
                                 </div>
                             </fieldset>
 
