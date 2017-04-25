@@ -4,9 +4,8 @@ import LogIn from "./components/LogIn/LogIn";
 import AddAppointment from "./components/Appointments/addAppointment";
 import BookingsHome from "./components/BookingsHome/BookingsHome";
 import UserInfo from "./components/userInfo/userInfo";
-
+import BusinessInfo from "./components/businessInfo/businessInfo";
 import ClientAppointment from "./components/Appointments/clientAppointment";
-
 export default (
 	<Switch>
 		<Route
@@ -25,10 +24,6 @@ export default (
 				path="/userInfo"
 			/>
 		<Route
-				component={ LogIn }
-				path="/about"
-			/>
-		<Route
 				component={ BookingsHome }
 				path="/home"
 			/>
@@ -36,6 +31,10 @@ export default (
 				component={ ClientAppointment }
 				exact
 				path="/client/book"
+			/>
+		<Route
+			component={ BusinessInfo }
+			path="/BusinessInfo"
 			/>
 	</Switch>
 );

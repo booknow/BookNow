@@ -16,13 +16,12 @@ export default class NavComponent extends Component {
         user_password: null
       }
     }
+    getUser().then(res=>{
+      this.setState({user: res.data})
+    })
   }
 
   render(){
-    getUser().then(res=>{
-      console.log(res.data);
-      this.setState({user: res.data})
-    })
        return (
           <Navbar inverse collapseOnSelect>
           {window.location.pathname !== '/'

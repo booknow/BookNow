@@ -22,7 +22,6 @@ class BookingsHome extends Component {
       })
 
       axios.get("http://localhost:3000/getApptCount").then((response)=>{
-        console.log(response);
         this.setState({ApptCount: response.data[0].count})
       })
 
@@ -36,7 +35,7 @@ class BookingsHome extends Component {
             inputText: "",
             filteredAppointments: [],
             user: {
-              first_name: null,
+              first_name: null
             }
       }
 
@@ -44,6 +43,7 @@ class BookingsHome extends Component {
         this.setState({appointments: response.data})
       })
     }
+
     searchTestHandler(e){
       const searchText = this.state.inputText
       const filteredArray = this.state.appointments.filter((object)=>{
@@ -59,10 +59,13 @@ class BookingsHome extends Component {
     }
     updateInputText(e, that){
       that.setState({inputText: e.target.value})
+      if (e.target.value === "") {
+        this.setState({filteredAppointments: []})
+      }
     }
 
     render() {
-
+      const self = this;
       const { ApptCount } = this.state;
       let { filteredAppointments } = this.state
 
@@ -116,12 +119,15 @@ class BookingsHome extends Component {
                 </Col>
 
                 <Col md={4} className="search-bookings">
-                  <FormGroup>
-                     <InputGroup onChange={(e)=>this.updateInputText(e, this)}>
-                       <InputGroup.Addon><button onClick={()=>this.searchTestHandler()} className="fa fa-search"></button></InputGroup.Addon>
-                       <FormControl type="text" placeholder="Search Bookings ..." />
-                     </InputGroup>
-                   </FormGroup>
+                  <form onSubmit={self.searchTestHandler}>
+                    <FormGroup>
+                      <InputGroup onChange={(e)=>this.updateInputText(e, this)}>
+                        <InputGroup.Addon><button onClick={()=>this.searchTestHandler()} className="fa fa-search"></button></InputGroup.Addon>
+                        <FormControl type="text" placeholder="Search Bookings ..." />
+                      </InputGroup>
+                    </FormGroup>
+
+                  </form>
                 </Col>
               </Row>
 
@@ -172,7 +178,7 @@ class BookingsHome extends Component {
     <hr />
 <Row>
     <Col sm={4}>
-      &copy; 2017 {this.state.user.first_name}
+      &copy; 2017 Vernon Mullen , Qais Malik , Daanish Nasir
     </Col>
 </Row>
 
