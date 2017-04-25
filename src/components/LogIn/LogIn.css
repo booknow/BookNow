@@ -4,15 +4,48 @@
   text-align: center;
 }
 
+.btn-facebook{
+  background-color: #3B5998;
+  border-color: #3B5998;
+  color: white;
+  width:50%;
+  margin-top: 1.5em;
+  margin-bottom:2em;
+}
+
+.btn-signIn{
+  background-color: #D73D32;
+  border-color: #D73D32;
+  width: 50%;
+  color:white;
+}
+
+
+.facebook-text{
+  color:white;
+}
+
+/*@media (max-width: 800px) and (min-width: 501px), (max-width: 1024px) and (min-width: 801px), (min-width: 1025px)
+.LogIn_Box {
+    max-width: 500px;
+    margin-bottom: 1em;
+    border-radius: 4px;
+}*/
 
 .LogIn_Box{
+  padding-top: 2em;
   position: relative;
-  top:25%;
+  top: 14%;
+  background-color: white;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width:500px;
 }
 
 .form_group{
   margin-bottom: 15px;
-  width: 20%;
+  width: 50%;
+
 }
 
 
