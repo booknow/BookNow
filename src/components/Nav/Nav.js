@@ -19,13 +19,11 @@ export default class NavComponent extends Component {
   }
 
   render(){
-
     const navMargin = {
-      marginBottom: '0px',
+      marginBottom: '0px'
     }
 
     getUser().then(res=>{
-      // console.log(res.data);
       this.setState({user: res.data})
     })
        return (
@@ -34,14 +32,14 @@ export default class NavComponent extends Component {
           ?
           <Navbar.Header>
             <Navbar.Brand>
-            <Link to="/home"> Skema </Link>  
+            <Link to="/home"> Skema </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           :
           <Navbar.Header>
             <Navbar.Brand>
-            <Link to="/home"> Skema </Link>
+            <Link to="/#"> Skema </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
