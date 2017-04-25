@@ -1,0 +1,60 @@
+body{
+  background-color: #EBEDF0;
+}
+
+
+.white-back{
+  background-color: white;
+}
+
+
+.legend-text{
+  border-bottom-color: #cecbcb;
+  color:#b9b7b7;
+  font-size: 21px;
+  font-weight: 700;
+  padding-bottom: 10px;
+  padding-left: 0;
+  border-bottom-width: 5px;
+}
+
+.margin-none{
+  margin:0;
+}
+
+.create-booking-btn{
+  background-color: #2B3039;
+}
+
+.btn-white{
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  font-size:22px;
+}
+
+.customer-since{
+  margin-top: 5%;
+}
+
+fieldset{
+  margin:20px 0 40px;
+}
+
+
+.service-feedback{
+  padding-top: 5%;
+}
+
+.address-title{
+  color: #2c7ea1;
+  font-size:21px;
+}
+
+
+.col2-padd{
+  padding:27px;
+}
+
+.customer-info-pad{
+  padding-top: 25px;
+}

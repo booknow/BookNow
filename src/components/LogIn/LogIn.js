@@ -7,8 +7,9 @@ class LogIn extends Component {
         return (
             <div className='LogIn_Container'>
                 <div className="LogIn_Box">
-                    <h1 className="Sign_In_Box">
-                        Sign In</h1>
+                    <h1 className="signIn-text">
+                        SKEMA
+                      </h1>
                     <p>Sign in to track your Booking, Reschedule, manage Add-ons, and more</p>
                     <form>
                         <b>Username:</b>
@@ -19,9 +20,9 @@ class LogIn extends Component {
                         <br/>
                         <input className="form_group" type="text" name="password"/>
                     </form>
-                    <button> Sign In </button>
+                    <button className="btn btn-signIn"> Sign In </button>
                       <form>
-                          <button className="play-button"><a href="http://localhost:3000/auth/facebook">Login with Facebook</a></button>
+                          <button className="play-button btn btn-facebook"><a className="facebook-text"href="http://localhost:3000/auth/facebook">Login with Facebook</a></button>
                       </form>
                 </div>
             </div>

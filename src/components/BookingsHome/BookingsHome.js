@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import axios from "axios"
+import axios from "axios";
 // var ReactDOM = require('react-dom');
 import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
 
@@ -73,7 +73,7 @@ class BookingsHome extends Component {
           return (
             <tr>
               <td>{appointment.address_city}</td>
-              <td>{appointment.first_name} {appointment.last_name} </td>
+              <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
               <td>{appointment.frequency}</td>
               <td>{appointment.email}</td>
@@ -85,7 +85,7 @@ class BookingsHome extends Component {
           return (
             <tr>
               <td>{appointment.address_city}</td>
-              <td>{appointment.first_name} {appointment.last_name} </td>
+              <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
               <td>{appointment.frequency}</td>
               <td>{appointment.email}</td>

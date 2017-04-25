@@ -92,9 +92,9 @@ app.get("/getCurrentUser", (req,res,next)=>{
   if (req.user) {
     return res.status(200).json(req.user)
   }
-
   return res.status(200).send('no user info')
 })
+
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
   console.log(req.body.total);
@@ -108,6 +108,15 @@ app.post('/createAppointment' , (req,res,next) => {
   })
 })
 
+app.get('/customer/:id', function(req,res,next){
+  db.new_appointment.find(parseInt(req.params.id), function(err, user){
+    if (err) {return next(err)}
+    else{
+      return res.status(200).json(user);
+    }
+  })
+})
+
 
 app.get('/getApptCount', function(req,res,next){
   db.getApptCount(function(err, ApptCount){
@@ -117,6 +126,14 @@ app.get('/getApptCount', function(req,res,next){
     }
     console.log("the total number of appointments:", ApptCount);
     return res.status(200).json(ApptCount);
+  })
+})
+
+app.get('/api/setuppref', (req,res,next) => {
+  console.log(req.body);
+  db.readUserPref([3], (err, pref) => {
+    if (err) {return next(err)}
+    return res.status(200).json(pref)
   })
 })
 

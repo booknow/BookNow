@@ -16,26 +16,30 @@ export default class NavComponent extends Component {
         user_password: null
       }
     }
-    getUser().then(res=>{
-      this.setState({user: res.data})
-    })
   }
 
   render(){
+    const navMargin = {
+      marginBottom: '0px'
+    }
+
+    getUser().then(res=>{
+      this.setState({user: res.data})
+    })
        return (
-          <Navbar inverse collapseOnSelect>
+          <Navbar style={navMargin} inverse collapseOnSelect>
           {window.location.pathname !== '/'
           ?
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="home">Skema</a>
+            <Link to="/home"> Skema </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           :
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">Skema</a>
+            <Link to="/#"> Skema </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
