@@ -34,14 +34,14 @@ export default class NavComponent extends Component {
           ?
           <Navbar.Header>
             <Navbar.Brand>
-            <Link to="/home"> Skema </Link>  
+            <Link to="/home"> Skema </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
           :
           <Navbar.Header>
             <Navbar.Brand>
-            <Link to="/home"> Skema </Link>
+            <Link to="/#"> Skema </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
