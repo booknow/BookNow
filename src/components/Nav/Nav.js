@@ -19,13 +19,11 @@ export default class NavComponent extends Component {
   }
 
   render(){
-
     const navMargin = {
-      marginBottom: '0px',
+      marginBottom: '0px'
     }
 
     getUser().then(res=>{
-      // console.log(res.data);
       this.setState({user: res.data})
     })
        return (
