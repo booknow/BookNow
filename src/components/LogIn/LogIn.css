@@ -1,7 +1,12 @@
 .LogIn_Container{
-  background-color: #EBF1F4;
-  height: 90vh;
+  /*background-color: #EBF1F4;*/
+  height: 100vh;
   text-align: center;
+  background-image:url(http://www.launch27.com/wp-content/themes/launch27/images/have-page-img.jpg);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+
 }
 
 .btn-facebook{
@@ -45,6 +50,15 @@
 .form_group{
   margin-bottom: 15px;
   width: 50%;
+
+}
+
+body{
+
+}
+
+.signIn-text{
+  font-family: 'Exo', sans-serif;
 
 }
 

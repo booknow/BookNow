@@ -7,7 +7,7 @@ class LogIn extends Component {
         return (
             <div className='LogIn_Container'>
                 <div className="LogIn_Box">
-                    <h1 className="Sign_In_Box">
+                    <h1 className="signIn-text">
                         SKEMA
                       </h1>
                     <p>Sign in to track your Booking, Reschedule, manage Add-ons, and more</p>

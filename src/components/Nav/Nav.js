@@ -19,12 +19,17 @@ export default class NavComponent extends Component {
   }
 
   render(){
+
+    const navMargin = {
+      marginBottom: '0px',
+    }
+
     getUser().then(res=>{
       // console.log(res.data);
       this.setState({user: res.data})
     })
        return (
-          <Navbar inverse collapseOnSelect>
+          <Navbar style={navMargin} inverse collapseOnSelect>
           {window.location.pathname !== '/'
           ?
           <Navbar.Header>
