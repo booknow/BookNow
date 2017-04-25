@@ -108,6 +108,15 @@ app.post('/createAppointment' , (req,res,next) => {
   })
 })
 
+app.get('/customer/:id', function(req,res,next){
+  db.new_appointment.find(parseInt(req.params.id), function(err, user){
+    if (err) {return next(err)}
+    else{
+      return res.status(200).json(user);
+    }
+  })
+})
+
 
 app.get('/getApptCount', function(req,res,next){
   db.getApptCount(function(err, ApptCount){
