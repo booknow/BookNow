@@ -92,9 +92,9 @@ app.get("/getCurrentUser", (req,res,next)=>{
   if (req.user) {
     return res.status(200).json(req.user)
   }
-
   return res.status(200).send('no user info')
 })
+
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
   console.log(req.body.total);
