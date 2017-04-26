@@ -22,46 +22,52 @@ import API_BASE_URL from '../../utils/api-helper';
 
 export default class BusinessInfo1 extends Component {
 
+    componentWillMount() {
+
+    }
+
     constructor() {
+
         super()
 
-        axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
+        this.state = {
+          services: []
+        }
+
+        axios.get(API_BASE_URL + '/api/setup/services').then((response) => {
+          this.setState({services: response.data})
+          console.log(this.state.services);
+        })
         .catch(function(err) {console.log(err);})
+
 
     }
 
     render() {
+
+
+      const services = this.state.services.map(function(service){
+          return (
+            <Checkbox>
+              {service.service_name}
+            </Checkbox>
+
+          )
+        });
+
         return (
             <Grid>
                 <Row>
                     <Col sm={8}>
                         <Form horizontal>
                             <h2>SERVICE TYPE</h2>
-                            <h4>What Service do you offer? Please select from the list</h4>
-                            <FormGroup >
-                                <Checkbox inline>
-                                    {'Lawncare'}
-                                </Checkbox>
+                            <h4>What service do you offer? Please select from the list below</h4>
 
-                                <Checkbox inline>
-                                    {'Carpet cleaning'}
-                                </Checkbox>
-
-                                <Checkbox inline>
-                                    {'home cleaning'}
-                                </Checkbox>
-
-                                <Checkbox inline>
-                                    {'car detaling'}
-                                </Checkbox>
-
-                                <Checkbox inline>
-                                    {'moving service'}
-                                </Checkbox>
-                                <Checkbox inline>
-                                    {'Other'}
-                                </Checkbox>
+                            <div className="setup-col">
+                              <FormGroup >
+                                  {services}
                               </FormGroup>
+                            </div>
                           </Form>
                       </Col>
                 </Row>

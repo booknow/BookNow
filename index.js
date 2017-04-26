@@ -75,12 +75,20 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 //   })
 // })
 
-app.post('/api/book', (req,res,next) => {
-  // if (err) { return next(err) }
-  return res.status(200).send('working!')
-})
 
-// app.post('/api/setup')
+
+// app.post('/api/setup', (req,res,next) => {
+//   db.create
+//   if (err) {return next(err)}
+//   return res.status(200).json('working')
+// })
+
+app.get('/api/setup/services', (req,res,next) => {
+  db.getServicesList([], (err, list) => {
+    if (err) {return next(err)}
+    return res.status(200).json(list)
+  })
+})
 
 app.get('/appointments', (req,res,next) => {
   db.readAppts([], (err, appts)=> {
