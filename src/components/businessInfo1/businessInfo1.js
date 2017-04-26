@@ -14,10 +14,22 @@ import {
     Row,
     FormControl,
     FormGroup
-} from 'react-bootstrap'
+} from 'react-bootstrap';
+
 import '../businessInfoStart/businessInfoStart.css';
+import axios from 'axios'
+import API_BASE_URL from '../../utils/api-helper';
 
 export default class BusinessInfo1 extends Component {
+
+    constructor() {
+        super()
+
+        axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
+        .catch(function(err) {console.log(err);})
+
+    }
+
     render() {
         return (
             <Grid>

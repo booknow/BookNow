@@ -80,6 +80,8 @@ app.post('/api/book', (req,res,next) => {
   return res.status(200).send('working!')
 })
 
+// app.post('/api/setup')
+
 app.get('/appointments', (req,res,next) => {
   db.readAppts([], (err, appts)=> {
     if (err) {return next(err)}
