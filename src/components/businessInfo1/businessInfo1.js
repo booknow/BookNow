@@ -56,13 +56,10 @@ export default class BusinessInfo1 extends Component {
                 <Row>
                     <Col className="next-btn" md={4} mdOffset={4}>
 
-                        <ButtonToolbar>
-                            <Col md={4} mdOffset={4}>
-                                <Button className="" bsStyle="success" bsSize="large">
-                                    <Link to="/businessInfo/2">Next</Link>
-                                </Button>
-                            </Col>
-                        </ButtonToolbar>
+                      <ButtonToolbar>
+                        <Button bsStyle="success" bsSize="large" block><Link to="/setup/2">Next</Link></Button>
+                        <Button bsStyle="success" bsSize="large" block><Link to="/setup">Previous</Link></Button>
+                      </ButtonToolbar>
                     </Col>
                 </Row>
             </Grid>

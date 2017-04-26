@@ -16,13 +16,13 @@ class BusinessInfo extends Component {
       return (
           <div>
           <Switch>
-            <Route exact path="/businessInfo" component={BusinessInfoStart}/>
-            <Route exact path="/businessInfo/1" component={BusinessInfo1} />
-            <Route exact path="/businessInfo/2" component={BusinessInfo2} />
-            <Route exact path="/businessInfo/3" component={BusinessInfo3} />
-            <Route exact path="/businessInfo/4" component={BusinessInfo4} />
-            <Route exact path="/businessInfo/5" component={BusinessInfo5} />
-            <Route exact path="/businessInfo/6" component={BusinessInfo6} />
+            <Route exact path="/setup" component={BusinessInfoStart}/>
+            <Route exact path="/setup/1" component={BusinessInfo1} />
+            <Route exact path="/setup/2" component={BusinessInfo2} />
+            <Route exact path="/setup/3" component={BusinessInfo3} />
+            <Route exact path="/setup/4" component={BusinessInfo4} />
+            <Route exact path="/setup/5" component={BusinessInfo5} />
+            <Route exact path="/setup/6" component={BusinessInfo6} />
           </Switch>
         </div>
       )

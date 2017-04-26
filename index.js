@@ -61,7 +61,7 @@ app.use((req, res, next) => {
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/businessInfo'
+    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/setup'
   })
 )
 
