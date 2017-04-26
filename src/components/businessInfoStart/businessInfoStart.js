@@ -4,6 +4,10 @@ import {Button, Table, ButtonToolbar ,Panel,ControlLabel, InputGroup, Form, Grid
 import './businessInfoStart.css';
 
 export default class BusinessInfoStart extends Component {
+  constructor(){
+    super()
+
+  }
     render() {
         return (
           <Grid>
@@ -35,7 +39,7 @@ export default class BusinessInfoStart extends Component {
 
              </Col>
            </Row>
-
+           
           </Grid>
         )
     }
