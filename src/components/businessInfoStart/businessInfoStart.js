@@ -1,5 +1,8 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import Validation from 'react-validation';
+import validator from 'validator';
+
 import {
     Button,
     Table,
@@ -23,6 +26,7 @@ export default class BusinessInfoStart extends Component {
     }
     render() {
         return (
+          <Validation.components.Form>
             <Grid>
                 <Row>
                     <Col sm={8}>
@@ -34,9 +38,8 @@ export default class BusinessInfoStart extends Component {
                                     Email
                                 </Col>
                                 <Col sm={9}>
-                                    <FormControl type="email" placeholder="Email"/>
+                                    <FormControl validations={['required', 'email']} type="email" placeholder="Email"/>
                                 </Col>
-
                             </FormGroup>
                         </Form>
                     </Col>
@@ -54,6 +57,7 @@ export default class BusinessInfoStart extends Component {
                 </Row>
 
             </Grid>
+          </Validation.components.Form>
         )
     }
 }

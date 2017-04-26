@@ -1,4 +1,3 @@
-//TODO: Fix tags https://www.npmjs.com/package/react-tag-input
 
 import React, {Component} from "react";
 import axios from "axios";
