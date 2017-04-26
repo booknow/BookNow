@@ -1,3 +1,3 @@
-SELECT service_name
+SELECT *
 FROM services
 ;

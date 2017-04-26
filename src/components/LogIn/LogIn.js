@@ -1,8 +1,20 @@
 import React, {Component} from "react";
+import axios from 'axios'
 
 import './LogIn.css';
 
 class LogIn extends Component {
+    login(e) {
+      e.preventDefault()
+      console.log("Logging in")
+      axios.get('http://localhost:3000/auth/facebook')
+      .then(response => {
+        console.log(response)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
     render() {
         return (
             <div className='LogIn_Container'>
@@ -22,7 +34,7 @@ class LogIn extends Component {
                     </form>
                     <button className="btn btn-signIn"> Sign In </button>
                       <form>
-                          <button className="play-button btn btn-facebook"><a className="facebook-text"href="http://localhost:3000/auth/facebook">Login with Facebook</a></button>
+                          <button className="play-button btn btn-facebook" ><a href="http://localhost:3000/auth/facebook" className="facebook-text">Login with Facebook</a></button>
                       </form>
                 </div>
             </div>
