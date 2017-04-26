@@ -41,7 +41,7 @@ export default (
 			/>
 		<Route
 			component={ BusinessInfo }
-			path="/BusinessInfo"
+			path="/setup"
 			/>
 	</Switch>
 );
