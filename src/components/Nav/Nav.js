@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import './Nav.css';
 import {getUser} from "../../userService"
 
+var Droppie = require('react-droppie')
+
 export default class NavComponent extends Component {
   constructor(){
     super()
