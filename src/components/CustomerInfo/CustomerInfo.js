@@ -90,6 +90,8 @@ class CustomerInfo extends Component {
     componentWillMount(){
       axios.get("http://localhost:3000/customer/" + this.props.match.params.id).then(response => {
         console.log(response.data);
+
+
         this.setState({
           customer:{
             email:response.data.email,
