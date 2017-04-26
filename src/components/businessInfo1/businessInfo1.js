@@ -101,8 +101,10 @@ export default class BusinessInfo1 extends Component {
                 <Row>
                     <Col className="next-btn" md={4} mdOffset={4}>
 
+
                         <ButtonToolbar>
                             <Col md={4} mdOffset={4}>
+                                  <Button bsStyle="success" bsSize="large" block><Link to="/setup">Previous</Link></Button>
                                 <Link to="/businessInfo/2">
                                   <Button onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit">
                                       Next
@@ -110,6 +112,7 @@ export default class BusinessInfo1 extends Component {
                                 </Link>
                             </Col>
                         </ButtonToolbar>
+
                     </Col>
                 </Row>
             </Grid>

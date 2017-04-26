@@ -69,7 +69,11 @@ app.use((req, res, next) => {
 //END POINTS
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
-app.get('/auth/facebook/callback', passport.authenticate('facebook', {successRedirect: 'http://localhost:4000/home', failureRedirect: 'http://localhost:4000'}))
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/setup'
+  })
+)
+
 
 
 // app.put('/updateUserInfo', (req,res,next) => {
@@ -161,6 +165,15 @@ app.get('/api/setuppref', (req,res,next) => {
   })
 })
 
+
+app.get('/servicesProvided' , function(req,res,next) {
+  db.servicesProvided(function(err, servicesProvided){
+    if(err){
+      return next (err);
+    }
+    return res.status(200).json(servicesProvided);
+  })
+})
 
 
 app.listen(port , () => {
