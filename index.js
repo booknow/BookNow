@@ -139,7 +139,7 @@ app.get('/api/setuppref', (req,res,next) => {
 })
 
 
-app.get('servicesProvided' , function(req,res,next) {
+app.get('/servicesProvided' , function(req,res,next) {
   db.servicesProvided(function(err, servicesProvided){
     if(err){
       return next (err);

@@ -92,6 +92,7 @@ class CustomerInfo extends Component {
         console.log(response.data);
 
 
+
         this.setState({
           customer:{
             email:response.data.email,
@@ -206,7 +207,7 @@ class CustomerInfo extends Component {
                             <Row>
                                 <div className="service-feedback">
                                     <Col lg={6}>
-                                        <p>Service</p>
+                                        <p>Service : {customer.service_name}</p>
                                     </Col>
                                     <Col lg={6}>
                                         <p>Feedback</p>
