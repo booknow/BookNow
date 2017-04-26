@@ -90,6 +90,9 @@ class CustomerInfo extends Component {
     componentWillMount(){
       axios.get("http://localhost:3000/customer/" + this.props.match.params.id).then(response => {
         console.log(response.data);
+
+
+
         this.setState({
           customer:{
             email:response.data.email,
@@ -204,7 +207,7 @@ class CustomerInfo extends Component {
                             <Row>
                                 <div className="service-feedback">
                                     <Col lg={6}>
-                                        <p>Service</p>
+                                        <p>Service : {customer.service_name}</p>
                                     </Col>
                                     <Col lg={6}>
                                         <p>Feedback</p>

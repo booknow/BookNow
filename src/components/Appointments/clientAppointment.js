@@ -13,6 +13,7 @@ class ClientAppointment extends Component {
   constructor(props) {
     super(props)
 
+
     this.state = {
       servicetype: null,
       serviceamt: 0,
@@ -30,7 +31,10 @@ class ClientAppointment extends Component {
       extraitem: null,
       paymentmethod: null,
       comments: null,
-      totalamt: null
+      totalamt: null,
+      servicename:null,
+      services : [ ]
+
     }
 
     console.log(this.state);
@@ -38,27 +42,42 @@ class ClientAppointment extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(field, e) {
-    this.setState({[field]: e.target.value})
+  componentWillMount(){
 
-    if(e.target.value === ''){
-      this.setState({serviceamt: 0});
-    }
+axios.get("http://localhost:3000/servicesProvided").then(response => {
+  console.log(response.data);
 
-    if (e.target.value === 'Web Development') {
-        this.setState({serviceamt: 10000 });
-    }
+    this.setState({
+      services: [...this.state.services, ...response.data]  //why ...response.data
 
-    if (e.target.value === 'Social Media') {
-      this.setState({serviceamt:  500000});
-    }
-
-    if (e.target.value === 'Consulting') {
-      this.setState({serviceamt:  900});
-    }
+    })
+})
 
   }
 
+  handleServiceChange(e){
+
+      if(!e.target.value){
+        this.setState({
+          serviceamt:0,
+          servicetype: ''
+        })
+      }
+
+    this.setState({
+
+      serviceamt: this.state.services[e.target.value].services_provided_price,
+      servicetype:this.state.services[e.target.value].service_name
+
+    })
+
+  }
+
+  handleChange(field, e) {
+
+    this.setState({[field]: e.target.value})
+
+  }
 
 
   handleSubmit(e) {
@@ -73,13 +92,21 @@ class ClientAppointment extends Component {
 
   }
 
+
+
   render() {
 
     let { serviceamt
       , extrasamt
       , discountamt
-      , tipamt} = this.state
+      , tipamt
+      , services} = this.state
     let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
+
+    const serviceOptions = services.map((service, index) => (
+        <option value={index}>{service.service_name}</option>
+    ))
+
 
     const topHeading = {
       marginBottom: '0px',
@@ -211,12 +238,9 @@ class ClientAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'servicetype') } >
+                <FormControl componentClass="select" placeholder="select" onChange={ this.handleServiceChange.bind(this) } >
                   <option></option>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Social Media">Social Media</option>
-                  <option value="Consulting">Consulting</option>
-                  <option value="Simple Website">Simple Website</option>
+                  {serviceOptions}
                 </FormControl>
               </Col>
             </FormGroup>

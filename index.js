@@ -139,6 +139,15 @@ app.get('/api/setuppref', (req,res,next) => {
 })
 
 
+app.get('/servicesProvided' , function(req,res,next) {
+  db.servicesProvided(function(err, servicesProvided){
+    if(err){
+      return next (err);
+    }
+    return res.status(200).json(servicesProvided);
+  })
+})
+
 
 app.listen(port , () => {
   console.log(`listenin' to port ${port}`);
