@@ -38,8 +38,7 @@ passport.use(new FacebookStrategy({
     }
     else {
       db.createUser([profile.displayName, profile.id], function(err, newUsers) {
-        console.log(newUsers, err);
-        return done(null, users[0])
+        return done(err, users[0])
       })
     }
   })
@@ -62,9 +61,10 @@ app.use((req, res, next) => {
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/book'
+    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/businessInfo'
   })
 )
+
 
 // app.put('/updateUserInfo', (req,res,next) => {
 //   db.updateUserInfo([req.body.email], (req ,res, next) =>{
@@ -97,12 +97,10 @@ app.get("/getCurrentUser", (req,res,next)=>{
 
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
-  console.log(req.body.total);
   db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
 
     if(err) {return next(err) }
     else{
-      console.log(data);
       return res.status(200).json(data);
     }
   })
@@ -120,22 +118,24 @@ app.get('/customer/:id', function(req,res,next){
 
 app.get('/getApptCount', function(req,res,next){
   db.getApptCount(function(err, ApptCount){
-    console.log(err);
+    // console.log(err);
     if(err){
       return next (err);
     }
-    console.log("the total number of appointments:", ApptCount);
+    // console.log("the total number of appointments:", ApptCount);
     return res.status(200).json(ApptCount);
   })
 })
 
 app.get('/api/setuppref', (req,res,next) => {
-  console.log(req.body);
+  // console.log(req.body);
   db.readUserPref([3], (err, pref) => {
     if (err) {return next(err)}
     return res.status(200).json(pref)
   })
 })
+
+
 
 app.listen(port , () => {
   console.log(`listenin' to port ${port}`);
