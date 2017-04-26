@@ -123,7 +123,7 @@ class CustomerInfo extends Component {
                 <Row>
                     <Col sm={12}>
                         <h3>
-                            Customers / First Name Last Name
+                            Customers / {customer.first_name} {customer.last_name}
                         </h3>
                     </Col>
                 </Row>
