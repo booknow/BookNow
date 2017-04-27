@@ -26,19 +26,28 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+let uber = '';
+
 passport.use(new FacebookStrategy({
   clientID: config.facebook.clientId,
   clientSecret: config.facebook.clientSecret,
   callbackURL: 'http://localhost:3000/auth/facebook/callback'
 }, function (token, refreshToken, profile, done) {
   db.findUser(profile.id, function(err, users) {
+
     if (err) next(err)
     if (users.length) {
+    
+      uber = users[0]
+
       return done(null, users[0]);
     }
     else {
       db.createUser([profile.displayName, profile.id], function(err, newUsers) {
-        return done(err, users[0])
+
+        uber = newUser[0]
+      
+        return done(err, newUsers[0])
       })
     }
   })
@@ -66,6 +75,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 )
 
 
+
 // app.put('/updateUserInfo', (req,res,next) => {
 //   db.updateUserInfo([req.body.email], (req ,res, next) =>{
 //     if(err) {return next(err) }
@@ -75,9 +85,26 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 //   })
 // })
 
-app.post('/api/book', (req,res,next) => {
-  // if (err) { return next(err) }
-  return res.status(200).send('working!')
+
+
+app.post('/api/setup', (req,res,next) => {
+  console.log(uber, uber.id);
+  Promise.all(req.body.idArr.map(id => {
+    return db.createServiceList([uber.id, id], (err, list) => {
+        if (err) {return next(err)}
+    })
+  })).then(() => {
+    return res.status(200).json('working')
+  }).catch(err => {
+    console.log(err)
+  })
+})
+
+app.get('/api/setup/services', (req,res,next) => {
+  db.getServicesList([], (err, list) => {
+    if (err) {return next(err)}
+    return res.status(200).json(list)
+  })
 })
 
 app.get('/appointments', (req,res,next) => {
@@ -138,6 +165,15 @@ app.get('/api/setuppref', (req,res,next) => {
   })
 })
 
+
+app.get('/servicesProvided' , function(req,res,next) {
+  db.servicesProvided(function(err, servicesProvided){
+    if(err){
+      return next (err);
+    }
+    return res.status(200).json(servicesProvided);
+  })
+})
 
 
 app.listen(port , () => {
