@@ -22,12 +22,11 @@ export default class BusinessInfo2 extends Component {
     super()
     this.state = {
       id: null,
-      servicesProvided: null
+      servicesProvided: []
     }
-
   }
 
-  componentWillMount(props){
+  componentWillMount(){
 
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
@@ -35,16 +34,18 @@ export default class BusinessInfo2 extends Component {
       axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
         this.setState({servicesProvided: response.data})
         console.log(this.state.servicesProvided);
+        })
       })
-    })
 
-    const servicesProList = this.state.servicesProvided.map((service, idx) => {
-      <option value={idx}>{service.service_name}</option>
-    })
+
     }
 
     render() {
-
+        const servicesProList = this.state.servicesProvided.map((service, idx) => {
+          return (
+            <input value={idx}>{service.service_name}></input>
+          )
+        });
         return (
             <Grid>
                 <Row>
@@ -61,6 +62,7 @@ export default class BusinessInfo2 extends Component {
                                     </Col>
                                     <Col xs={6} md={4}>
                                         <InputGroup>
+                                          {servicesProList}
                                             <InputGroup.Addon>$</InputGroup.Addon>
                                             <FormControl type="text" placeholder="Price"/>
                                             <InputGroup.Addon>.00</InputGroup.Addon>
@@ -75,15 +77,15 @@ export default class BusinessInfo2 extends Component {
                     </Col>
                 </Row>
                 <Row>
-              <Col className="next-btn" md={4} mdOffset={4}>
+                  <Col className="next-btn" md={4} mdOffset={4}>
 
-                <ButtonToolbar>
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
-                </ButtonToolbar>
+                    <ButtonToolbar>
+                      <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                      <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
+                    </ButtonToolbar>
 
-            </Col>
-          </Row>
+                  </Col>
+                </Row>
             </Grid>
         )
     }
