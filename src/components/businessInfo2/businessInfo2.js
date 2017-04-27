@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
 import {
     Button,
     ButtonToolbar,
@@ -36,10 +35,6 @@ export default class BusinessInfo2 extends Component {
 
   }
 
-  handleChange(e, field) {
-    this.setState({ [field]: e.target.value })
-  }
-
   componentWillMount(){
 
     axios.get(API_BASE_URL + '/api/user')
@@ -63,7 +58,7 @@ export default class BusinessInfo2 extends Component {
     render() {
         const servicesProList = this.state.servicesProvided.map((service, idx) => {
           return (
-            <FormGroup>
+            <FormGroup key={idx}>
               <Col componentClass={ControlLabel} sm={4}>
                 <ControlLabel value={idx}>{service.service_name}</ControlLabel>
               </Col>
