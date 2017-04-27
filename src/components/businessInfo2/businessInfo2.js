@@ -48,11 +48,18 @@ export default class BusinessInfo2 extends Component {
         [field]: e.target.value
       }]})
 
-      console.log(this.state);
+
     }
 
     handleSubmit() {
-      axios.put(API_BASE_URL + '/api/setup/services/:id', this.state.id).then((response) =>{
+      console.log(this.state);
+      const prices = []
+      this.state.servicesPrices.forEach(price=>{
+        if (price) {
+          prices.push({price});
+        }
+      })
+      axios.put(API_BASE_URL + '/api/setup/services/:id', prices).then((response) =>{
         console.log(response);
       })
     }
@@ -103,12 +110,11 @@ export default class BusinessInfo2 extends Component {
 
 
                 <ButtonToolbar>
-                  { this.state.price
-                  ?
-                  <Button bsStyle="success" bsSize="large" block href="/setup/3" onClick={this.handleSubmit}>Next</Button>
-                  :
-                  <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
-                  }
+
+                  <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit}>Next</Button>
+
+
+
                   <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                 </ButtonToolbar>
 
