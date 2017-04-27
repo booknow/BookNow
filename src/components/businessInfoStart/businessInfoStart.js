@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import {
-    Button,    
-    ButtonToolbar,  
-    ControlLabel,  
+    Button,
+    ButtonToolbar,
+    ControlLabel,
     Form,
     Grid,
     Col,
@@ -13,7 +13,7 @@ import {
 } from 'react-bootstrap'
 import './businessInfoStart.css';
 
-export default class BusinessInfoStart extends Component {    
+export default class BusinessInfoStart extends Component {
     render() {
         return (
             <Grid>
@@ -38,9 +38,19 @@ export default class BusinessInfoStart extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/1">Next</Link>
+
+                          {
+                            this.state.email
+                            ?
+                            <Button bsStyle="success" bsSize="large" block href="/setup/1">
+                                Next
                             </Button>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block href="/setup/1">
+                                Next
+                            </Button>
+                          }
+
                         </ButtonToolbar>
 
                     </Col>

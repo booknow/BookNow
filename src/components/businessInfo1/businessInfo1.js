@@ -96,12 +96,11 @@ export default class BusinessInfo1 extends Component {
 
                         <ButtonToolbar>
                             <Col md={4} mdOffset={4}>
-                                  <Button bsStyle="success" bsSize="large" block><Link to="/setup">Previous</Link></Button>
-                                <Link to="/businessInfo/2">
-                                  <Button onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit">
+                                    <Button onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit" href="/setup/2" block>
                                       Next
-                                  </Button>
-                                </Link>
+                                    </Button>
+                                  <Button bsStyle="success" bsSize="large" block href="/setup">Previous</Button>
+
                             </Col>
                         </ButtonToolbar>
 
