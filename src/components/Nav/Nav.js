@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import './Nav.css';
 import {getUser} from "../../userService"
 
-var Droppie = require('react-droppie')
+// var Droppie = require('react-droppie')
 
 export default class NavComponent extends Component {
   constructor(){
@@ -51,11 +51,11 @@ export default class NavComponent extends Component {
               { window.location.pathname !== '/'
                 ?
                 <Nav>
-                  <NavItem eventKey={1}><Link to="/book">Book Appointment</Link></NavItem>
+                  <Link to="/book"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
                 </Nav>
                 :
                 <Nav>
-                  <NavItem eventKey={1}><Link to="#">Book Appointment</Link></NavItem>
+                  <Link to="#"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
                 </Nav>
               }
                 <Nav pullRight>
@@ -79,7 +79,7 @@ export default class NavComponent extends Component {
               </Navbar.Collapse>
             </Navbar>
           :
-        null  
+        null
       )
   }
 }

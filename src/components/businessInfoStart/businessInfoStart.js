@@ -1,14 +1,12 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {
+
     Button,
-    Table,
     ButtonToolbar,
-    Panel,
     ControlLabel,
-    InputGroup,
-    Grid,
     Form,
+    Grid,
     ButtonInput,
     Col,
     Row,
@@ -31,6 +29,7 @@ export default class BusinessInfoStart extends Component {
       // console.log(e.target.value)
       this.setState({email: e.target.value})
     }
+
     render() {
         return (
             <Grid>
