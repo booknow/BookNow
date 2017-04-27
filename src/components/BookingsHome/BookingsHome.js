@@ -15,11 +15,11 @@ class BookingsHome extends Component {
 
     componentWillMount() {
 
-      axios.get('http://localhost:3000/user', {withCredentials: true})
-      .then(response => {
-        // console.log(response)
-
-      })
+      // axios.get('http://localhost:3000/user', {withCredentials: true})
+      // .then(response => {
+      //   // console.log(response)
+      //
+      // })
 
       axios.get("http://localhost:3000/getApptCount").then((response)=>{
         this.setState({ApptCount: response.data[0].count})

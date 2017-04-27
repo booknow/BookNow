@@ -17,8 +17,6 @@ import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 
 export default class BusinessInfo2 extends Component {
-  constructor(props) {
-    super(props)
 
     // console.log(this.state)
 
@@ -32,23 +30,40 @@ export default class BusinessInfo2 extends Component {
     //
     // })
     // .catch(function(err) {console.log(err)});
+
+  constructor() {
+    super()
     this.state = {
-      desc:''
-     ,price:''
+      id: null
+      ,servicesProvided:[]
+      ,desc:''
+      ,price:''
     }
     this.handleChange = this.handleChange.bind(this)
   }
   handleChange(e, field) {
     this.setState({ [field]: e.target.value })
-  }
-
+}
   componentWillMount(){
 
     axios.get(API_BASE_URL + '/api/user')
+    .then(response => {
+      this.setState({id: response.data})
+      axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
+        this.setState({servicesProvided: response.data})
+        console.log(this.state.servicesProvided);
+        })
+      })
 
-  }
+
+    }
 
     render() {
+        const servicesProList = this.state.servicesProvided.map((service, idx) => {
+          return (
+            <input value={idx}>{service.service_name}></input>
+          )
+        });
         return (
             <Grid>
                 <Row>
@@ -60,9 +75,14 @@ export default class BusinessInfo2 extends Component {
                             <FormGroup >
 
                                 <Row className="show-grid">
-                                    <Col xs={12} md={8}><FormControl value={this.state.desc} onChange={(e)=>this.handleChange(e, "desc")} type='text' placeholder="Description"/></Col>
+
+                                    <Col xs={12} md={8}>
+                                      <FormControl value={this.state.desc} onChange={(e)=>this.handleChange(e, "desc")} type='text' placeholder="Description"/>
+                                    </Col>
+
                                     <Col xs={6} md={4}>
                                         <InputGroup>
+                                          {servicesProList}
                                             <InputGroup.Addon>$</InputGroup.Addon>
                                             <FormControl value={this.state.price} onChange={(e)=>this.handleChange(e, "price")} type="number" placeholder="Price"/>
                                             <InputGroup.Addon>.00</InputGroup.Addon>
@@ -77,7 +97,8 @@ export default class BusinessInfo2 extends Component {
                     </Col>
                 </Row>
                 <Row>
-              <Col className="next-btn" md={4} mdOffset={4}>
+                  <Col className="next-btn" md={4} mdOffset={4}>
+
 
                 <ButtonToolbar>
                   { this.state.desc && this.state.price
@@ -89,8 +110,8 @@ export default class BusinessInfo2 extends Component {
                   <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
                 </ButtonToolbar>
 
-            </Col>
-          </Row>
+                  </Col>
+                </Row>
             </Grid>
         )
     }
