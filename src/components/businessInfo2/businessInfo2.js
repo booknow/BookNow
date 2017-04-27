@@ -9,7 +9,6 @@ import {
     Col,
     Row,
     FormControl,
-    ControlLabel,
     Checkbox,
     FormGroup
 } from 'react-bootstrap'
@@ -22,16 +21,17 @@ export default class BusinessInfo2 extends Component {
   constructor() {
     super()
     this.state = {
-      id: null,
-      servicesProvided: [],
-      servicesPrices: []
+      id: null
+      ,servicesProvided:[]
+      ,servicesPrices: []
+      ,desc:''
+      ,price:''
     }
-
-
-
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this)
   }
-
+  handleChange(e, field) {
+    this.setState({ [field]: e.target.value })
+}
   componentWillMount(){
 
     axios.get(API_BASE_URL + '/api/user')
@@ -42,37 +42,16 @@ export default class BusinessInfo2 extends Component {
         console.log(this.state.servicesProvided);
         })
       })
-    }
 
-    handleChange(field, e) {
-      this.setState({servicesPrices:[...this.state.servicesPrices, {
-        [field]: e.target.value
-      }]})
 
-      console.log(this.state);
     }
 
     render() {
         const servicesProList = this.state.servicesProvided.map((service, idx) => {
           return (
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={4}>
-                <ControlLabel value={idx}>{service.service_name}</ControlLabel>
-              </Col>
-              <Col sm={8}>
-                <InputGroup>
-                  <InputGroup.Addon>$</InputGroup.Addon>
-
-                  <FormControl type="number" placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
-
-                  <InputGroup.Addon>.00</InputGroup.Addon>
-                </InputGroup>
-              </Col>
-            </FormGroup>
-
+            <input value={idx}>{service.service_name}></input>
           )
         });
-
         return (
             <Grid>
                 <Row>
@@ -84,6 +63,18 @@ export default class BusinessInfo2 extends Component {
                             <FormGroup >
                                 <Row className="show-grid">
                                     {servicesProList}
+                                    <Col xs={12} md={8}>
+                                      <FormControl value={this.state.desc} onChange={(e)=>this.handleChange(e, "desc")} type='text' placeholder="Description"/>
+                                    </Col>
+
+                                    <Col xs={6} md={4}>
+                                        <InputGroup>
+                                          {servicesProList}
+                                            <InputGroup.Addon>$</InputGroup.Addon>
+                                            <FormControl value={this.state.price} onChange={(e)=>this.handleChange(e, "price")} type="number" placeholder="Price"/>
+                                            <InputGroup.Addon>.00</InputGroup.Addon>
+                                        </InputGroup>
+                                    </Col>
                                 </Row>
                                 <Checkbox inline>
                                     {'This is hourly service'}
@@ -94,12 +85,19 @@ export default class BusinessInfo2 extends Component {
                 </Row>
                 <Row>
                   <Col className="next-btn" md={4} mdOffset={4}>
-
                     <ButtonToolbar>
                       <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
                       <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
                     </ButtonToolbar>
-
+                <ButtonToolbar>
+                  { this.state.desc && this.state.price
+                  ?
+                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                  :
+                  <Button disabled bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                  }
+                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
+                </ButtonToolbar>
                   </Col>
                 </Row>
             </Grid>
