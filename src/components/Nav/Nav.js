@@ -51,11 +51,12 @@ export default class NavComponent extends Component {
               { window.location.pathname !== '/'
                 ?
                 <Nav>
-                  <Link to="/book"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
+                    // <NavItem href="/book" eventKey={1}>Book Appointment</NavItem>
+                    <NavItem><Link to="/book"> Book Appointment </Link></NavItem>
                 </Nav>
                 :
                 <Nav>
-                  <Link to="#"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
+                  // <Link to="#"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
                 </Nav>
               }
                 <Nav pullRight>

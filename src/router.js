@@ -33,8 +33,9 @@ export default (
 		<Route
 				component={ ClientAppointment }
 				exact
-				path="/client"
+				path="/client/"
 			/>
+
 		<Route
 				component={ CustomerInfo }
 				path="/customerInfo/:id"
