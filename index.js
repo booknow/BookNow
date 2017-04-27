@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-let uber = null;
+let uber = "";
 
 passport.use(new FacebookStrategy({
   clientID: config.facebook.clientId,
@@ -44,10 +44,8 @@ passport.use(new FacebookStrategy({
     }
     else {
       db.createUser([profile.displayName, profile.id], function(err, newUsers) {
-
-        uber = newUser[0]
-
-        return done(err, newUsers[0])
+        uber = newUsers[0]
+        return done()
       })
     }
   })
@@ -62,9 +60,6 @@ passport.deserializeUser(function(user, done) {
   return done(null, user);
 })
 
-app.use((req, res, next) => {
-  next();
-})
 
 //END POINTS
 
@@ -82,7 +77,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 //     else{
 //       return res.status(200).json(data);
 //     }
-//   })git 
+//   })git
 // })
 
 
@@ -104,13 +99,25 @@ app.post('/api/setup', (req,res,next) => {
 })
 
 app.get('/api/setup/services/:id', (req,res,next) => {
-
   // get services provided by user.id
   db.readServicesProvidedById([req.params.id], (err, services) => {
+    console.log("the facebook id is:",req.params.id)
     if (err) {return next(err)}
     return res.status(200).json(services)
   })
 })
+
+
+
+// app.get('/customer/:id', function(req,res,next){
+//   db.new_appointment.find(parseInt(req.params.id), function(err, user){
+//     if (err) {return next(err)}
+//     else{
+//       return res.status(200).json(user);
+//     }
+//   })
+// })
+
 
 app.get('/api/setup/services', (req,res,next) => {
   db.getServicesList([], (err, list) => {
@@ -164,7 +171,7 @@ app.get('/customer/:id', function(req,res,next){
 
 // app.get('/client/:id', function(req,res,next){
 //   db.clientInfo([],function(err, clientInfo){
-//     //req.params.id ?
+//     //req.params.id
 //     if (err){
 //       return next (err);
 //     }
