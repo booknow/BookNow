@@ -13,17 +13,6 @@ import {
 import '../businessInfoStart/businessInfoStart.css';
 
 export default class BusinessInfo6 extends Component {
-  constructor(){
-    super()
-    this.state = {
-      jobsNum:''
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
-  handleChange(e) {
-    console.log(e.target.value)
-    this.setState({jobsNum: e.target.value})
-  }
     render() {
         return (
             <Grid>
@@ -34,7 +23,7 @@ export default class BusinessInfo6 extends Component {
                             <h4>
                                 Based on your number of teams, how many jobs can you do at any one time?</h4>
                             <FormGroup >
-                                <Col xs={6} md={4}><FormControl value={this.state.jobsNum} onChange={this.handleChange} type="number" placeholder="1"/></Col>
+                                <Col xs={6} md={4}><FormControl placeholder="1"/></Col>
                             </FormGroup>
                         </Form>
                     </Col>
@@ -43,17 +32,9 @@ export default class BusinessInfo6 extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
-                          {
-                            this.state.jobsNum
-                            ?
-                            <Button  bsStyle="success" bsSize="large" block>
+                            <Button bsStyle="success" bsSize="large" block>
                                 <Link to="/home">Finish</Link>
                             </Button>
-                            :
-                            <Button disabled bsStyle="success" bsSize="large" block>
-                                <Link to="/home">Finish</Link>
-                            </Button>
-                          }
                             <Button bsStyle="success" bsSize="large" block>
                                 <Link to="/setup/5">Previous</Link>
                             </Button>
