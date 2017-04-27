@@ -14,6 +14,17 @@ import {
 import './businessInfoStart.css';
 
 export default class BusinessInfoStart extends Component {
+  constructor() {
+        super()
+        this.state = {
+          email: ""
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+    handleChange(e) {
+     // console.log(e.target.value)
+     this.setState({email: e.target.value})
+   }
     render() {
         return (
             <Grid>
@@ -27,7 +38,7 @@ export default class BusinessInfoStart extends Component {
                                     Email
                                 </Col>
                                 <Col sm={9}>
-                                    <FormControl type="email" placeholder="Email"/>
+                                    <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/>
                                 </Col>
 
                             </FormGroup>

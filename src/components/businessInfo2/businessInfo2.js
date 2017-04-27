@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
 import {
     Button,
     ButtonToolbar,
@@ -26,9 +25,8 @@ export default class BusinessInfo2 extends Component {
     this.state = {
       id: null,
       servicesProvided: [],
-      servicesPrices: []
-      ,desc:''
-      ,price:''
+      servicesPrices: [],
+
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -36,12 +34,9 @@ export default class BusinessInfo2 extends Component {
 
   }
 
-  handleChange(e, field) {
-    this.setState({ [field]: e.target.value })
 
-  }
+  componentWillMount(){
 
-  componentWillMount(props){
 
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
@@ -55,11 +50,13 @@ export default class BusinessInfo2 extends Component {
     }
 
     handleChange(field, e) {
+      if (!e.target.value && this.state.servicesPrices.indexOf()) {
+
+      }
       this.setState({servicesPrices:[...this.state.servicesPrices, {
         [field]: e.target.value
       }]})
 
-      console.log(this.state);
     }
 
     render() {
@@ -111,7 +108,8 @@ export default class BusinessInfo2 extends Component {
 
 
                 <ButtonToolbar>
-                  { this.state.price
+                  {
+                  this.state.servicesPrices.length
                   ?
                   <Button bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
                   :
