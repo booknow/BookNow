@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios'
-
+import { Button } from 'react-bootstrap'
 import './LogIn.css';
 
 class LogIn extends Component {
@@ -32,10 +32,9 @@ class LogIn extends Component {
                         <br/>
                         <input className="form_group" type="text" name="password"/>
                     </form>
-                    <button className="btn btn-signIn"> Sign In </button>
-                      <form>
-                          <button className="play-button btn btn-facebook" ><a href="http://localhost:3000/auth/facebook" className="facebook-text">Login with Facebook</a></button>
-                      </form>
+                    <Button className="btn btn-signIn"> Sign In </Button>
+                    <Button href="http://localhost:3000/auth/facebook" className="btn btn-facebook" >Login with Facebook</Button>
+
                 </div>
             </div>
         )

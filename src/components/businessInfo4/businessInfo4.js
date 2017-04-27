@@ -3,11 +3,11 @@ import {Link} from "react-router-dom"
 import {
     Button,
     Radio,
-  
+
     ButtonToolbar,
-    
-    
-  
+
+
+
     Form,
     Grid,
     Col,
@@ -45,11 +45,20 @@ export default class BusinessInfo4 extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/5">Next</Link>
+
+                          { this.state.hour && this.state.min && (this.state.am || this.state.pm)
+                            ?
+                            <Button bsStyle="success" bsSize="large" block href="/setup/5">
+                                Next
                             </Button>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/3">Previous</Link>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block href="/setup/5">
+                                Next
+                            </Button>
+                          }
+                            <Button bsStyle="success" bsSize="large" block href="/setup/3">
+                                Previous
+
                             </Button>
                         </ButtonToolbar>
 

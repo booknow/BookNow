@@ -9,6 +9,7 @@ import {
     Col,
     Row,
     FormControl,
+    ControlLabel,
     Checkbox,
     FormGroup
 } from 'react-bootstrap'
@@ -18,12 +19,25 @@ import API_BASE_URL from '../../utils/api-helper'
 
 export default class BusinessInfo2 extends Component {
 
+
+
   constructor() {
     super()
     this.state = {
       id: null,
-      servicesProvided: null
+      servicesProvided: [],
+      servicesPrices: []
+      ,desc:''
+      ,price:''
     }
+
+    this.handleChange = this.handleChange.bind(this)
+
+
+  }
+
+  handleChange(e, field) {
+    this.setState({ [field]: e.target.value })
 
   }
 
@@ -35,15 +49,40 @@ export default class BusinessInfo2 extends Component {
       axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
         this.setState({servicesProvided: response.data})
         console.log(this.state.servicesProvided);
-      })
-    })
 
-    const servicesProList = this.state.servicesProvided.map((service, idx) => {
-      <option value={idx}>{service.service_name}</option>
-    })
+        })
+      })
+    }
+
+    handleChange(field, e) {
+      this.setState({servicesPrices:[...this.state.servicesPrices, {
+        [field]: e.target.value
+      }]})
+
+      console.log(this.state);
     }
 
     render() {
+        const servicesProList = this.state.servicesProvided.map((service, idx) => {
+          return (
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                <ControlLabel value={idx}>{service.service_name}</ControlLabel>
+              </Col>
+              <Col sm={8}>
+                <InputGroup>
+                  <InputGroup.Addon>$</InputGroup.Addon>
+
+                  <FormControl type="number" placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
+
+                  <InputGroup.Addon>.00</InputGroup.Addon>
+                </InputGroup>
+              </Col>
+            </FormGroup>
+
+          )
+        });
+
 
         return (
             <Grid>
@@ -54,18 +93,10 @@ export default class BusinessInfo2 extends Component {
                             <h3>Please enter the types of Services you offer and at what price</h3>
                             <h4>Example: Hourly ABC Service - $99</h4>
                             <FormGroup >
-
                                 <Row className="show-grid">
-                                    <Col xs={12} md={8}>
-                                      <FormControl placeholder="Description"/>
-                                    </Col>
-                                    <Col xs={6} md={4}>
-                                        <InputGroup>
-                                            <InputGroup.Addon>$</InputGroup.Addon>
-                                            <FormControl type="text" placeholder="Price"/>
-                                            <InputGroup.Addon>.00</InputGroup.Addon>
-                                        </InputGroup>
-                                    </Col>
+
+                                    {servicesProList}
+
                                 </Row>
                                 <Checkbox inline>
                                     {'This is hourly service'}
@@ -75,15 +106,23 @@ export default class BusinessInfo2 extends Component {
                     </Col>
                 </Row>
                 <Row>
-              <Col className="next-btn" md={4} mdOffset={4}>
+                  <Col className="next-btn" md={4} mdOffset={4}>
+
+
 
                 <ButtonToolbar>
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
+                  { this.state.price
+                  ?
+                  <Button bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  :
+                  <Button disabled bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  }
+                  <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                 </ButtonToolbar>
 
-            </Col>
-          </Row>
+
+                  </Col>
+                </Row>
             </Grid>
         )
     }
