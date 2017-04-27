@@ -103,6 +103,15 @@ app.post('/api/setup', (req,res,next) => {
   })
 })
 
+app.get('/api/setup/services/:id', (req,res,next) => {
+
+  // get services provided by user.id
+  db.readServicesProvidedById([req.params.id], (err, services) => {
+    if (err) {return next(err)}
+    return res.status(200).json(services)
+  })
+})
+
 app.get('/api/setup/services', (req,res,next) => {
   db.getServicesList([], (err, list) => {
     if (err) {return next(err)}
@@ -110,13 +119,7 @@ app.get('/api/setup/services', (req,res,next) => {
   })
 })
 
-app.get('/api/setup/services/:id', (req,res,next) => {
-  // get services provided by user.id
-  db.readServicesProvidedById([req.params.id], (err, services) => {
-    if (err) {return next(err)}
-    return res.status(200).json(services)
-  })
-})
+
 
 app.put('/api/setup/services/:id', (req,res,next) => {
   // update price for services by user.id
