@@ -331,7 +331,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button onClick = { () => this.createAppt(this.state)} className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button onClick={ () => this.createAppt(this.state)} className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>

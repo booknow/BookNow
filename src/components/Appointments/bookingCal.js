@@ -27,7 +27,7 @@ class MyCalendar extends Component {
 
                     let schedPrefs = response.data[0]
 
-                    var dayNum;
+
                     var occurrences;
 
                     function sched(num) {
@@ -69,6 +69,8 @@ class MyCalendar extends Component {
                                   case 'pa_sunday':
                                       stateSetter(2, i)
                                       break;
+                                  default:
+                                  break;
                                 }
                             }
                         }
@@ -83,17 +85,17 @@ class MyCalendar extends Component {
             <
             BigCalendar
 
-            startAccessor = 'start'
-            endAccessor = 'end'
-            style = {
+            startAccessor='start'
+            endAccessor='end'
+            style={
                 {
                     height: '420px'
                 }
             }
-            timeslots = {
+            timeslots={
                 8
             }
-            events = {
+            events={
                 this.state.events
             }
             />

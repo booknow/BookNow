@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-import axios from "axios"
-import {Checkbox, ControlLabel ,Grid,Panel,title,FieldGroup, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
-import { Link, Switch, Route } from 'react-router-dom';
+
+import { Switch, Route } from 'react-router-dom';
 import './businessInfo.css';
 import BusinessInfoStart from "../businessInfoStart/businessInfoStart"
 import BusinessInfo1 from "../businessInfo1/businessInfo1";

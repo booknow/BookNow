@@ -2,10 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import {
     Button,
-    Table,
     ButtonToolbar,
-    Panel,
-    ControlLabel,
     InputGroup,
     Form,
     Grid,
@@ -16,15 +13,40 @@ import {
     FormGroup
 } from 'react-bootstrap'
 import '../businessInfoStart/businessInfoStart.css';
+import axios from 'axios'
+import API_BASE_URL from '../../utils/api-helper'
 
 export default class BusinessInfo2 extends Component {
+  constructor(props) {
+    super(props)
+
+    // console.log(this.state)
+
+
+
+    // axios.get(API_BASE_URL + '/api/setup/services').then((response) => {
+    //   response.data.map( service => {
+    //     this.setState({selectableServices: [...this.state.selectableServices, {name: service.service_name, id: service.service_id, selected: false}]})
+    //   })
+    //   this.setState({services: response.data})
+    //
+    // })
+    // .catch(function(err) {console.log(err)});
+  }
+
+  componentWillMount(){
+
+    axios.get(API_BASE_URL + '/api/user')
+
+  }
+
     render() {
         return (
             <Grid>
                 <Row>
                     <Col sm={8}>
                         <Form horizontal>
-                            <h2>Please enter your Services</h2>
+                            <h2>Please enter your Service Prices</h2>
                             <h3>Please enter the types of Services you offer and at what price</h3>
                             <h4>Example: Hourly ABC Service - $99</h4>
                             <FormGroup >
