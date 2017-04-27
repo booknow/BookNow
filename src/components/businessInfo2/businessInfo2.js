@@ -32,6 +32,14 @@ export default class BusinessInfo2 extends Component {
     //
     // })
     // .catch(function(err) {console.log(err)});
+    this.state = {
+      desc:''
+     ,price:''
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(e, field) {
+    this.setState({ [field]: e.target.value })
   }
 
   componentWillMount(){
@@ -52,11 +60,11 @@ export default class BusinessInfo2 extends Component {
                             <FormGroup >
 
                                 <Row className="show-grid">
-                                    <Col xs={12} md={8}><FormControl placeholder="Description"/></Col>
+                                    <Col xs={12} md={8}><FormControl value={this.state.desc} onChange={(e)=>this.handleChange(e, "desc")} type='text' placeholder="Description"/></Col>
                                     <Col xs={6} md={4}>
                                         <InputGroup>
                                             <InputGroup.Addon>$</InputGroup.Addon>
-                                            <FormControl type="text" placeholder="Price"/>
+                                            <FormControl value={this.state.price} onChange={(e)=>this.handleChange(e, "price")} type="number" placeholder="Price"/>
                                             <InputGroup.Addon>.00</InputGroup.Addon>
                                         </InputGroup>
                                     </Col>
@@ -72,7 +80,12 @@ export default class BusinessInfo2 extends Component {
               <Col className="next-btn" md={4} mdOffset={4}>
 
                 <ButtonToolbar>
+                  { this.state.desc && this.state.price
+                  ?
                   <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                  :
+                  <Button disabled bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                  }
                   <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
                 </ButtonToolbar>
 
