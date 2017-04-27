@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
 import {
     Button,
     ButtonToolbar,
@@ -14,17 +13,21 @@ import {
 import './businessInfoStart.css';
 
 export default class BusinessInfoStart extends Component {
-  constructor() {
-        super()
-        this.state = {
-          email: ""
-        }
-        this.handleChange = this.handleChange.bind(this)
-    }
-    handleChange(e) {
-     // console.log(e.target.value)
-     this.setState({email: e.target.value})
-   }
+
+
+    constructor() {
+         super()
+         this.state = {
+           email: ""
+         }
+         this.handleChange = this.handleChange.bind(this)
+     }
+
+     handleChange(e) {
+       // console.log(e.target.value)
+       this.setState({email: e.target.value})
+     }
+
     render() {
         return (
             <Grid>

@@ -18,20 +18,19 @@ import API_BASE_URL from '../../utils/api-helper'
 
 export default class BusinessInfo2 extends Component {
 
-
-
   constructor() {
     super()
     this.state = {
       id: null,
       servicesProvided: [],
-      servicesPrices: [],
+      servicesPrices: []
 
     }
 
+
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-
-
   }
 
 
@@ -44,25 +43,41 @@ export default class BusinessInfo2 extends Component {
       axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
         this.setState({servicesProvided: response.data})
         console.log(this.state.servicesProvided);
-
         })
       })
     }
 
     handleChange(field, e) {
-      if (!e.target.value && this.state.servicesPrices.indexOf()) {
 
-      }
+      this.setState(this.state.servicesProvided.map(()=>{
+
+      }))
+    }
+
+    handleSubmit() {
+      console.log(this.state);
+      const prices = []
+      this.state.servicesPrices.forEach(price=>{
+        if (price) {
+          prices.push({price});
+        }
+      })
+      axios.put(API_BASE_URL + '/api/setup/services/:id', prices).then((response) =>{
+        console.log(response);
+      })
+
+      
       this.setState({servicesPrices:[...this.state.servicesPrices, {
         [field]: e.target.value
       }]})
+
 
     }
 
     render() {
         const servicesProList = this.state.servicesProvided.map((service, idx) => {
           return (
-            <FormGroup>
+            <FormGroup key={idx}>
               <Col componentClass={ControlLabel} sm={4}>
                 <ControlLabel value={idx}>{service.service_name}</ControlLabel>
               </Col>
@@ -80,7 +95,6 @@ export default class BusinessInfo2 extends Component {
           )
         });
 
-
         return (
             <Grid>
                 <Row>
@@ -91,9 +105,7 @@ export default class BusinessInfo2 extends Component {
                             <h4>Example: Hourly ABC Service - $99</h4>
                             <FormGroup >
                                 <Row className="show-grid">
-
                                     {servicesProList}
-
                                 </Row>
                                 <Checkbox inline>
                                     {'This is hourly service'}
@@ -108,13 +120,17 @@ export default class BusinessInfo2 extends Component {
 
 
                 <ButtonToolbar>
+
+
+                 
                   {
                   this.state.servicesPrices.length
                   ?
-                  <Button bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3">Next</Button>
                   :
-                  <Button disabled bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
                   }
+
                   <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                 </ButtonToolbar>
 
