@@ -21,7 +21,15 @@ import './businessInfoStart.css';
 export default class BusinessInfoStart extends Component {
     constructor() {
         super()
+        this.state = {
+          email: ""
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
 
+    handleChange(e) {
+      // console.log(e.target.value)
+      this.setState({email: e.target.value})
     }
     render() {
         return (
@@ -36,7 +44,7 @@ export default class BusinessInfoStart extends Component {
                                   Email
                               </Col>
                               <Col sm={9}>
-                                  <FormControl type="email" placeholder="Email"/>
+                                  <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/>
                               </Col>
                         </Form>
                     </Col>
@@ -45,9 +53,17 @@ export default class BusinessInfoStart extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
+                          {
+                            this.state.email
+                            ?
                             <Button bsStyle="success" bsSize="large" block>
                                 <Link to="/setup/1">Next</Link>
                             </Button>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block>
+                                <Link to="/setup/1">Next</Link>
+                            </Button>
+                          }
                         </ButtonToolbar>
 
                     </Col>
