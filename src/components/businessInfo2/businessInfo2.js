@@ -28,7 +28,7 @@ export default class BusinessInfo2 extends Component {
     }
 
 
-    }
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -66,12 +66,12 @@ export default class BusinessInfo2 extends Component {
         console.log(response);
       })
 
-      
+    }
+
+    handleChange(field, e) {
       this.setState({servicesPrices:[...this.state.servicesPrices, {
         [field]: e.target.value
       }]})
-
-
     }
 
     render() {
@@ -122,7 +122,7 @@ export default class BusinessInfo2 extends Component {
                 <ButtonToolbar>
 
 
-                 
+
                   {
                   this.state.servicesPrices.length
                   ?
