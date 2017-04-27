@@ -2,11 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import {
     Button,
-  
     ButtonToolbar,
-    
-    
-    
     Form,
     Grid,
     Col,
@@ -17,6 +13,18 @@ import {
 import '../businessInfoStart/businessInfoStart.css';
 
 export default class BusinessInfo5 extends Component {
+  constructor() {
+      super()
+      this.state = {
+        hour:''
+       ,min:''
+      }
+      this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(e, field) {
+    this.setState({ [field]: e.target.value })
+  }
     render() {
         return (
             <Grid>
@@ -27,8 +35,8 @@ export default class BusinessInfo5 extends Component {
                             <h4>
                                 On average how much time do you need between jobs?</h4>
                             <FormGroup >
-                                <Col xs={6} md={4}><FormControl placeholder="2"/></Col>
-                                <Col xs={6} md={4}><FormControl placeholder="00"/></Col>
+                                <Col xs={6} md={4}><FormControl value={this.state.hour} onChange={(e)=>this.handleChange(e, "hour")} type='number' placeholder="2"/></Col>
+                                <Col xs={6} md={4}><FormControl value={this.state.min} onChange={(e)=>this.handleChange(e, "min")} type='number' placeholder="00"/></Col>
 
                             </FormGroup>
                         </Form>
@@ -38,9 +46,17 @@ export default class BusinessInfo5 extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
+                          {
+                            this.state.hour && this.state.min
+                            ?
                             <Button bsStyle="success" bsSize="large" block>
                                 <Link to="/setup/6">Next</Link>
                             </Button>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block>
+                                <Link to="/setup/6">Next</Link>
+                            </Button>
+                          }
                             <Button bsStyle="success" bsSize="large" block>
                                 <Link to="/setup/4">Previous</Link>
                             </Button>
