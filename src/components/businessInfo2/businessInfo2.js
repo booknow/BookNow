@@ -9,6 +9,7 @@ import {
     Col,
     Row,
     FormControl,
+    ControlLabel,
     Checkbox,
     FormGroup
 } from 'react-bootstrap'
@@ -22,8 +23,13 @@ export default class BusinessInfo2 extends Component {
     super()
     this.state = {
       id: null,
-      servicesProvided: []
+      servicesProvided: [],
+      servicesPrices: []
     }
+
+
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount(){
@@ -36,16 +42,37 @@ export default class BusinessInfo2 extends Component {
         console.log(this.state.servicesProvided);
         })
       })
+    }
 
+    handleChange(field, e) {
+      this.setState({servicesPrices:[...this.state.servicesPrices, {
+        [field]: e.target.value
+      }]})
 
+      console.log(this.state);
     }
 
     render() {
         const servicesProList = this.state.servicesProvided.map((service, idx) => {
           return (
-            <input value={idx}>{service.service_name}></input>
+            <FormGroup>
+              <Col componentClass={ControlLabel} sm={4}>
+                <ControlLabel value={idx}>{service.service_name}</ControlLabel>
+              </Col>
+              <Col sm={8}>
+                <InputGroup>
+                  <InputGroup.Addon>$</InputGroup.Addon>
+
+                  <FormControl type="number" placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
+
+                  <InputGroup.Addon>.00</InputGroup.Addon>
+                </InputGroup>
+              </Col>
+            </FormGroup>
+
           )
         });
+
         return (
             <Grid>
                 <Row>
@@ -55,19 +82,8 @@ export default class BusinessInfo2 extends Component {
                             <h3>Please enter the types of Services you offer and at what price</h3>
                             <h4>Example: Hourly ABC Service - $99</h4>
                             <FormGroup >
-
                                 <Row className="show-grid">
-                                    <Col xs={12} md={8}>
-                                      <FormControl placeholder="Description"/>
-                                    </Col>
-                                    <Col xs={6} md={4}>
-                                        <InputGroup>
-                                          {servicesProList}
-                                            <InputGroup.Addon>$</InputGroup.Addon>
-                                            <FormControl type="text" placeholder="Price"/>
-                                            <InputGroup.Addon>.00</InputGroup.Addon>
-                                        </InputGroup>
-                                    </Col>
+                                    {servicesProList}
                                 </Row>
                                 <Checkbox inline>
                                     {'This is hourly service'}
