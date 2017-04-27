@@ -38,11 +38,21 @@ export default class BusinessInfo5 extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/6">Next</Link>
+
+                          {
+                            this.state.hour && this.state.min
+                            ?
+                            <Button bsStyle="success" bsSize="large" block href="/setup/6">
+                                Next
                             </Button>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/4">Previous</Link>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block href="/setup/6">
+                                Next
+                            </Button>
+                          }
+                            <Button bsStyle="success" bsSize="large" block href="/setup/4">
+                                Previous
+
                             </Button>
                         </ButtonToolbar>
 

@@ -32,11 +32,21 @@ export default class BusinessInfo6 extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/home">Finish</Link>
+
+                          {
+                            this.state.jobsNum
+                            ?
+                            <Button  bsStyle="success" bsSize="large" block href="/home">
+                                Finish
                             </Button>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/5">Previous</Link>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block href="/home">
+                                Finish
+                            </Button>
+                          }
+                            <Button bsStyle="success" bsSize="large" block href="/setup/5">
+                                Previous
+
                             </Button>
                         </ButtonToolbar>
 

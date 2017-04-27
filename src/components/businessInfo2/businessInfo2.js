@@ -102,15 +102,19 @@ export default class BusinessInfo2 extends Component {
                 </Row>
                 <Row>
                   <Col className="next-btn" md={4} mdOffset={4}>
-                  <ButtonToolbar>
-                    { this.state.price
-                    ?
-                    <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
-                    :
-                    <Button disabled bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
-                    }
-                    <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
-                  </ButtonToolbar>
+
+
+
+                <ButtonToolbar>
+                  { this.state.price
+                  ?
+                  <Button bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  :
+                  <Button disabled bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  }
+                  <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
+                </ButtonToolbar>
+
 
                   </Col>
                 </Row>

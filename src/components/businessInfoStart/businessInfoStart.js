@@ -38,9 +38,19 @@ export default class BusinessInfoStart extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/1">Next</Link>
+
+                          {
+                            this.state.email
+                            ?
+                            <Button bsStyle="success" bsSize="large" block href="/setup/1">
+                                Next
                             </Button>
+                            :
+                            <Button disabled bsStyle="success" bsSize="large" block href="/setup/1">
+                                Next
+                            </Button>
+                          }
+
                         </ButtonToolbar>
 
                     </Col>
