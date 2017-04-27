@@ -17,30 +17,34 @@ import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 
 export default class BusinessInfo2 extends Component {
-  constructor(props) {
-    super(props)
 
-    // console.log(this.state)
+  constructor() {
+    super()
+    this.state = {
+      id: null,
+      servicesProvided: null
+    }
 
-
-
-    // axios.get(API_BASE_URL + '/api/setup/services').then((response) => {
-    //   response.data.map( service => {
-    //     this.setState({selectableServices: [...this.state.selectableServices, {name: service.service_name, id: service.service_id, selected: false}]})
-    //   })
-    //   this.setState({services: response.data})
-    //
-    // })
-    // .catch(function(err) {console.log(err)});
   }
 
-  componentWillMount(){
+  componentWillMount(props){
 
     axios.get(API_BASE_URL + '/api/user')
+    .then(response => {
+      this.setState({id: response.data})
+      axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
+        this.setState({servicesProvided: response.data})
+        console.log(this.state.servicesProvided);
+      })
+    })
 
-  }
+    const servicesProList = this.state.servicesProvided.map((service, idx) => {
+      <option value={idx}>{service.service_name}</option>
+    })
+    }
 
     render() {
+
         return (
             <Grid>
                 <Row>
@@ -52,7 +56,9 @@ export default class BusinessInfo2 extends Component {
                             <FormGroup >
 
                                 <Row className="show-grid">
-                                    <Col xs={12} md={8}><FormControl placeholder="Description"/></Col>
+                                    <Col xs={12} md={8}>
+                                      <FormControl placeholder="Description"/>
+                                    </Col>
                                     <Col xs={6} md={4}>
                                         <InputGroup>
                                             <InputGroup.Addon>$</InputGroup.Addon>
