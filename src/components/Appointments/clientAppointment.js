@@ -4,6 +4,7 @@ import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
 import MyCalendar from './bookingCal';
+
 // import './clientappt.css'
 
 
@@ -12,7 +13,7 @@ class ClientAppointment extends Component {
 
   constructor(props) {
     super(props)
-
+    console.log(props);
 
     this.state = {
       servicetype: null,
@@ -44,22 +45,29 @@ class ClientAppointment extends Component {
 
   componentWillMount(){
 
-    axios.get("http://localhost:3000/servicesProvided").then((response) => {
-      console.log(response.data);
+console.log("http:localhost:3000/api/setup/services/" + this.props.match.params.id);
 
-      this.setState({
-        services: [...this.state.services, ...response.data]  //why ...response.data
-
+    axios.get("http://localhost:3000/api/setup/services/" + this.props.match.params.id).then(response =>{
+      console.log(response);
+      const serviceArr = response.data.map(service=> {
+        return service.service_name
       })
-
+      console.log(serviceArr);
+      this.setState({
+        services: [...this.state.services, ...serviceArr]  //why ...response.data
+      })
 
     })
 
-    // axios.get("http:localhost:3000/api/setup/services/ + .match.params.id).then(response =>{
-    //   console.log(response);
+
+    // axios.get("http://localhost:3000/servicesProvided").then((response) => {
+    //   console.log(response.data);
+    //
+    //
     //
     //
     // })
+
 
 
 
@@ -114,7 +122,7 @@ class ClientAppointment extends Component {
     let total=parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
 
     const serviceOptions=services.map((service, index) => (
-        <option value={index}>{service.service_name}</option>
+        <option value={index}>{service}</option>
     ))
 
 
