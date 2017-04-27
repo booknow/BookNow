@@ -1,13 +1,11 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom"
 import {
-
     Button,
     ButtonToolbar,
     ControlLabel,
     Form,
     Grid,
-    ButtonInput,
     Col,
     Row,
     FormControl,
@@ -15,21 +13,7 @@ import {
 } from 'react-bootstrap'
 import './businessInfoStart.css';
 
-
 export default class BusinessInfoStart extends Component {
-    constructor() {
-        super()
-        this.state = {
-          email: ""
-        }
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange(e) {
-      // console.log(e.target.value)
-      this.setState({email: e.target.value})
-    }
-
     render() {
         return (
             <Grid>
@@ -38,13 +22,15 @@ export default class BusinessInfoStart extends Component {
                         <Form horizontal>
                             <h2>FIRST THINGS FIRST</h2>
                             <h4>Where does your customer email their questions?</h4>
+                            <FormGroup >
+                                <Col componentClass={ControlLabel} sm={3}>
+                                    Email
+                                </Col>
+                                <Col sm={9}>
+                                    <FormControl type="email" placeholder="Email"/>
+                                </Col>
 
-                              <Col componentClass={ControlLabel} sm={3}>
-                                  Email
-                              </Col>
-                              <Col sm={9}>
-                                  <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/>
-                              </Col>
+                            </FormGroup>
                         </Form>
                     </Col>
                 </Row>
@@ -52,6 +38,7 @@ export default class BusinessInfoStart extends Component {
                     <Col className="next-btn" md={4} mdOffset={4}>
 
                         <ButtonToolbar>
+
                           {
                             this.state.email
                             ?
@@ -63,6 +50,7 @@ export default class BusinessInfoStart extends Component {
                                 Next
                             </Button>
                           }
+
                         </ButtonToolbar>
 
                     </Col>
