@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import {
     Button,
-    Checkbox,  
-    ButtonToolbar,          
+    Checkbox,
+    ButtonToolbar,
     Form,
     Grid,
     Col,
-    Row,    
+    Row,
     FormGroup
 } from 'react-bootstrap';
 
@@ -16,7 +16,6 @@ import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper';
 
 export default class BusinessInfo1 extends Component {
-
 
 
     constructor() {
@@ -28,8 +27,6 @@ export default class BusinessInfo1 extends Component {
           selectableServices: [],
 
         }
-
-
 
         axios.get(API_BASE_URL + '/api/setup/services').then((response) => {
           response.data.map( service => {
