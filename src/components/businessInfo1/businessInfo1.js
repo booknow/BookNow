@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom"
 import {
     Button,
     Checkbox,
@@ -25,7 +24,7 @@ export default class BusinessInfo1 extends Component {
         this.state = {
           services: [],
           selectableServices: [],
-
+          selected: []
         }
 
         axios.get(API_BASE_URL + '/api/setup/services').then((response) => {
@@ -38,10 +37,13 @@ export default class BusinessInfo1 extends Component {
         .catch(function(err) {console.log(err)});
 
         this.handleSubmit = this.handleSubmit.bind(this)
-
+        this.handleChange = this.handleChange.bind(this)
     }
 
-
+    handleChange(e, field) {
+        console.log(e.target.value)
+        this.setState({ [field]: e.target.value })
+      }
 
     handleSubmit(e){
       const idArr = [];
@@ -96,9 +98,16 @@ export default class BusinessInfo1 extends Component {
 
                         <ButtonToolbar>
                             <Col md={4} mdOffset={4}>
+                                  { this.state.selectableServices.filter(service => service.selected).length
+                                    ?
                                     <Button onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit" href="/setup/2" block>
                                       Next
                                     </Button>
+                                    :
+                                    <Button disabled onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit" href="/setup/2" block>
+                                      Next
+                                    </Button>
+                                  }
                                   <Button bsStyle="success" bsSize="large" block href="/setup">Previous</Button>
 
                             </Col>
