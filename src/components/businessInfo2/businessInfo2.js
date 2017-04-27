@@ -24,8 +24,7 @@ export default class BusinessInfo2 extends Component {
       id: null,
       servicesProvided: [],
       servicesPrices: []
-      ,desc:''
-      ,price:''
+
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -44,11 +43,9 @@ export default class BusinessInfo2 extends Component {
     }
 
     handleChange(field, e) {
-      this.setState({servicesPrices:[...this.state.servicesPrices, {
-        [field]: e.target.value
-      }]})
+      this.setState(this.state.servicesProvided.map(()=>{
 
-
+      }))
     }
 
     handleSubmit() {
