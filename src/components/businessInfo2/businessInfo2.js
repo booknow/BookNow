@@ -25,7 +25,7 @@ export default class BusinessInfo2 extends Component {
       servicesProvided: [],
       servicesPrices: []
 
-    }
+
 
 
     }
@@ -66,7 +66,7 @@ export default class BusinessInfo2 extends Component {
         console.log(response);
       })
 
-      
+
       this.setState({servicesPrices:[...this.state.servicesPrices, {
         [field]: e.target.value
       }]})
@@ -122,7 +122,7 @@ export default class BusinessInfo2 extends Component {
                 <ButtonToolbar>
 
 
-                 
+
                   {
                   this.state.servicesPrices.length
                   ?
