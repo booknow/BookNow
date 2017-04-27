@@ -18,8 +18,6 @@ import API_BASE_URL from '../../utils/api-helper'
 
 export default class BusinessInfo2 extends Component {
 
-
-
   constructor() {
     super()
     this.state = {
@@ -29,10 +27,8 @@ export default class BusinessInfo2 extends Component {
       ,desc:''
       ,price:''
     }
-
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-
-
   }
 
   componentWillMount(){
@@ -53,6 +49,10 @@ export default class BusinessInfo2 extends Component {
       }]})
 
       console.log(this.state);
+    }
+
+    handleSubmit() {
+
     }
 
     render() {
@@ -103,9 +103,9 @@ export default class BusinessInfo2 extends Component {
                 <ButtonToolbar>
                   { this.state.price
                   ?
-                  <Button bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  <Button bsStyle="success" bsSize="large" block href="/setup/3" onClick={this.handleSubmit}>Next</Button>
                   :
-                  <Button disabled bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
+                  <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
                   }
                   <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                 </ButtonToolbar>

@@ -18,11 +18,13 @@ app.use(cors({
   origin: 'http://localhost:4000',
   credentials: true
 }))
+
 app.use(session({
   secret: config.sessionSecret,
   saveUninitialized: true,
   resave: true
 }));
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -123,6 +125,7 @@ app.get('/api/setup/services', (req,res,next) => {
 
 app.put('/api/setup/services/:id', (req,res,next) => {
   // update price for services by user.id
+  console.log('putting prices into services_provided');
 })
 
 app.get('/appointments', (req,res,next) => {
