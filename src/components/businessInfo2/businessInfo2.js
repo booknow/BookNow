@@ -34,7 +34,9 @@ export default class BusinessInfo2 extends Component {
 
   }
 
+
   componentWillMount(){
+
 
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
@@ -42,6 +44,7 @@ export default class BusinessInfo2 extends Component {
       axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
         this.setState({servicesProvided: response.data})
         console.log(this.state.servicesProvided);
+
         })
       })
     }
@@ -77,6 +80,7 @@ export default class BusinessInfo2 extends Component {
           )
         });
 
+
         return (
             <Grid>
                 <Row>
@@ -87,7 +91,9 @@ export default class BusinessInfo2 extends Component {
                             <h4>Example: Hourly ABC Service - $99</h4>
                             <FormGroup >
                                 <Row className="show-grid">
+
                                     {servicesProList}
+
                                 </Row>
                                 <Checkbox inline>
                                     {'This is hourly service'}

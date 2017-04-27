@@ -11,7 +11,7 @@ import {WithContext as ReactTags} from 'react-tag-input';
 import {
     Grid,
     Row,
-    Col,                                
+    Col,
 } from "react-bootstrap";
 
 
