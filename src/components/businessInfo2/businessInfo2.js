@@ -42,16 +42,16 @@ export default class BusinessInfo2 extends Component {
       ,desc:''
       ,price:''
     }
-    
+
     this.handleChange = this.handleChange.bind(this)
-    
+
 
   }
-  
+
   handleChange(e, field) {
     this.setState({ [field]: e.target.value })
   }
-  
+
   componentWillMount(){
 
     axios.get(API_BASE_URL + '/api/user')
@@ -133,11 +133,11 @@ export default class BusinessInfo2 extends Component {
                 <ButtonToolbar>
                   { this.state.price
                   ?
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                  <Button bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
                   :
-                  <Button disabled bsStyle="success" bsSize="large" block><Link to="/setup/3">Next</Link></Button>
+                  <Button disabled bsStyle="success" bsSize="large" block href="/setup/3">Next</Button>
                   }
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/1">Previous</Link></Button>
+                  <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                 </ButtonToolbar>
 
                   </Col>

@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import {
     Button,
-    Checkbox,  
-    ButtonToolbar,    
+    Checkbox,
+    ButtonToolbar,
     Form,
     Grid,
     Col,
@@ -85,13 +85,13 @@ export default class BusinessInfo3 extends Component {
                   this.state.sat
 
                   ?
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/4">Next</Link></Button>
+                  <Button bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
                   :
-                  <Button disabled bsStyle="success" bsSize="large" block><Link to="/setup/4">Next</Link></Button>
+                  <Button disabled bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
 
                   }
 
-                  <Button bsStyle="success" bsSize="large" block><Link to="/setup/2">Previous</Link></Button>
+                  <Button bsStyle="success" bsSize="large" block href="/setup/2">Previous</Button>
                 </ButtonToolbar>
 
             </Col>

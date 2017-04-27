@@ -49,16 +49,16 @@ export default class BusinessInfo5 extends Component {
                           {
                             this.state.hour && this.state.min
                             ?
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/6">Next</Link>
+                            <Button bsStyle="success" bsSize="large" block href="/setup/6">
+                                Next
                             </Button>
                             :
-                            <Button disabled bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/6">Next</Link>
+                            <Button disabled bsStyle="success" bsSize="large" block href="/setup/6">
+                                Next
                             </Button>
                           }
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/4">Previous</Link>
+                            <Button bsStyle="success" bsSize="large" block href="/setup/4">
+                                Previous
                             </Button>
                         </ButtonToolbar>
 

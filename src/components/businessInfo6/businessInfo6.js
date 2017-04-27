@@ -46,16 +46,16 @@ export default class BusinessInfo6 extends Component {
                           {
                             this.state.jobsNum
                             ?
-                            <Button  bsStyle="success" bsSize="large" block>
-                                <Link to="/home">Finish</Link>
+                            <Button  bsStyle="success" bsSize="large" block href="/home">
+                                Finish
                             </Button>
                             :
-                            <Button disabled bsStyle="success" bsSize="large" block>
-                                <Link to="/home">Finish</Link>
+                            <Button disabled bsStyle="success" bsSize="large" block href="/home">
+                                Finish
                             </Button>
                           }
-                            <Button bsStyle="success" bsSize="large" block>
-                                <Link to="/setup/5">Previous</Link>
+                            <Button bsStyle="success" bsSize="large" block href="/setup/5">
+                                Previous
                             </Button>
                         </ButtonToolbar>
 
