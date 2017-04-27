@@ -26,9 +26,9 @@ export default class BusinessInfo2 extends Component {
       servicesPrices: []
 
 
+}
 
 
-    }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -47,12 +47,6 @@ export default class BusinessInfo2 extends Component {
       })
     }
 
-    handleChange(field, e) {
-
-      this.setState(this.state.servicesProvided.map(()=>{
-
-      }))
-    }
 
     handleSubmit() {
       console.log(this.state);
@@ -67,11 +61,13 @@ export default class BusinessInfo2 extends Component {
       })
 
 
+    }
+
+    handleChange(field, e) {
+
       this.setState({servicesPrices:[...this.state.servicesPrices, {
         [field]: e.target.value
       }]})
-
-
     }
 
     render() {
