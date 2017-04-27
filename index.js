@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-let uber = null;
+let uber = {}
 
 passport.use(new FacebookStrategy({
   clientID: config.facebook.clientId,
@@ -82,7 +82,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 //     else{
 //       return res.status(200).json(data);
 //     }
-//   })git 
+//   })
 // })
 
 
@@ -160,17 +160,6 @@ app.get('/customer/:id', function(req,res,next){
   })
 })
 
-///Client Facebook ID Endpoint
-
-// app.get('/client/:id', function(req,res,next){
-//   db.clientInfo([],function(err, clientInfo){
-//     //req.params.id ?
-//     if (err){
-//       return next (err);
-//     }
-//       return res.status.(200).json(clientInfo);
-//   })
-// })
 
 app.get('/getApptCount', function(req,res,next){
   db.getApptCount(function(err, ApptCount){
