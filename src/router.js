@@ -37,7 +37,7 @@ export default (
 			/>
 		<Route
 				component={ CustomerInfo }
-				path = "/customerInfo/:id"
+				path="/customerInfo/:id"
 			/>
 		<Route
 			component={ BusinessInfo }

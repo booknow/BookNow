@@ -2,8 +2,7 @@ import axios from "axios";
 
 // import axiosLibrary from "axios";
 // const axios = axiosLibrary.create({ withCredentials: true });
-
-const base_url = "/getCurrentUser";
+// const base_url = "/getCurrentUser";
 
 export function getUser() {
   let userPromise = new Promise((resolve, reject)=>{

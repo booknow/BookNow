@@ -1,12 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
 import {
-    Button,
-    Table,
-    ButtonToolbar,
-    Panel,
-    ControlLabel,
-    InputGroup,
+    Button,    
+    ButtonToolbar,  
+    ControlLabel,  
     Form,
     Grid,
     Col,
@@ -16,11 +13,7 @@ import {
 } from 'react-bootstrap'
 import './businessInfoStart.css';
 
-export default class BusinessInfoStart extends Component {
-    constructor() {
-        super()
-
-    }
+export default class BusinessInfoStart extends Component {    
     render() {
         return (
             <Grid>

@@ -37,7 +37,7 @@ passport.use(new FacebookStrategy({
 
     if (err) next(err)
     if (users.length) {
-    
+
       uber = users[0]
 
       return done(null, users[0]);
@@ -46,7 +46,7 @@ passport.use(new FacebookStrategy({
       db.createUser([profile.displayName, profile.id], function(err, newUsers) {
 
         uber = newUser[0]
-      
+
         return done(err, newUsers[0])
       })
     }
@@ -86,6 +86,9 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 // })
 
 
+app.get('/api/user', (req,res,next) => {
+  res.status(200).json(uber.id)
+})
 
 app.post('/api/setup', (req,res,next) => {
   console.log(uber, uber.id);
@@ -105,6 +108,18 @@ app.get('/api/setup/services', (req,res,next) => {
     if (err) {return next(err)}
     return res.status(200).json(list)
   })
+})
+
+app.get('/api/setup/services/:id', (req,res,next) => {
+  // get services provided by user.id
+  db.readServicesProvidedById([req.params.id], (err, services) => {
+    if (err) {return next(err)}
+    return res.status(200).json(services)
+  })
+})
+
+app.put('/api/setup/services/:id', (req,res,next) => {
+  // update price for services by user.id
 })
 
 app.get('/appointments', (req,res,next) => {
@@ -174,6 +189,8 @@ app.get('/servicesProvided' , function(req,res,next) {
     return res.status(200).json(servicesProvided);
   })
 })
+
+
 
 
 app.listen(port , () => {

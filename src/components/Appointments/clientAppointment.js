@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
+import {Button, Checkbox, Table, Panel, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
@@ -44,14 +44,14 @@ class ClientAppointment extends Component {
 
   componentWillMount(){
 
-axios.get("http://localhost:3000/servicesProvided").then(response => {
-  console.log(response.data);
+    axios.get("http://localhost:3000/servicesProvided").then(response => {
+      console.log(response.data);
 
-    this.setState({
-      services: [...this.state.services, ...response.data]  //why ...response.data
+        this.setState({
+          services: [...this.state.services, ...response.data]  //why ...response.data
 
+        })
     })
-})
 
   }
 
@@ -100,10 +100,10 @@ axios.get("http://localhost:3000/servicesProvided").then(response => {
       , extrasamt
       , discountamt
       , tipamt
-      , services} = this.state
-    let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
+      , services}=this.state
+    let total=parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
 
-    const serviceOptions = services.map((service, index) => (
+    const serviceOptions=services.map((service, index) => (
         <option value={index}>{service.service_name}</option>
     ))
 
@@ -340,7 +340,7 @@ axios.get("http://localhost:3000/servicesProvided").then(response => {
               </Col>
             </FormGroup>
 
-            <Button onClick = { () => this.createAppt(this.state)} className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button onClick={ () => this.createAppt(this.state)} className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>

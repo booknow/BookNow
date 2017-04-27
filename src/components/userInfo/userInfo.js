@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
-import {Button, Table, ButtonToolbar ,Panel,ControlLabel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup} from 'react-bootstrap'
+import {Button, ButtonToolbar,ControlLabel, Form, Grid, Col, Row, FormControl, FormGroup} from 'react-bootstrap'
 import './userInfo.css';
 
 class UserInfo extends Component {
     render() {
         return (
-< div className = "user-info-container" > <Grid>
+<div className="user-info-container"> <Grid>
     <Row>
         <Col sm={8}>
             <Form horizontal>
