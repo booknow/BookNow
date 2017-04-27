@@ -55,11 +55,10 @@ class ClientAppointment extends Component {
 
     })
 
-    // axios.get("http:localhost:3000/api/setup/services/ + .match.params.id).then(response =>{
-    //   console.log(response);
-    //
-    //
-    // })
+    axios.get("http:localhost:3000/api/setup/services/" + this.props.params.id).then(response =>{
+      console.log(response);
+
+    })
 
 
 

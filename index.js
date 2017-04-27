@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-let uber = "";
+let uber = {};
 
 passport.use(new FacebookStrategy({
   clientID: config.facebook.clientId,
