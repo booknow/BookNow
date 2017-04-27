@@ -52,7 +52,9 @@ export default class BusinessInfo2 extends Component {
     }
 
     handleSubmit() {
-
+      axios.put(API_BASE_URL + '/api/setup/services/:id', this.state.id).then((response) =>{
+        console.log(response);
+      })
     }
 
     render() {

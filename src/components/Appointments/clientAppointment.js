@@ -44,14 +44,24 @@ class ClientAppointment extends Component {
 
   componentWillMount(){
 
-    axios.get("http://localhost:3000/servicesProvided").then(response => {
+    axios.get("http://localhost:3000/servicesProvided").then((response) => {
       console.log(response.data);
 
-        this.setState({
-          services: [...this.state.services, ...response.data]  //why ...response.data
+      this.setState({
+        services: [...this.state.services, ...response.data]  //why ...response.data
 
-        })
+      })
+
+
     })
+
+    // axios.get("http:localhost:3000/api/setup/services/ + .match.params.id).then(response =>{
+    //   console.log(response);
+    //
+    //
+    // })
+
+
 
   }
 
