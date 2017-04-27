@@ -53,7 +53,7 @@ export default class BusinessInfoStart extends Component {
 
                         <ButtonToolbar>
                           {
-                            this.state.email
+                            this.state.email 
                             ?
                             <Button bsStyle="success" bsSize="large" block>
                                 <Link to="/setup/1">Next</Link>
