@@ -64,7 +64,6 @@ export default class BusinessInfo2 extends Component {
 
 
     }
->>>>>>> master
 
     handleSubmit() {
 
@@ -118,7 +117,7 @@ export default class BusinessInfo2 extends Component {
                             </FormGroup>
                         </Form>
                         <ButtonToolbar>
-                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} >Next</Button>
+                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href='/setup/3' >Next</Button>
                           <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
                           <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                         </ButtonToolbar>
@@ -128,13 +127,6 @@ export default class BusinessInfo2 extends Component {
                 </Row>
                 <Row>
                   <Col className="next-btn" md={4} mdOffset={4}>
-
-
-
-
-
-
-
 
                   </Col>
                 </Row>
