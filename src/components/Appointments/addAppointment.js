@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
-import './apptmnt.css'
+
+import './apptmnt.css';
+
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 class AddAppointment extends Component {
 
@@ -27,6 +34,8 @@ class AddAppointment extends Component {
       paymentmethod: null,
       comments: null,
 
+      startDate: moment(),
+      time:null
     }
 
     // console.log(this.state);
@@ -70,6 +79,12 @@ class AddAppointment extends Component {
       this.setState({serviceamt:  900});
     }
 
+  }
+
+  handleChange(date){
+    this.setState({
+      startDate:date
+    });
   }
 
 
@@ -307,14 +322,37 @@ class AddAppointment extends Component {
             <h2 style={headingMargin}>When</h2>
 
             <FormGroup controlId="formControlsSelect">
+
               <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Date / Time</ControlLabel>
+                  <ControlLabel>Date/Time</ControlLabel>
               </Col>
 
-              <Col sm={7}>
+              <Col sm={3}>
+
+                <DatePicker
+                  selected={this.state.startDate}
+                  onChange={this.handleChange}
+                  />
 
               </Col>
+
+
+               <div>
+                 <Col sm={4}>
+                   <FormControl onChange={this.handleChange.bind(this, 'time')} componentClass="select" placeholder="Time">
+                    <option value="8:00am"></option>
+                     <option value="9:00AM">9:00AM</option>
+                     <option value="10:00AM">10:00AM</option>
+                     <option value="11:00AM">11:00AM</option>
+                     <option value="12:00PM">12:00PM</option>
+                     <option value="1:00PM">1:00PM</option>
+                     <option value="2:00PM">2:00PM</option>
+
+                   </FormControl>
+                 </Col>
+               </div>
             </FormGroup>
+
 
             <h2 style={headingMargin}>Comments</h2>
 
