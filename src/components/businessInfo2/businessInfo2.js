@@ -10,7 +10,8 @@ import {
     FormControl,
     ControlLabel,
     Checkbox,
-    FormGroup
+    FormGroup,
+    Panel
 } from 'react-bootstrap'
 import '../businessInfoStart/businessInfoStart.css';
 import axios from 'axios'
@@ -59,7 +60,7 @@ export default class BusinessInfo2 extends Component {
           else return c
         });
         this.setState( { servicesProvided: stateArr } )
-        setTimeout(()=>{console.log(this.state.servicesProvided)},1000)
+
 
     }
 
@@ -71,7 +72,7 @@ export default class BusinessInfo2 extends Component {
           prices.push({price});
         }
       })
-      axios.put(API_BASE_URL + '/api/setup/services/:id', prices).then((response) =>{
+      axios.put(API_BASE_URL + '/api/setup/services/:id', this.state.servicesProvided).then((response) =>{
         console.log(response);
       })
 
@@ -81,17 +82,17 @@ export default class BusinessInfo2 extends Component {
 
     render() {
         const servicesProList = this.state.servicesProvided.map((service, idx) => {
-          console.log(service);
+
           return (
             <FormGroup key={idx}>
-              <Col componentClass={ControlLabel} sm={4}>
+              <Col componentClass={ControlLabel} sm={3}>
                 <ControlLabel value={idx}>{service.service_name}</ControlLabel>
               </Col>
-              <Col sm={8}>
+              <Col sm={6}>
                 <InputGroup>
                   <InputGroup.Addon>$</InputGroup.Addon>
 
-                  <FormControl type="number" placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
+                  <FormControl type="number" required placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
 
                   <InputGroup.Addon>.00</InputGroup.Addon>
                 </InputGroup>
@@ -104,20 +105,25 @@ export default class BusinessInfo2 extends Component {
         return (
             <Grid>
                 <Row>
-                    <Col sm={8}>
+                    <Col sm={12}>
+                      <Panel className="bi-panel">
                         <Form horizontal>
                             <h2>Please enter your Service Prices</h2>
-                            <h3>Please enter the types of Services you offer and at what price</h3>
-                            <h4>Example: Hourly ABC Service - $99</h4>
+                            <p>Please enter the types of Services you offer and at what price. Example: Hourly ABC Service - $99</p>
                             <FormGroup >
                                 <Row className="show-grid">
                                     {servicesProList}
                                 </Row>
-                                <Checkbox inline>
-                                    {'This is hourly service'}
-                                </Checkbox>
+
                             </FormGroup>
                         </Form>
+                        <ButtonToolbar>
+                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} >Next</Button>
+                          <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
+                          <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
+                        </ButtonToolbar>
+
+                      </Panel>
                     </Col>
                 </Row>
                 <Row>
@@ -125,20 +131,9 @@ export default class BusinessInfo2 extends Component {
 
 
 
-                <ButtonToolbar>
 
 
 
-                  {
-                  this.state.servicesPrices.length
-                  ?
-                  <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3">Next</Button>
-                  :
-                  <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
-                  }
-
-                  <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
-                </ButtonToolbar>
 
 
                   </Col>
