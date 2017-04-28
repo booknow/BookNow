@@ -137,7 +137,7 @@ app.put('/api/setup/services/:id', (req,res,next) => {
   let dataSent = req.body
   dataSent.forEach((x, idx)=> {
 
-    db.updatePrices([x.service_id, x.service_name, x.services_provided_price, x.sprovider_id], (err, data)=>{
+    db.updatePrices([x.service_id, x.services_provided_price, x.sprovider_id], (err, data)=>{
       if (err) {return next(err)}
 
     })
