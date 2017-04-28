@@ -26,11 +26,16 @@ export default class BusinessInfo2 extends Component {
       servicesPrices: []
 
     }
+
+
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
+
   componentWillMount(){
+
 
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
@@ -42,6 +47,7 @@ export default class BusinessInfo2 extends Component {
     }
 
     handleChange(field, e) {
+
         let stateArr = this.state.servicesProvided.map(c=>{
           if (c.service_name === field) {
             return {
@@ -54,6 +60,7 @@ export default class BusinessInfo2 extends Component {
         });
         this.setState( { servicesProvided: stateArr } )
         setTimeout(()=>{console.log(this.state.servicesProvided)},1000)
+
     }
 
     handleSubmit() {
@@ -67,7 +74,9 @@ export default class BusinessInfo2 extends Component {
       axios.put(API_BASE_URL + '/api/setup/services/:id', prices).then((response) =>{
         console.log(response);
       })
+
       console.log(this.state);
+
     }
 
     render() {
@@ -118,9 +127,15 @@ export default class BusinessInfo2 extends Component {
 
                 <ButtonToolbar>
 
-                  <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit}>Next</Button>
 
 
+                  {
+                  this.state.servicesPrices.length
+                  ?
+                  <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3">Next</Button>
+                  :
+                  <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
+                  }
 
                   <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                 </ButtonToolbar>

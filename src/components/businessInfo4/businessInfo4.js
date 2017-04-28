@@ -3,11 +3,7 @@ import React, {Component} from "react";
 import {
     Button,
     Radio,
-
     ButtonToolbar,
-
-
-
     Form,
     Grid,
     Col,
@@ -18,6 +14,21 @@ import {
 import '../businessInfoStart/businessInfoStart.css';
 
 export default class BusinessInfo4 extends Component {
+  constructor() {
+     super()
+     this.state = {
+       hour:''
+      ,min:''
+      ,am:0
+      ,pm:0
+     }
+     this.handleChange = this.handleChange.bind(this)
+ }
+
+ handleChange(e, field) {
+  //  console.log(e.target.value)
+   this.setState({ [field]: e.target.value })
+ }
     render() {
         return (
             <Grid>
@@ -27,13 +38,13 @@ export default class BusinessInfo4 extends Component {
                             <h2>AVAILABILITY</h2>
                             <h4>What time of the day do you start your first job?</h4>
                             <FormGroup >
-                                <Col xs={6} md={4}><FormControl placeholder="8"/></Col>
-                                <Col xs={6} md={4}><FormControl placeholder="00"/></Col>
-                                <Radio name="radioGroup" inline>
+                                <Col xs={6} md={4}><FormControl value={this.state.hour} onChange={(e)=>this.handleChange(e, "hour")} type="number" placeholder="8"/></Col>
+                                <Col xs={6} md={4}><FormControl value={this.state.min} onChange={(e)=>this.handleChange(e, "min")} type="number" placeholder="00"/></Col>
+                                <Radio value={this.state.am} onChange={(e)=>this.handleChange(e, "am")} name="radioGroup" inline>
                                     {'Am'}
                                 </Radio>
 
-                                <Radio name="radioGroup" inline>
+                                <Radio value={this.state.pm} onChange={(e)=>this.handleChange(e, "pm")} name="radioGroup" inline>
                                     {'Pm'}
                                 </Radio>
 
