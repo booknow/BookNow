@@ -138,11 +138,11 @@ class AddAppointment extends Component {
     return (
       <Grid className="apptcon">
         <Row>
-          <Col md={12}>
-            <h1 style={topHeading}>New Appointment</h1>
-          </Col>
+
 
           <Col sm={8}>
+          <Panel className="appt-panel">
+          <h1 style={topHeading}>New Appointment</h1>
           <Form horizontal onSubmit={this.handleSubmit}>
           <h2 style={headingMargin}>Who</h2>
             <FormGroup >
@@ -376,6 +376,7 @@ class AddAppointment extends Component {
 
 
           </Form>
+          </Panel>
         </Col>
         <Col className="summary-col" sm={4}>
           <Panel header={title} style={blueBg}>
@@ -415,7 +416,9 @@ class AddAppointment extends Component {
             </Table>
           </Panel>
         </Col>
+
       </Row>
+
     </Grid>
     )
     }

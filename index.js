@@ -119,10 +119,14 @@ app.get('/api/setup/services/:id', (req,res,next) => {
 
 
 app.get('/api/setup/services', (req,res,next) => {
-  db.getServicesList([], (err, list) => {
-    if (err) {return next(err)}
-    return res.status(200).json(list)
-  })
+
+    db.getServicesList([], (err, list) => {
+      if (err) {return next(err)}
+      return res.status(200).json(list)
+    })
+
+
+
 })
 
 
@@ -130,8 +134,20 @@ app.get('/api/setup/services', (req,res,next) => {
 app.put('/api/setup/services/:id', (req,res,next) => {
   // update price for services by user.id
   console.log(req.body);
-  console.log('putting prices into services_provided');
+  let dataSent = req.body
+
+
+    Promise.all(dataSent.forEach((x, idx)=> {
+      return db.updatePrices([x.service_id, x.services_provided_price, x.sprovider_id], (err, data)=>{
+        if (err) {return next(err)}
+      }).then(()=>{
+        return res.status(200).json('sent service update to service provided!')
+      })
+    })
+  )
 })
+
+
 
 app.get('/appointments', (req,res,next) => {
   db.readAppts([], (err, appts)=> {

@@ -54,7 +54,8 @@ export default class BusinessInfo2 extends Component {
             return {
               service_id: c.service_id,
               service_name: c.service_name,
-              services_provided_price: +e.target.value
+              services_provided_price: +e.target.value,
+              sprovider_id: this.state.id
             }
           }
           else return c
@@ -114,26 +115,21 @@ export default class BusinessInfo2 extends Component {
                             </FormGroup>
                         </Form>
                         <ButtonToolbar>
-                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} >Next</Button>
-                          <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
-                          <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
+                          <Col sm={6}>
+
+                          <Button bsStyle="primary" bsSize="large" block href="/setup/1">Previous</Button>
+                          </Col>
+                          <Col sm={6}>
+                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3">Next</Button>
+                          </Col>
+
+
                         </ButtonToolbar>
 
                       </Panel>
                     </Col>
                 </Row>
-                <Row>
-                  <Col className="next-btn" md={4} mdOffset={4}>
 
-
-
-
-
-
-
-
-                  </Col>
-                </Row>
             </Grid>
         )
     }
