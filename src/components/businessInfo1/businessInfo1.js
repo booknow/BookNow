@@ -7,6 +7,7 @@ import {
     Grid,
     Col,
     Row,
+    Panel,
     FormGroup
 } from 'react-bootstrap';
 
@@ -79,23 +80,18 @@ export default class BusinessInfo1 extends Component {
         return (
             <Grid>
                 <Row>
-                    <Col sm={8}>
+                    <Panel className="bi-panel">
+                      <Col sm={12}>
+                        <h2>SERVICE TYPE</h2>
+                        <p>What service do you offer? Please select from the list below</p>
+
                         <Form horizontal>
-                            <h2>SERVICE TYPE</h2>
-                            <h4>What service do you offer? Please select from the list below</h4>
-
-                            <div className="setup-col">
-                              <FormGroup >
-                                  {services}
-                              </FormGroup>
-                            </div>
-                          </Form>
-                      </Col>
-                </Row>
-                <Row>
-                    <Col className="next-btn" md={4} mdOffset={4}>
-
-
+                          <div className="setup-col">
+                            <FormGroup >
+                                {services}
+                            </FormGroup>
+                          </div>
+                        </Form>
                         <ButtonToolbar>
                             <Col md={4} mdOffset={4}>
                                   { this.state.selectableServices.filter(service => service.selected).length
@@ -112,9 +108,10 @@ export default class BusinessInfo1 extends Component {
 
                             </Col>
                         </ButtonToolbar>
-
                     </Col>
+                    </Panel>
                 </Row>
+
             </Grid>
         )
     }

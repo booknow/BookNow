@@ -23,8 +23,8 @@ export default class BusinessInfo2 extends Component {
     super()
     this.state = {
       id: null,
-      servicesProvided: [],
-      servicesPrices: []
+      servicesProvided: []
+
 
 
 }
@@ -67,12 +67,8 @@ export default class BusinessInfo2 extends Component {
 
     handleSubmit() {
 
-      const prices = []
-      this.state.servicesPrices.forEach(price=>{
-        if (price) {
-          prices.push({price});
-        }
-      })
+
+
       axios.put(API_BASE_URL + '/api/setup/services/:id', this.state.servicesProvided).then((response) =>{
         console.log(response);
       })
