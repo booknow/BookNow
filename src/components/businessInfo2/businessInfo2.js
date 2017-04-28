@@ -42,20 +42,29 @@ export default class BusinessInfo2 extends Component {
       this.setState({id: response.data})
       axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
         this.setState({servicesProvided: response.data})
-        console.log(this.state.servicesProvided);
         })
       })
     }
 
     handleChange(field, e) {
 
-      this.setState(this.state.servicesProvided.map(()=>{
+        let stateArr = this.state.servicesProvided.map(c=>{
+          if (c.service_name === field) {
+            return {
+              service_id: c.service_id,
+              service_name: c.service_name,
+              services_provided_price: +e.target.value
+            }
+          }
+          else return c
+        });
+        this.setState( { servicesProvided: stateArr } )
+        setTimeout(()=>{console.log(this.state.servicesProvided)},1000)
 
-      }))
     }
 
     handleSubmit() {
-      console.log(this.state);
+
       const prices = []
       this.state.servicesPrices.forEach(price=>{
         if (price) {
@@ -66,16 +75,13 @@ export default class BusinessInfo2 extends Component {
         console.log(response);
       })
 
-    }
+      console.log(this.state);
 
-    handleChange(field, e) {
-      this.setState({servicesPrices:[...this.state.servicesPrices, {
-        [field]: e.target.value
-      }]})
     }
 
     render() {
         const servicesProList = this.state.servicesProvided.map((service, idx) => {
+          console.log(service);
           return (
             <FormGroup key={idx}>
               <Col componentClass={ControlLabel} sm={4}>

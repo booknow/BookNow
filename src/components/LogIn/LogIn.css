@@ -17,6 +17,19 @@
   margin-bottom:2em;
 }
 
+.btn-default {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-facebook:hover {
+  background-color:#3B8898;
+  border-color: #2f6c79;
+  color: white;
+
+}
+
 .btn-signIn{
   background-color: #D73D32;
   border-color: #D73D32;
@@ -24,6 +37,17 @@
   color:white;
 }
 
+.btn-signIn:hover {
+  background-color: #df655d;
+  border-color: #df655d;
+  color: white;
+}
+
+.btn-default.focus, .btn-default:focus, .btn-default.focus, .btn-default:focus {
+  outline: none !important;
+  background-color: none important;
+  border-color: none important;
+}
 
 .facebook-text{
   color:white;
@@ -44,7 +68,8 @@
   margin-left: auto !important;
   margin-right: auto !important;
   width:500px;
-  border-radius: 40px;
+  border-radius: 20px;
+  padding-bottom:2em;
 }
 
 .form_group{
@@ -53,9 +78,6 @@
 
 }
 
-body{
-
-}
 
 .signIn-text{
   font-family: 'Exo', sans-serif;
