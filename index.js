@@ -105,22 +105,36 @@ app.post('/api/setup', (req,res,next) => {
 })
 
 app.post('/api/setup/dates', (req,res,next)=>{
-
-  let datesAvail = req.body
-  let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-  Promise.all(datesAvail.map(x => {
-  // console.log(x);
-    for (let day of week) {
-      if (x.label === day) {
-        console.log('winner chicken!');
-      }
-    }
-    // return db.createAvailability([x.bool])
-  })).then(()=> {
-    return res.status(200).json('posted schedule to pref_available table')
-  }).catch(err => {
-    console.log(err);
+  const obj = {}
+  req.body.forEach(day => {
+      let prop = 'pa_' + day.toLowerCase()
+      obj[prop] = true
   })
+  console.log(obj)
+  db.pref_available.insert(obj, (err, rows) => {
+    if (err) {
+      return res.status(500).json(err)
+    }
+    return res.status(200).json(rows)
+  })
+
+//   Promise.all(datesAvail.map(x => {
+//   // console.log(x);
+//     for (let day of week) {
+//       if (x.label === day) {
+//         console.log('winner chicken!');
+//
+//       }
+//
+//
+//
+//     }
+//     return db.createAvailability([x.bool])
+//   })).then(()=> {
+//     return res.status(200).json('posted schedule to pref_available table')
+//   }).catch(err => {
+//     console.log(err);
+//   })
 })
 
 app.get('/api/setup/services/:id', (req,res,next) => {
@@ -185,7 +199,7 @@ app.get("/getCurrentUser", (req,res,next)=>{
 
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
-  db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency, req.body.realDate, req.body.time, req.body.comments], (err, data) => {
+  db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
 
     if(err) {return next(err) }
     else{
