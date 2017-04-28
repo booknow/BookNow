@@ -135,15 +135,19 @@ app.put('/api/setup/services/:id', (req,res,next) => {
   // update price for services by user.id
   console.log(req.body);
   let dataSent = req.body
-  dataSent.forEach((x, idx)=> {
 
-    db.updatePrices([x.service_id, x.services_provided_price, x.sprovider_id], (err, data)=>{
-      if (err) {return next(err)}
 
+    Promise.all(dataSent.forEach((x, idx)=> {
+      return db.updatePrices([x.service_id, x.services_provided_price, x.sprovider_id], (err, data)=>{
+        if (err) {return next(err)}
+      }).then(()=>{
+        return res.status(200).json('sent service update to service provided!')
+      })
     })
-  })
-  return res.status(200).json('sent!')
+  )
 })
+
+
 
 app.get('/appointments', (req,res,next) => {
   db.readAppts([], (err, appts)=> {
