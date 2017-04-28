@@ -111,7 +111,9 @@ export default class BusinessInfo1 extends Component {
                     </Col>
                     </Panel>
                 </Row>
-
+                <div className="steps">
+                  <p> 2 of 7</p>
+                </div>
             </Grid>
         )
     }

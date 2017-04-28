@@ -33,8 +33,7 @@ export default class BusinessInfo3 extends Component {
             fri: null,
             sat: null
         }
-        // this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this)
+       
     }
 
     componentWillMount = () => {
@@ -87,7 +86,9 @@ export default class BusinessInfo3 extends Component {
 
                             <h4>Select the days you provide service</h4>
 
+
                             {this.createCheckboxes()}
+
 
                             <a onClick={this.handleFormSubmit}>Next</a>
                             <ButtonToolbar>
@@ -108,7 +109,9 @@ export default class BusinessInfo3 extends Component {
                       </Panel>
                 </Row>
 
-
+                <div className="steps">
+                  <p> 4 of 7</p>
+                </div>
 
             </Grid>
         )

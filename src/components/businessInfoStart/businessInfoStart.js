@@ -66,11 +66,13 @@ export default class BusinessInfoStart extends Component {
                           }
 
                         </ButtonToolbar>
-
                     </Col>
                 </Row>
-
+                <div className="steps">
+                  <p> 1 of 7</p>
+                </div>
             </Grid>
+
         )
     }
 }
