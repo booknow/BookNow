@@ -129,7 +129,7 @@ app.get('/api/setup/services', (req,res,next) => {
 
 app.put('/api/setup/services/:id', (req,res,next) => {
   // update price for services by user.id
-  console.log(req.body.servicesPrices);
+  console.log(req.body.services_provided_price, req.body.service_id, req.body.sprovider_id);
   console.log('putting prices into services_provided');
 })
 
