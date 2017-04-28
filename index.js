@@ -105,7 +105,22 @@ app.post('/api/setup', (req,res,next) => {
 })
 
 app.post('/api/setup/dates', (req,res,next)=>{
-  console.log(req.body);
+
+  let datesAvail = req.body
+  let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  Promise.all(datesAvail.map(x => {
+  // console.log(x);
+    for (let day of week) {
+      if (x.label === day) {
+        console.log('winner chicken!');
+      }
+    }
+    // return db.createAvailability([x.bool])
+  })).then(()=> {
+    return res.status(200).json('posted schedule to pref_available table')
+  }).catch(err => {
+    console.log(err);
+  })
 })
 
 app.get('/api/setup/services/:id', (req,res,next) => {
