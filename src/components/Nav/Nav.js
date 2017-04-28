@@ -30,7 +30,7 @@ export default class NavComponent extends Component {
     })
        return (
           window.location.pathname !== "/client" ?
-            <Navbar style={navMargin} inverse collapseOnSelect>
+            <Navbar style={navMargin} inverse>
             {window.location.pathname !== '/'
             ?
             <Navbar.Header>
@@ -51,11 +51,11 @@ export default class NavComponent extends Component {
               { window.location.pathname !== '/'
                 ?
                 <Nav>
-                    <Link to="/book"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
+                    <NavItem eventKey={1} href="/book">Book Appointment</NavItem>
                 </Nav>
                 :
                 <Nav>
-                    <Link to="#"><NavItem eventKey={1}>Book Appointment</NavItem></Link>
+                    <NavItem eventKey={2} href="/book">Book Appointment</NavItem>
                 </Nav>
               }
                 <Nav pullRight>
