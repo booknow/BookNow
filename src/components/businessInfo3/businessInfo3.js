@@ -78,7 +78,7 @@ export default class BusinessInfo3 extends Component {
 
                                 ? <Button bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
                                 : <Button disabled bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
-}
+                            }
 
                             <Button bsStyle="success" bsSize="large" block href="/setup/2">Previous</Button>
 
@@ -86,6 +86,9 @@ export default class BusinessInfo3 extends Component {
 
                     </Col>
                 </Row>
+                <div className="steps">
+                  <p> 4 of 7</p>
+                </div>
             </Grid>
         )
     }
