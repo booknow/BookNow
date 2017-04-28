@@ -18,6 +18,9 @@ export default class NavComponent extends Component {
         user_password: null
       }
     }
+    getUser().then(res=>{
+      this.setState({user: res.data})
+    })
   }
 
   render(){
@@ -25,11 +28,9 @@ export default class NavComponent extends Component {
       marginBottom: '0px'
     }
 
-    getUser().then(res=>{
-      this.setState({user: res.data})
-    })
+
        return (
-          window.location.pathname !== "/client" ?
+          !(window.location.href.split("/").includes("client")) ?
             <Navbar style={navMargin} inverse>
             {window.location.pathname !== '/'
             ?
@@ -55,7 +56,7 @@ export default class NavComponent extends Component {
                 </Nav>
                 :
                 <Nav>
-                    <NavItem eventKey={2} href="/book">Book Appointment</NavItem>
+                    <NavItem eventKey={2} href="#">Book Appointment</NavItem>
                 </Nav>
               }
                 <Nav pullRight>
@@ -67,7 +68,7 @@ export default class NavComponent extends Component {
                   {window.location.pathname !== "/"
                     ?
                     <NavDropdown eventKey={3} title={this.state.user.first_name} id="basic-nav-dropdown">
-                      <MenuItem eventKey={3.1}> <Link to="/userInfo">My Account</Link></MenuItem>
+                      <MenuItem eventKey={3.1} href="/userInfo">My Account</MenuItem>
 
                       <MenuItem href="/" eventKey={3.2}>Log Out</MenuItem>
 

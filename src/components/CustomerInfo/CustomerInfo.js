@@ -33,6 +33,9 @@ class CustomerInfo extends Component {
               last_name:null,
               frequency:null,
               service_name:null,
+              date:null,
+              time:null,
+              comments:null
             },
             tags: [
                 {

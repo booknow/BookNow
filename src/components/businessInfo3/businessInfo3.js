@@ -25,7 +25,6 @@ const items = [
 
 export default class BusinessInfo3 extends Component {
 
-
     componentWillMount() {
        this.selectedCheckboxes = [];
      }
@@ -70,9 +69,12 @@ export default class BusinessInfo3 extends Component {
 
                             <h4>Select the days you provide service</h4>
 
+
                             {this.createCheckboxes()}
 
+
                             <a onClick={this.handleFormSubmit.bind(this)}>Next</a>
+
                             <ButtonToolbar>
 
                               <Col sm={6}>
@@ -92,7 +94,9 @@ export default class BusinessInfo3 extends Component {
                       </Panel>
                 </Row>
 
-
+                <div className="steps">
+                  <p> 4 of 7</p>
+                </div>
 
             </Grid>
         )
