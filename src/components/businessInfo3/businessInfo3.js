@@ -9,7 +9,9 @@ import {
     Panel
 } from 'react-bootstrap'
 import '../businessInfoStart/businessInfoStart.css';
-import Checkbox from '../../utils/Checkbox'
+import Checkbox from '../../utils/Checkbox';
+import axios from 'axios';
+import API_BASE_URL from '../../utils/api-helper';
 
 const items = [
   'Monday',
@@ -22,21 +24,8 @@ const items = [
 ]
 
 export default class BusinessInfo3 extends Component {
-    constructor() {
-        super()
-        this.state = {
-            sun: null,
-            mon: null,
-            tus: null,
-            wed: null,
-            thur: null,
-            fri: null,
-            sat: null
-        }
-       
-    }
 
-    componentWillMount = () => {
+    componentWillMount() {
        this.selectedCheckboxes = [];
      }
 
@@ -59,21 +48,15 @@ export default class BusinessInfo3 extends Component {
       items.map(this.createCheckbox)
     )
 
-    postToServer(){
-
+    postToServer() {
+      return axios.post(API_BASE_URL + '/api/setup/dates', this.selectedCheckboxes)
     }
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
-
-        // for (const checkbox of this.selectedCheckboxes) {
-        //   console.log(checkbox, 'is selected.');
-        // }
         console.log(this.selectedCheckboxes);
+        this.postToServer()
       }
-
-
-
 
     render() {
         return (
@@ -90,18 +73,20 @@ export default class BusinessInfo3 extends Component {
                             {this.createCheckboxes()}
 
 
-                            <a onClick={this.handleFormSubmit}>Next</a>
+                            <a onClick={this.handleFormSubmit.bind(this)}>Next</a>
+
                             <ButtonToolbar>
+
                               <Col sm={6}>
-
-                                {this.state.sun || this.state.mon || this.state.tus || this.state.wed || this.state.thur || this.state.fri || this.state.sat
-
-                                    ? <Button bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
-                                    : <Button disabled bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
-    }
+                                <Button bsStyle="primary" bsSize="large" block href="/setup/2">Previous</Button>
                               </Col>
                               <Col sm={6}>
-                                <Button bsStyle="success" bsSize="large" block href="/setup/2">Previous</Button>
+
+
+
+
+                                    <Button disabled bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
+
                               </Col>
                             </ButtonToolbar>
                         </Form>
