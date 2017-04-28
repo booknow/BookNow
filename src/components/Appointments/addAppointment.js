@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
-import './apptmnt.css'
+
+import './apptmnt.css';
+
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 class AddAppointment extends Component {
 
@@ -27,21 +34,20 @@ class AddAppointment extends Component {
       paymentmethod: null,
       comments: null,
 
+      startDate: moment(),
+      time:null
     }
 
     // console.log(this.state);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
-
 
   createAppt({email,firstname,lastname,address,city,state,zip,servicetype,frequency}){
     let total = null;
     axios.post("http://localhost:3000/createAppointment", arguments[0], total)
   }
-
-
-
 
   getValidationState() {
     const length = this.state.value.length;
@@ -49,7 +55,6 @@ class AddAppointment extends Component {
     else if (length > 5) return 'warning';
     else if (length > 0) return 'error';
   }
-
 
   handleChange(field, e) {
     this.setState({[field]: e.target.value})
@@ -70,6 +75,12 @@ class AddAppointment extends Component {
       this.setState({serviceamt:  900});
     }
 
+  }
+
+  handleDateChange(date){
+    this.setState({
+      startDate:date
+    });
   }
 
 
@@ -127,11 +138,11 @@ class AddAppointment extends Component {
     return (
       <Grid className="apptcon">
         <Row>
-          <Col md={12}>
-            <h1 style={topHeading}>New Appointment</h1>
-          </Col>
+
 
           <Col sm={8}>
+          <Panel className="appt-panel">
+          <h1 style={topHeading}>New Appointment</h1>
           <Form horizontal onSubmit={this.handleSubmit}>
           <h2 style={headingMargin}>Who</h2>
             <FormGroup >
@@ -307,14 +318,44 @@ class AddAppointment extends Component {
             <h2 style={headingMargin}>When</h2>
 
             <FormGroup controlId="formControlsSelect">
+
               <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Date / Time</ControlLabel>
+                  <ControlLabel>Date/Time</ControlLabel>
               </Col>
 
-              <Col sm={7}>
+              <Col sm={3}>
+
+                <DatePicker
+                  className='date-input'
+                  selected={this.state.startDate}
+                  onChange={this.handleDateChange}
+                  />
 
               </Col>
+
+
+               <div>
+                 <Col sm={4}>
+                   <FormControl onChange={this.handleChange.bind(this, 'time')} componentClass="select" placeholder="Time">
+                    <option value="8:00am"></option>
+                     <option value="9:00AM">9:00AM</option>
+                     <option value="10:00AM">10:00AM</option>
+                     <option value="11:00AM">11:00AM</option>
+                     <option value="12:00PM">12:00PM</option>
+                     <option value="1:00PM">1:00PM</option>
+                     <option value="2:00PM">2:00PM</option>
+                     <option value="3:00PM">3:00PM</option>
+                     <option value="4:00PM">4:00PM</option>
+                     <option value="5:00PM">5:00PM</option>
+                     <option value="6:00PM">6:00PM</option>
+                     <option value="7:00PM">7:00PM</option>
+                     <option value="8:00PM">8:00PM</option>
+
+                   </FormControl>
+                 </Col>
+               </div>
             </FormGroup>
+
 
             <h2 style={headingMargin}>Comments</h2>
 
@@ -335,6 +376,7 @@ class AddAppointment extends Component {
 
 
           </Form>
+          </Panel>
         </Col>
         <Col className="summary-col" sm={4}>
           <Panel header={title} style={blueBg}>
@@ -374,7 +416,9 @@ class AddAppointment extends Component {
             </Table>
           </Panel>
         </Col>
+
       </Row>
+
     </Grid>
     )
     }

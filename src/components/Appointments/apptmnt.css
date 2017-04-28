@@ -19,6 +19,11 @@ form .checkbox {
   margin-left:auto;
 
 }
+.date-input{
+  padding: 5px;
+  border-radius: 6px;
+  border: 0.5px solid #C5C5C5;
+}
 
 .summary-col {
   position: fixed;
@@ -44,6 +49,10 @@ form .checkbox {
   background-color: #00ad9a !important;
   border: 0;
 
+}
+
+.appt-panel {
+  margin-top:35px;
 }
 
 
