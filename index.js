@@ -109,6 +109,7 @@ app.post('/api/setup/dates', (req,res,next)=>{
   req.body.forEach(day => {
       let prop = 'pa_' + day.toLowerCase()
       obj[prop] = true
+      obj.pa_userid = uber.id
   })
   console.log(obj)
   db.pref_available.insert(obj, (err, rows) => {
@@ -233,9 +234,9 @@ app.get('/getApptCount', function(req,res,next){
 app.get('/api/setuppref', (req,res,next) => {
 
   console.log(req.body);
-  // TODO change hard coded number 3
 
-  db.readUserPref([3], (err, pref) => {
+
+  db.readUserPref([uber.id], (err, pref) => {
     if (err) {return next(err)}
     return res.status(200).json(pref)
   })
