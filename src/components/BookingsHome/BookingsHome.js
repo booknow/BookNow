@@ -178,7 +178,7 @@ class BookingsHome extends Component {
     <hr />
 <Row>
     <Col sm={4}>
-      &copy; 2017 Vernon Mullen , Qais Malik , Daanish Nasir
+      &Copy; 2017 Vernon Mullen , Qais Malik , Daanish Nasir
     </Col>
 </Row>
 
