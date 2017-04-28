@@ -87,7 +87,7 @@ export default class BusinessInfo2 extends Component {
                 <InputGroup>
                   <InputGroup.Addon>$</InputGroup.Addon>
 
-                  <FormControl type="number" required placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
+                  <FormControl  type="number" required placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
 
                   <InputGroup.Addon>.00</InputGroup.Addon>
                 </InputGroup>
@@ -115,9 +115,8 @@ export default class BusinessInfo2 extends Component {
                         <ButtonToolbar>
                           <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href='/setup/3' >Next</Button>
                           <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
-                          <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
+                        <Button bsStyle="success" bsSize="large" block href="/setup/1">Previous</Button>
                         </ButtonToolbar>
-
                       </Panel>
                     </Col>
                 </Row>
