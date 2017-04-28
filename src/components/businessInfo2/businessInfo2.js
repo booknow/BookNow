@@ -120,10 +120,10 @@ export default class BusinessInfo2 extends Component {
                           <Button bsStyle="primary" bsSize="large" block href="/setup/1">Previous</Button>
                           </Col>
                           <Col sm={6}>
-                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} >Next</Button>
+                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3">Next</Button>
                           </Col>
 
-                          <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
+
                         </ButtonToolbar>
 
                       </Panel>
