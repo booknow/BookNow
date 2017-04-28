@@ -104,6 +104,10 @@ app.post('/api/setup', (req,res,next) => {
   })
 })
 
+app.post('/api/setup/dates', (req,res,next)=>{
+  console.log(req.body);
+})
+
 app.get('/api/setup/services/:id', (req,res,next) => {
 
   // get services provided by user.id

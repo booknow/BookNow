@@ -75,6 +75,9 @@ export default class BusinessInfo4 extends Component {
 
                     </Col>
                 </Row>
+                <div className="steps">
+                  <p> 5 of 7</p>
+                </div>
             </Grid>
         )
     }

@@ -44,8 +44,10 @@ class AddAppointment extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
+
   createAppt(e){
     e.preventDefault()
+
     let total = null;
     console.log("IN createAppt: ", this.state)
     axios.post("http://localhost:3000/createAppointment", this.state)
@@ -84,11 +86,11 @@ class AddAppointment extends Component {
       startDate:date
     });
   }
+
   handleDateSelect(e) {
     console.log(e)
     this.setState({realDate: e._d})
   }
-
 
 
   handleSubmit(e) {
@@ -96,10 +98,7 @@ class AddAppointment extends Component {
 
     console.log(this.state);
 
-    // const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
-    // .catch(function(err) {console.log(err);})
-
-    // return booking;
+  
 
   }
 
@@ -329,6 +328,7 @@ class AddAppointment extends Component {
                   <ControlLabel>Date/Time</ControlLabel>
               </Col>
 
+
               <Col md={3} sm={5}>
 
                 <DatePicker
@@ -337,6 +337,7 @@ class AddAppointment extends Component {
                   selected={this.state.startDate}
                   onChange={this.handleDateChange.bind(this)}
                   onSelect={this.handleDateSelect.bind(this)}
+
                   />
 
               </Col>

@@ -26,8 +26,8 @@ export default class BusinessInfo2 extends Component {
       servicesProvided: []
 
 
-    }
 
+}
 
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -46,6 +46,7 @@ export default class BusinessInfo2 extends Component {
         })
       })
     }
+
 
     handleChange(field, e) {
 
@@ -73,8 +74,6 @@ export default class BusinessInfo2 extends Component {
         console.log(response);
       })
 
-      console.log(this.state);
-
     }
 
     render() {
@@ -89,7 +88,7 @@ export default class BusinessInfo2 extends Component {
                 <InputGroup>
                   <InputGroup.Addon>$</InputGroup.Addon>
 
-                  <FormControl type="number" required placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
+                  <FormControl  type="number" required placeholder="enter price" onChange={this.handleChange.bind(this, service.service_name)}/>
 
                   <InputGroup.Addon>.00</InputGroup.Addon>
                 </InputGroup>
@@ -115,21 +114,26 @@ export default class BusinessInfo2 extends Component {
                             </FormGroup>
                         </Form>
                         <ButtonToolbar>
+
                           <Col sm={6}>
 
                           <Button bsStyle="primary" bsSize="large" block href="/setup/1">Previous</Button>
                           </Col>
                           <Col sm={6}>
-                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3">Next</Button>
-                          </Col>
-
-
+                          {this.state.servicesProvided.find(service => service["services_provided_price"])
+                          ?
+                          <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3" >Next</Button>
+                          :
+                          <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
+                          }
+                        </Col>
                         </ButtonToolbar>
-
                       </Panel>
                     </Col>
                 </Row>
-
+                <div className="steps">
+                  <p> 3 of 7</p>
+                </div>
             </Grid>
         )
     }
