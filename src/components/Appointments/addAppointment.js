@@ -41,16 +41,13 @@ class AddAppointment extends Component {
     // console.log(this.state);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
-
 
   createAppt({email,firstname,lastname,address,city,state,zip,servicetype,frequency}){
     let total = null;
     axios.post("http://localhost:3000/createAppointment", arguments[0], total)
   }
-
-
-
 
   getValidationState() {
     const length = this.state.value.length;
@@ -58,7 +55,6 @@ class AddAppointment extends Component {
     else if (length > 5) return 'warning';
     else if (length > 0) return 'error';
   }
-
 
   handleChange(field, e) {
     this.setState({[field]: e.target.value})
@@ -81,7 +77,7 @@ class AddAppointment extends Component {
 
   }
 
-  handleChange(date){
+  handleDateChange(date){
     this.setState({
       startDate:date
     });
@@ -330,8 +326,9 @@ class AddAppointment extends Component {
               <Col sm={3}>
 
                 <DatePicker
+                  className='date-input'
                   selected={this.state.startDate}
-                  onChange={this.handleChange}
+                  onChange={this.handleDateChange}
                   />
 
               </Col>
@@ -347,6 +344,12 @@ class AddAppointment extends Component {
                      <option value="12:00PM">12:00PM</option>
                      <option value="1:00PM">1:00PM</option>
                      <option value="2:00PM">2:00PM</option>
+                     <option value="3:00PM">3:00PM</option>
+                     <option value="4:00PM">4:00PM</option>
+                     <option value="5:00PM">5:00PM</option>
+                     <option value="6:00PM">6:00PM</option>
+                     <option value="7:00PM">7:00PM</option>
+                     <option value="8:00PM">8:00PM</option>
 
                    </FormControl>
                  </Col>
