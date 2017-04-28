@@ -44,9 +44,13 @@ class AddAppointment extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
-  createAppt({email,firstname,lastname,address,city,state,zip,servicetype,frequency}){
+
+  createAppt(e){
+    e.preventDefault()
+
     let total = null;
-    axios.post("http://localhost:3000/createAppointment", arguments[0], total)
+    console.log("IN createAppt: ", this.state)
+    axios.post("http://localhost:3000/createAppointment", this.state)
   }
 
   getValidationState() {
@@ -83,6 +87,10 @@ class AddAppointment extends Component {
     });
   }
 
+  handleDateSelect(e) {
+    console.log(e)
+    this.setState({realDate: e._d})
+  }
 
 
   handleSubmit(e) {
@@ -90,10 +98,7 @@ class AddAppointment extends Component {
 
     console.log(this.state);
 
-    const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
-    .catch(function(err) {console.log(err);})
-
-    return booking;
+  
 
   }
 
@@ -143,7 +148,7 @@ class AddAppointment extends Component {
           <Col sm={8}>
           <Panel className="appt-panel">
           <h1 style={topHeading}>New Appointment</h1>
-          <Form horizontal onSubmit={this.handleSubmit}>
+          <Form horizontal onSubmit={this.createAppt.bind(this)}>
           <h2 style={headingMargin}>Who</h2>
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
@@ -323,12 +328,16 @@ class AddAppointment extends Component {
                   <ControlLabel>Date/Time</ControlLabel>
               </Col>
 
-              <Col sm={3}>
+
+              <Col md={3} sm={5}>
 
                 <DatePicker
+
                   className='date-input'
                   selected={this.state.startDate}
-                  onChange={this.handleDateChange}
+                  onChange={this.handleDateChange.bind(this)}
+                  onSelect={this.handleDateSelect.bind(this)}
+
                   />
 
               </Col>
@@ -372,7 +381,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button onClick={ () => this.createAppt(this.state)} className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
+            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
 
 
           </Form>

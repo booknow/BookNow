@@ -170,7 +170,7 @@ app.get("/getCurrentUser", (req,res,next)=>{
 
 //posting new appointment data
 app.post('/createAppointment' , (req,res,next) => {
-  db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency], (err, data) => {
+  db.postApptData([req.body.email,req.body.firstname,req.body.lastname,req.body.address,req.body.city,req.body.state,req.body.zip, req.body.servicetype, req.body.frequency, req.body.realDate, req.body.time, req.body.comments], (err, data) => {
 
     if(err) {return next(err) }
     else{
