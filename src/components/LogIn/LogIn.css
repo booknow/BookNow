@@ -88,6 +88,8 @@ body {
 .form_group{
   margin-bottom: 15px;
   width: 50%;
+  color: black;
+  text-align: center;
 
 }
 
