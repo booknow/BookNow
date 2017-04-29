@@ -24,17 +24,23 @@ const items = [
 ]
 
 export default class BusinessInfo3 extends Component {
-
+    constructor() {
+      super()
+      this.state = {
+        selectedCheckboxes: []
+      }
+    }
     componentWillMount() {
-       this.selectedCheckboxes = [];
      }
 
      toggleCheckbox = label => {
-       if (this.selectedCheckboxes.includes(label)) {
-         this.selectedCheckboxes.splice(this.selectedCheckboxes.indexOf(label), 1)
+       let selectedCheckboxes = this.state.selectedCheckboxes.slice();
+       if (selectedCheckboxes.includes(label)) {
+         selectedCheckboxes.splice(selectedCheckboxes.indexOf(label), 1)
        } else {
-         this.selectedCheckboxes.push({label, bool: true})
+         selectedCheckboxes.push(label)
        }
+       this.setState({selectedCheckboxes})
      }
     createCheckbox = label => (
       <Checkbox
@@ -49,12 +55,12 @@ export default class BusinessInfo3 extends Component {
     )
 
     postToServer() {
-      return axios.post(API_BASE_URL + '/api/setup/dates', this.selectedCheckboxes)
+      return axios.post(API_BASE_URL + '/api/setup/dates', this.state.selectedCheckboxes)
     }
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
-        console.log(this.selectedCheckboxes);
+        console.log(this.state.selectedCheckboxes);
         this.postToServer()
       }
 
