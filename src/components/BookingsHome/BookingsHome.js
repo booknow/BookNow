@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import axios from "axios";
 // var ReactDOM = require('react-dom');
-import { Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
-
+import { Popover, Well, Tooltip,Modal, Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
+import API_BASE_URL from '../../utils/api-helper'
 
 import { Link } from 'react-router-dom';
 
@@ -13,36 +13,41 @@ import './BookingsHome.css';
 
 class BookingsHome extends Component {
 
+  constructor(){
+    super()
+    this.state = {
+          showModal: null,
+          appointments : [],
+          ApptCount: 0,
+          inputText: "",
+          filteredAppointments: [],
+          user: {
+            first_name: null
+          }
+    }
+
+    axios.get('http://localhost:3000/appointments').then((response)=>{
+      this.setState({appointments: response.data})
+    })
+
+  }
+
+
+
     componentWillMount() {
-
-      // axios.get('http://localhost:3000/user', {withCredentials: true})
-      // .then(response => {
-      //   // console.log(response)
-      //
-      // })
-
       axios.get("http://localhost:3000/getApptCount").then((response)=>{
         this.setState({ApptCount: response.data[0].count})
       })
 
+      axios.get(API_BASE_URL + '/api/user')
+      .then(response => {
+        this.setState({id: response.data})
 
-    }
-    constructor(){
-      super()
-      this.state = {
-            appointments : [],
-            ApptCount: 0,
-            inputText: "",
-            filteredAppointments: [],
-            user: {
-              first_name: null
-            }
+        })
       }
 
-      axios.get('http://localhost:3000/appointments').then((response)=>{
-        this.setState({appointments: response.data})
-      })
-    }
+
+
 
     searchTestHandler(e){
       const searchText = this.state.inputText
@@ -57,6 +62,19 @@ class BookingsHome extends Component {
       })
       filteredArray.length > 0 ? this.setState({filteredAppointments: filteredArray}) : null
     }
+
+    close = () => {
+      this.setState({ showModal: false });
+    }
+
+    open = () => {
+      this.setState({ showModal: true });
+
+
+
+    }
+
+
     updateInputText(e, that){
       that.setState({inputText: e.target.value})
       if (e.target.value === "") {
@@ -93,6 +111,19 @@ class BookingsHome extends Component {
 
           )
       })
+
+      const popover = (
+      <Popover id="modal-popover" title="popover">
+        very popover. such engagement
+      </Popover>
+    );
+      const tooltip = (
+        <Tooltip id="modal-tooltip">
+          wow.
+        </Tooltip>
+      );
+
+
         return (
           <Grid>
               <Row>
@@ -108,8 +139,30 @@ class BookingsHome extends Component {
                    </Col>
               </Row>
               <Row>
-                <Col md={8}>
-                  <button className="schedule_username_buttons btn btn-default btn-lg send_schedule"> Send Schedule </button>
+                <Col md={8} className="row-admin">
+
+                  <Button
+                    bsStyle="primary"
+                    bsSize="large"
+                    onClick={this.open}
+                  >
+                    Send Schedule
+                  </Button>
+                  <Modal show={this.state.showModal} onHide={this.close}>
+                     <Modal.Header closeButton>
+                       <Modal.Title>Share your schedule!</Modal.Title>
+                     </Modal.Header>
+                     <Modal.Body>
+
+                        <p>Share your link to your schedule! Here is a link to your schedule:</p>
+                        <Well>http://localhost:4000/client/{this.state.id}</Well>
+
+
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button onClick={this.close}>Close</Button>
+                      </Modal.Footer>
+                   </Modal>
 
                 <DropdownButton className="schedule_username_buttons btn btn-default btn-lg" title="All Active Bookings" id="bg-nested-dropdown">
                       <MenuItem eventKey="1">Upcoming Bookings</MenuItem>
