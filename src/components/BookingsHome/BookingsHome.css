@@ -4,6 +4,12 @@ body {
 
   }
 
+  .copyright-fot {
+    text-align: center;
+    padding-bottom:20px;
+    font-size:.8em;
+  }
+
   .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
     color:white;
   }
