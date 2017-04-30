@@ -98,10 +98,13 @@ class BookingsHome extends Component {
       const { ApptCount } = this.state;
       let { filteredAppointments } = this.state
 
-      const appointments = this.state.appointments.map(function(appointment){
+      const appointments = this.state.appointments.map((appointment) => {
+        console.log(appointment.date);
+        let dateForm = appointment.date.toLocaleString()
+
           return (
-            <tr key={appointment}>
-              <td>{appointment.address_city}</td>
+            <tr key={appointment.id}>
+              <td>{dateForm}</td>
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
               <td>{appointment.frequency}</td>
