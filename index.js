@@ -150,19 +150,20 @@ app.get('/api/setup/services/:id', (req,res,next) => {
 
 
 
-
-
 app.get('/api/setup/services', (req,res,next) => {
 
     db.getServicesList([], (err, list) => {
       if (err) {return next(err)}
       return res.status(200).json(list)
     })
-
-
-
 })
 
+app.get('/api/book/:id', (req,res,next)=> {
+  db.readUserServices([req.params.id], (err, services)=>{
+    if (err) {return next(err)}
+    return res.status(200).json(services)
+  })
+})
 
 
 app.put('/api/setup/services/:id', (req,res,next) => {

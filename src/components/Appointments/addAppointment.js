@@ -33,7 +33,7 @@ class AddAppointment extends Component {
       extraitem: null,
       paymentmethod: null,
       comments: null,
-
+      id: null,
       startDate: moment(),
       time:null
     }
@@ -44,13 +44,26 @@ class AddAppointment extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
+  componentWillMount(){
+    axios.get(API_BASE_URL + '/api/user')
+    .then(response => {
+      this.setState({id: response.data})
+    }).then(()=> {
+      axios.get(API_BASE_URL + '/api/book/' + this.state.id ).then(response =>{
+       this.setState({servicetype: response.data})
+       console.log(this.state.servicetype);
+      })
+    })
+
+  }
+
 
   createAppt(e){
     e.preventDefault()
 
     let total = null;
-    console.log("IN createAppt: ", this.state)
-    axios.post("http://localhost:3000/createAppointment", this.state)
+    // console.log("IN createAppt: ", this.state)
+    axios.post(API_BASE_URL + "/createAppointment", this.state)
   }
 
   getValidationState() {
@@ -98,7 +111,7 @@ class AddAppointment extends Component {
 
     console.log(this.state);
 
-  
+
 
   }
 
@@ -139,6 +152,7 @@ class AddAppointment extends Component {
         paddingTop: '30px',
         borderTop:'2px solid #00B29E'
     }
+
 
     return (
       <Grid className="apptcon">
@@ -230,55 +244,11 @@ class AddAppointment extends Component {
             </FormGroup>
 
 
-            <FormGroup controlId="formControlsSelect">
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Frequency</ControlLabel>
-              </Col>
-
-              <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'frequency') }>
-                  <option></option>
-                  <option value="One Time">One Time</option>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Weekly">Weekly</option>
-                  <option value="Biweekly">Biweekly</option>
-                </FormControl>
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Extras</ControlLabel>
-              </Col>
 
 
-              <Col className="extras" sm={7} onChange={ this.handleChange.bind(this, 'extraitem') }>
-                <Checkbox value="Extra Item 1">
-                  Extra Item 1
-                </Checkbox>
-                <Checkbox value="Extra Item 2">
-                  Extra Item 2
-                </Checkbox>
-                <Checkbox value="Extra Item 3">
-                  Extra Item 3
-                </Checkbox>
-                <Checkbox value="Extra Item 4">
-                  Extra Item 4
-                </Checkbox>
-                <Checkbox value="Extra Item 5">
-                  Extra Item 5
-                </Checkbox>
-              </Col>
-            </FormGroup>
 
-            <FormGroup>
 
-            <Col sm={4} smOffset={3} className="addservice">
-              <Button block>Add Service</Button>
-            </Col>
 
-            </FormGroup>
 
             <FormGroup>
               <Col componentClass={ControlLabel} sm={3}>
@@ -398,11 +368,7 @@ class AddAppointment extends Component {
                 <td>{this.state.serviceamt} </td>
               </tr>
 
-              <tr>
-                <td>Extras</td>
 
-                <td>{this.state.extrasamt}</td>
-              </tr>
 
               <tr>
                 <td>Discount</td>

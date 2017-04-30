@@ -45,9 +45,9 @@ class ClientAppointment extends Component {
 
   componentWillMount(){
 
-console.log("http:localhost:3000/api/setup/services/" + this.props.match.params.id);
+    console.log(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id);
 
-    axios.get("http://localhost:3000/api/setup/services/" + this.props.match.params.id).then(response =>{
+    axios.get(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id).then(response =>{
       console.log(response);
       const serviceArr = response.data.map(service=> {
         return service.service_name

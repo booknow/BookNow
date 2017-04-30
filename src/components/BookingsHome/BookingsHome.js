@@ -102,7 +102,7 @@ class BookingsHome extends Component {
 
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
-              <td>{appointment.frequency}</td>
+
               <td>{appointment.email}</td>
             </tr>
 
@@ -115,7 +115,7 @@ class BookingsHome extends Component {
               <td>{appointment.date}</td>
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
-              <td>{appointment.frequency}</td>
+              
               <td>{appointment.email}</td>
             </tr>
 
@@ -207,7 +207,7 @@ class BookingsHome extends Component {
                <th>Service Date</th>
                <th>Customer</th>
                <th>Service Location</th>
-               <th>Frequency</th>
+
                <th>Email</th>
              </tr>
            </thead>
