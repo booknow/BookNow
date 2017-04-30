@@ -47,9 +47,9 @@ export default class BusinessInfoStart extends Component {
                                     Email
                                 </Col>
                                 <Col sm={9}>
-                                    <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/>
+                                    <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/><br/>
+                                      <small>Email must contain '@' and '.'</small>
                                 </Col>
-
                             </FormGroup>
                         </Form>
                     </Col>
