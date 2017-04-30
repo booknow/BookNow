@@ -50,16 +50,7 @@ class BookingsHome extends Component {
         })
       })
 
-
-
-
-
-
-
-
-      }
-
-
+ }
 
 
     searchTestHandler(e){
@@ -96,12 +87,17 @@ class BookingsHome extends Component {
     render() {
       const self = this;
       const { ApptCount } = this.state;
+
+
       let { filteredAppointments } = this.state
 
       const appointments = this.state.appointments.map(function(appointment){
+          const formattedDate = new Date(appointment.date);
           return (
+
             <tr key={appointment}>
-              <td>{appointment.address_city}</td>
+              <td>{formattedDate.toLocaleDateString('en-US')}</td>
+
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
               <td>{appointment.frequency}</td>
@@ -110,10 +106,11 @@ class BookingsHome extends Component {
 
           )
       })
+
       filteredAppointments = filteredAppointments.map(function(appointment){
           return (
             <tr>
-              <td>{appointment.address_city}</td>
+              <td>{appointment.date}</td>
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
               <td>{appointment.frequency}</td>
@@ -209,7 +206,7 @@ class BookingsHome extends Component {
                <th>Customer</th>
                <th>Service Location</th>
                <th>Frequency</th>
-               <th>Total Price</th>
+               <th>Email</th>
              </tr>
            </thead>
 
