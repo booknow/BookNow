@@ -79,21 +79,21 @@ export default class BusinessInfo3 extends Component {
                             {this.createCheckboxes()}
 
 
-                            <a onClick={this.handleFormSubmit.bind(this)}>Next</a>
-
                             <ButtonToolbar>
 
                               <Col sm={6}>
                                 <Button bsStyle="primary" bsSize="large" block href="/setup/2">Previous</Button>
                               </Col>
+                              { this.state.selectedCheckboxes.length
+                                ?
                               <Col sm={6}>
-
-
-
-
-                                    <Button disabled bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
-
+                                    <Button  bsStyle="success" bsSize="large"  block href="/home">Finish</Button>
                               </Col>
+                              :
+                              <Col sm={6}>
+                                    <Button disabled bsStyle="success" bsSize="large" block >Finish</Button>
+                              </Col>
+                            }
                             </ButtonToolbar>
                         </Form>
                     </Col>
@@ -101,10 +101,12 @@ export default class BusinessInfo3 extends Component {
                 </Row>
 
                 <div className="steps">
-                  <p> 4 of 7</p>
+                  <p> 4 of 4</p>
                 </div>
 
             </Grid>
         )
     }
 }
+//note
+//there was this line onClick={this.handleFormSubmit.bind(this)} inside the finish buttons

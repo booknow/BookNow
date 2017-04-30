@@ -231,7 +231,8 @@ class BookingsHome extends Component {
     <hr />
 <Row>
     <Col sm={4}>
-      &copy; 2017 Vernon Mullen , Qais Malik , Daanish Nasir
+      © Vernon Mullen , Qais Malik and Daanish Nasir <br/>
+    Devmountain 2017
     </Col>
 </Row>
 

@@ -101,6 +101,7 @@ export default class BusinessInfo2 extends Component {
         return (
             <Grid>
                 <Row>
+
                     <Col sm={12}>
                       <Panel className="bi-panel">
                         <Form horizontal>
@@ -119,20 +120,23 @@ export default class BusinessInfo2 extends Component {
 
                           <Button bsStyle="primary" bsSize="large" block href="/setup/1">Previous</Button>
                           </Col>
-                          <Col sm={6}>
                           {this.state.servicesProvided.find(service => service["services_provided_price"])
                           ?
+                          <Col sm={6}>
                           <Button bsStyle="success" bsSize="large" block onClick={this.handleSubmit} href="/setup/3" >Next</Button>
-                          :
+                          </Col>
+                           :
+                           <Col sm={6}>
                           <Button disabled bsStyle="success" bsSize="large" block>Next</Button>
-                          }
-                        </Col>
+                          </Col>
+                        }
+
                         </ButtonToolbar>
                       </Panel>
                     </Col>
                 </Row>
                 <div className="steps">
-                  <p> 3 of 7</p>
+                  <p> 3 of 4</p>
                 </div>
             </Grid>
         )
