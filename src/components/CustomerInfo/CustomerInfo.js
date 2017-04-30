@@ -83,9 +83,9 @@ class CustomerInfo extends Component {
 
     componentWillMount(){
       axios.get("http://localhost:3000/customer/" + this.props.match.params.id).then(response => {
-        console.log(response.data);
+        console.log("Time is:" , response.data.time);
 
-
+        var formattedDate = new Date(response.data.date)
 
         this.setState({
           customer:{
@@ -97,7 +97,10 @@ class CustomerInfo extends Component {
             first_name: response.data.first_name,
             last_name:response.data.last_name,
             frequency:response.data.frequency,
-            service_name:response.data.service_name
+            service_name:response.data.service_name,
+            comments:response.data.comments,
+            date:formattedDate.toLocaleDateString('en-US'),
+            time:response.data.time
           }
         })
       })
@@ -179,7 +182,7 @@ class CustomerInfo extends Component {
                             <fieldset classname="notes">
                                 <legend className="legend-text">Notes
                                 </legend>
-                                <textarea rows="10" cols="44"></textarea>
+                                <textarea rows="10" cols="44" value={customer.comments}></textarea>
                             </fieldset>
 
                             <fieldset className="Payment Method"></fieldset>
@@ -215,9 +218,9 @@ class CustomerInfo extends Component {
                                     </strong>
                                 </Col>
                             </Row>
-                            <p>04/20/2017 4:00PM</p>
+                            <p>{customer.date} at {customer.time}</p>
                             <p>
-                                {customer.frequency}
+                                Frequency: {customer.frequency}
                             </p>
                             <strong>
                                 Small Car
