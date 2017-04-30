@@ -105,7 +105,37 @@ app.post('/api/setup', (req,res,next) => {
 })
 
 app.post('/api/setup/dates', (req,res,next)=>{
-  console.log(req.body);
+  const obj = {}
+  req.body.forEach(day => {
+      let prop = 'pa_' + day.toLowerCase()
+      obj[prop] = true
+      obj.pa_userid = uber.id
+  })
+  console.log(obj)
+  db.pref_available.insert(obj, (err, rows) => {
+    if (err) {
+      return res.status(500).json(err)
+    }
+    return res.status(200).json(rows)
+  })
+
+//   Promise.all(datesAvail.map(x => {
+//   // console.log(x);
+//     for (let day of week) {
+//       if (x.label === day) {
+//         console.log('winner chicken!');
+//
+//       }
+//
+//
+//
+//     }
+//     return db.createAvailability([x.bool])
+//   })).then(()=> {
+//     return res.status(200).json('posted schedule to pref_available table')
+//   }).catch(err => {
+//     console.log(err);
+//   })
 })
 
 app.get('/api/setup/services/:id', (req,res,next) => {
@@ -204,9 +234,9 @@ app.get('/getApptCount', function(req,res,next){
 app.get('/api/setuppref', (req,res,next) => {
 
   console.log(req.body);
-  // TODO change hard coded number 3
 
-  db.readUserPref([3], (err, pref) => {
+
+  db.readUserPref([uber.id], (err, pref) => {
     if (err) {return next(err)}
     return res.status(200).json(pref)
   })

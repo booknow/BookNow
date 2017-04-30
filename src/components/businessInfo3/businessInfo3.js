@@ -24,17 +24,23 @@ const items = [
 ]
 
 export default class BusinessInfo3 extends Component {
-
+    constructor() {
+      super()
+      this.state = {
+        selectedCheckboxes: []
+      }
+    }
     componentWillMount() {
-       this.selectedCheckboxes = [];
      }
 
      toggleCheckbox = label => {
-       if (this.selectedCheckboxes.includes(label)) {
-         this.selectedCheckboxes.splice(this.selectedCheckboxes.indexOf(label), 1)
+       let selectedCheckboxes = this.state.selectedCheckboxes.slice();
+       if (selectedCheckboxes.includes(label)) {
+         selectedCheckboxes.splice(selectedCheckboxes.indexOf(label), 1)
        } else {
-         this.selectedCheckboxes.push({label, bool: true})
+         selectedCheckboxes.push(label)
        }
+       this.setState({selectedCheckboxes})
      }
     createCheckbox = label => (
       <Checkbox
@@ -49,12 +55,12 @@ export default class BusinessInfo3 extends Component {
     )
 
     postToServer() {
-      return axios.post(API_BASE_URL + '/api/setup/dates', this.selectedCheckboxes)
+      return axios.post(API_BASE_URL + '/api/setup/dates', this.state.selectedCheckboxes)
     }
 
     handleFormSubmit = formSubmitEvent => {
         formSubmitEvent.preventDefault();
-        console.log(this.selectedCheckboxes);
+        console.log(this.state.selectedCheckboxes);
         this.postToServer()
       }
 
@@ -73,21 +79,21 @@ export default class BusinessInfo3 extends Component {
                             {this.createCheckboxes()}
 
 
-                            <a onClick={this.handleFormSubmit.bind(this)}>Next</a>
-
                             <ButtonToolbar>
 
                               <Col sm={6}>
                                 <Button bsStyle="primary" bsSize="large" block href="/setup/2">Previous</Button>
                               </Col>
+                              { this.state.selectedCheckboxes.length
+                                ?
                               <Col sm={6}>
-
-
-
-
-                                    <Button disabled bsStyle="success" bsSize="large" block href="/setup/4">Next</Button>
-
+                                    <Button  bsStyle="success" bsSize="large"  block href="/home">Finish</Button>
                               </Col>
+                              :
+                              <Col sm={6}>
+                                    <Button disabled bsStyle="success" bsSize="large" block >Finish</Button>
+                              </Col>
+                            }
                             </ButtonToolbar>
                         </Form>
                     </Col>
@@ -95,10 +101,12 @@ export default class BusinessInfo3 extends Component {
                 </Row>
 
                 <div className="steps">
-                  <p> 4 of 7</p>
+                  <p> 4 of 4</p>
                 </div>
 
             </Grid>
         )
     }
 }
+//note
+//there was this line onClick={this.handleFormSubmit.bind(this)} inside the finish buttons

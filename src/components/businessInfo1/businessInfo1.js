@@ -93,26 +93,31 @@ export default class BusinessInfo1 extends Component {
                           </div>
                         </Form>
                         <ButtonToolbar>
-                            <Col md={4} mdOffset={4}>
+                          <Col sm={6}>
+                          <Button bsStyle="primary" bsSize="large" block href="/setup">Previous</Button>
+                          </Col>
                                   { this.state.selectableServices.filter(service => service.selected).length
                                     ?
+                                    <Col sm={6}>
                                     <Button onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit" href="/setup/2" block>
                                       Next
                                     </Button>
+                                    </Col>
                                     :
+                                  <Col sm={6}>
                                     <Button disabled onClick={this.handleSubmit} className="" bsStyle="success" bsSize="large" type="submit" href="/setup/2" block>
                                       Next
                                     </Button>
+                                    </Col>
                                   }
-                                  <Button bsStyle="success" bsSize="large" block href="/setup">Previous</Button>
 
-                            </Col>
+
                         </ButtonToolbar>
                     </Col>
                     </Panel>
                 </Row>
                 <div className="steps">
-                  <p> 2 of 7</p>
+                  <p> 2 of 4</p>
                 </div>
             </Grid>
         )
