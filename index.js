@@ -183,8 +183,9 @@ app.put('/api/setup/services/:id', (req,res,next) => {
 
 
 
-app.get('/appointments', (req,res,next) => {
-  db.readAppts([], (err, appts)=> {
+app.get('/appointments/:id', (req,res,next) => {
+  console.log(req.params.id);
+  db.readAppts([req.params.id], (err, appts)=> {
     if (err) {return next(err)}
     return res.status(200).json(appts);
   })
@@ -210,7 +211,7 @@ app.post('/createAppointment' , (req,res,next) => {
 })
 
 app.get('/customer/:id', function(req,res,next){
-  db.new_appointment.find(parseInt(req.params.id), function(err, user){
+  db.new_appointment.find(parseInt(req.params.id), (err, user) => {
     if (err) {return next(err)}
     else{
       return res.status(200).json(user);
@@ -220,8 +221,8 @@ app.get('/customer/:id', function(req,res,next){
 
 
 
-app.get('/getApptCount', function(req,res,next){
-  db.getApptCount(function(err, ApptCount){
+app.get('/getApptCount/:id', (req,res,next)=>{
+  db.getApptCount([req.params.id], (err, ApptCount)=>{
     // console.log(err);
     if(err){
       return next (err);

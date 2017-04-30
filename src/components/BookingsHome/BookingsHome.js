@@ -26,24 +26,37 @@ class BookingsHome extends Component {
           }
     }
 
-    axios.get('http://localhost:3000/appointments').then((response)=>{
-      this.setState({appointments: response.data})
-    })
+
+
+
 
   }
 
 
 
     componentWillMount() {
-      axios.get("http://localhost:3000/getApptCount").then((response)=>{
-        this.setState({ApptCount: response.data[0].count})
-      })
-
       axios.get(API_BASE_URL + '/api/user')
       .then(response => {
         this.setState({id: response.data})
 
+      }).then(()=> {
+        return axios.get('http://localhost:3000/appointments/' + this.state.id).then((response)=>{
+          this.setState({appointments: response.data})
+          console.log(this.state.id);
         })
+      }).then(()=>{
+        return axios.get("http://localhost:3000/getApptCount/" + this.state.id).then((response)=>{
+          this.setState({ApptCount: response.data[0].count})
+        })
+      })
+
+
+
+
+
+
+
+
       }
 
 
@@ -70,8 +83,6 @@ class BookingsHome extends Component {
     open = () => {
       this.setState({ showModal: true });
 
-
-
     }
 
 
@@ -89,7 +100,7 @@ class BookingsHome extends Component {
 
       const appointments = this.state.appointments.map(function(appointment){
           return (
-            <tr>
+            <tr key={appointment}>
               <td>{appointment.address_city}</td>
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
@@ -214,7 +225,7 @@ class BookingsHome extends Component {
         :
         <Jumbotron className="jumbotron-booking">
           <h1>{0} Bookings found.</h1>
-          <p>We couldn't find any bookings that matched your search.</p>
+          <p>We could not find any bookings that matched your search.</p>
         <Link to="/book">  <p><Button bsStyle="info">Create a Booking</Button></p> </Link>
         </Jumbotron>
       }
@@ -230,8 +241,8 @@ class BookingsHome extends Component {
 </Row>
     <hr />
 <Row>
-    <Col sm={4}>
-      © Vernon Mullen , Qais Malik and Daanish Nasir <br/>
+    <Col sm={12} className="copyright-fot">
+      © Qais Malik, Vernon Mullen, and Daanish Nasir <br/>
     Devmountain 2017
     </Col>
 </Row>
