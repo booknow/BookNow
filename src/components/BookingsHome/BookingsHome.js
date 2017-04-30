@@ -91,12 +91,14 @@ class BookingsHome extends Component {
 
       let { filteredAppointments } = this.state
 
+
       const appointments = this.state.appointments.map(function(appointment){
           const formattedDate = new Date(appointment.date);
           return (
 
-            <tr key={appointment}>
+             <tr key={appointment.id}>
               <td>{formattedDate.toLocaleDateString('en-US')}</td>
+
 
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
