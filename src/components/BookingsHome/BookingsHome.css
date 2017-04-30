@@ -1,4 +1,24 @@
 
+body {
+  /*background-color:white;*/
+
+  }
+
+  .copyright-fot {
+    text-align: center;
+    padding-bottom:20px;
+    font-size:.8em;
+  }
+
+  .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+    color:white;
+  }
+
+  .navbar-inverse {
+    background-color:#333;
+    border: 0px;
+  }
+
 .active_bookings_text{
   text-align: left;
 }
@@ -11,7 +31,10 @@ tr:nth-child(odd) {
     background-color: white;
 }*/
 
-
+.row-admin {
+  margin-top:25px;
+  margin-bottom:25px;
+}
 
 .help-username_buttons{
   border: none;

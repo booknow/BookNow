@@ -3,6 +3,7 @@ import {
     Button,
     ButtonToolbar,
     ControlLabel,
+    Panel,
     Form,
     Grid,
     Col,
@@ -26,11 +27,16 @@ export default class BusinessInfoStart extends Component {
      handleChange(e) {
        // console.log(e.target.value)
        this.setState({email: e.target.value})
+
      }
+
+
+
 
     render() {
         return (
             <Grid>
+              <Panel className="bi-panel">
                 <Row>
                     <Col sm={8}>
                         <Form horizontal>
@@ -41,9 +47,9 @@ export default class BusinessInfoStart extends Component {
                                     Email
                                 </Col>
                                 <Col sm={9}>
-                                    <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/>
+                                    <FormControl value={this.state.email} onChange={this.handleChange} type="email" placeholder="Email"/><br/>
+                                      <small>Email must contain '@' and '.'</small>
                                 </Col>
-
                             </FormGroup>
                         </Form>
                     </Col>
@@ -54,11 +60,14 @@ export default class BusinessInfoStart extends Component {
                         <ButtonToolbar>
 
                           {
-                            this.state.email
+                            this.state.email && this.state.email.includes('@') && this.state.email.includes('.')
                             ?
+
+
                             <Button bsStyle="success" bsSize="large" block href="/setup/1">
                                 Next
                             </Button>
+
                             :
                             <Button disabled bsStyle="success" bsSize="large" block href="/setup/1">
                                 Next
@@ -67,9 +76,11 @@ export default class BusinessInfoStart extends Component {
 
                         </ButtonToolbar>
                     </Col>
+
                 </Row>
+                </Panel>
                 <div className="steps">
-                  <p> 1 of 7</p>
+                  <p> 1 of 4</p>
                 </div>
             </Grid>
 
