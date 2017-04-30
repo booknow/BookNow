@@ -40,12 +40,12 @@ class BookingsHome extends Component {
         this.setState({id: response.data})
 
       }).then(()=> {
-        return axios.get('http://localhost:3000/appointments/' + this.state.id).then((response)=>{
+        return axios.get(API_BASE_URL + '/appointments/' + this.state.id).then((response)=>{
           this.setState({appointments: response.data})
           console.log(this.state.id);
         })
       }).then(()=>{
-        return axios.get("http://localhost:3000/getApptCount/" + this.state.id).then((response)=>{
+        return axios.get(API_BASE_URL + "/getApptCount/" + this.state.id).then((response)=>{
           this.setState({ApptCount: response.data[0].count})
         })
       })
