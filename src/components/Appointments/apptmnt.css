@@ -32,12 +32,13 @@ form .checkbox {
 }
 
 .panel-underbtn {
-  margin-left:auto;
-  margin-right:auto;
+  /*margin-left:auto;
+  margin-right:auto;*/
   max-width:275px;
-  background-color: #1F232A;
+  background-color: #00AD9A;
+  border:1px solid #66cdc2;
   color: white;
-  margin-top:55px;
+  /*margin-top:55px;*/
 }
 
 .panel-underbtn:hover {
