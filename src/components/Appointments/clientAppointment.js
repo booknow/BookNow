@@ -19,9 +19,6 @@ class ClientAppointment extends Component {
     this.state = {
       servicetype: null,
       serviceamt: 0,
-      extrasamt: 0,
-      discountamt:0,
-      tipamt:0,
       email: null,
       firstname: null,
       lastname: null,
@@ -142,11 +139,8 @@ class ClientAppointment extends Component {
 
 
     let { serviceamt
-      , extrasamt
-      , discountamt
-      , tipamt
       , services}=this.state
-    let total=parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
+    let total=parseInt(serviceamt, 10)
 
     const serviceOptions=services.map((service, index) => (
         <option value={index}>{service.name}</option>
@@ -365,23 +359,6 @@ class ClientAppointment extends Component {
                 <td>{this.state.serviceamt} </td>
               </tr>
 
-              <tr>
-                <td>Extras</td>
-
-                <td>{this.state.extrasamt}</td>
-              </tr>
-
-              <tr>
-                <td>Discount</td>
-
-                <td>{this.state.discountamt}</td>
-              </tr>
-
-
-              <tr>
-                <td style={beforeTot}>Tip</td>
-                <td>{this.state.tipamt}</td>
-              </tr>
 
               <tr>
                 <td style={totalSt}>Total</td>
