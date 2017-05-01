@@ -35,28 +35,41 @@ class AddAppointment extends Component {
       comments: null,
       id: null,
       startDate: moment(),
-      time:null
+      time:null,
+      services: []
     }
 
-    // console.log(this.state);
+    let test = null;
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+
+
   }
 
   componentWillMount(){
+
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
       this.setState({id: response.data})
     }).then(()=> {
       axios.get(API_BASE_URL + '/api/book/' + this.state.id ).then(response =>{
-       this.setState({servicetype: response.data})
-       console.log(this.state.servicetype);
+
+        const serviceArr = response.data.map(service => {
+          return {name: service.service_name, price: service.services_provided_price}
+        })
+      //  this.setState({servicetype: response.data})
+
+       console.log(serviceArr)
+
+       this.setState({services: [...this.state.services, ... serviceArr]
+       })
+
       })
     })
 
   }
-
 
   createAppt(e){
     e.preventDefault()
@@ -66,6 +79,8 @@ class AddAppointment extends Component {
     axios.post(API_BASE_URL + "/createAppointment", this.state)
   }
 
+
+
   getValidationState() {
     const length = this.state.value.length;
     if (length > 10) return 'success';
@@ -73,25 +88,25 @@ class AddAppointment extends Component {
     else if (length > 0) return 'error';
   }
 
-  handleChange(field, e) {
+  handleChange(field, e, service) {
     this.setState({[field]: e.target.value})
 
-    if(e.target.value === ''){
-      this.setState({serviceamt: 0});
+  }
+
+  handleServiceChange(e) {
+    if(!e.target.value){
+      this.setState({
+        serviceamt:0,
+        servicetype: ''
+      })
     }
 
-    if (e.target.value === 'Web Development') {
-        this.setState({serviceamt: 10000 });
-    }
+  this.setState({
 
-    if (e.target.value === 'Social Media') {
-      this.setState({serviceamt:  500000});
-    }
+    serviceamt: this.state.services[e.target.value].price,
+    servicetype:this.state.services[e.target.value].name
 
-    if (e.target.value === 'Consulting') {
-      this.setState({serviceamt:  900});
-    }
-
+  })
   }
 
   handleDateChange(date){
@@ -110,16 +125,16 @@ class AddAppointment extends Component {
     e.preventDefault()
 
     console.log(this.state);
-
-
-
   }
 
   render() {
+
+
     let { serviceamt
       , extrasamt
       , discountamt
-      , tipamt} = this.state
+      , tipamt
+      , services} = this.state
     let total = parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
 
     const topHeading = {
@@ -153,12 +168,16 @@ class AddAppointment extends Component {
         borderTop:'2px solid #00B29E'
     }
 
+    const serviceOptions=services.map((service, index) => (
+        <option value={index}>{service.name}</option>
+    ))
+
+
+
 
     return (
       <Grid className="apptcon">
         <Row>
-
-
           <Col sm={8}>
           <Panel className="appt-panel">
           <h1 style={topHeading}>New Appointment</h1>
@@ -186,6 +205,7 @@ class AddAppointment extends Component {
             </FormGroup>
 
             <h2 style={headingMargin}>Where</h2>
+
 
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
@@ -233,22 +253,13 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'servicetype') } >
+
+                <FormControl componentClass="select" placeholder="select" onChange={ this.handleServiceChange.bind(this) } >
                   <option></option>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Social Media">Social Media</option>
-                  <option value="Consulting">Consulting</option>
-                  <option value="Simple Website">Simple Website</option>
+                  {serviceOptions}
                 </FormControl>
               </Col>
             </FormGroup>
-
-
-
-
-
-
-
 
             <FormGroup>
               <Col componentClass={ControlLabel} sm={3}>
@@ -298,20 +309,16 @@ class AddAppointment extends Component {
                   <ControlLabel>Date/Time</ControlLabel>
               </Col>
 
-
               <Col md={3} sm={5}>
 
                 <DatePicker
-
                   className='date-input'
                   selected={this.state.startDate}
                   onChange={this.handleDateChange.bind(this)}
                   onSelect={this.handleDateSelect.bind(this)}
-
                   />
 
               </Col>
-
 
                <div>
                  <Col sm={4}>
@@ -335,7 +342,6 @@ class AddAppointment extends Component {
                </div>
             </FormGroup>
 
-
             <h2 style={headingMargin}>Comments</h2>
 
             <FormGroup controlId="formControlsTextarea">
@@ -344,7 +350,6 @@ class AddAppointment extends Component {
               </Col>
 
               <Col sm={9}>
-
 
                   <FormControl componentClass="textarea" placeholder="Comments" onChange={this.handleChange.bind(this, 'comments')}/>
 
@@ -368,14 +373,11 @@ class AddAppointment extends Component {
                 <td>{this.state.serviceamt} </td>
               </tr>
 
-
-
               <tr>
                 <td>Discount</td>
 
                 <td>{this.state.discountamt}</td>
               </tr>
-
 
               <tr>
                 <td style={beforeTot}>Tip</td>
