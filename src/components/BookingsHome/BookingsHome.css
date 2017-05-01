@@ -48,6 +48,11 @@ tr:nth-child(odd) {
 
 .schedule_username_buttons{
   border: 1px solid #ccc;
+  /*margin-left:5px;*/
+}
+
+.btn-group>.btn:first-child {
+  margin-left:10px;
 }
 
 

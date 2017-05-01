@@ -25,14 +25,7 @@ class BookingsHome extends Component {
             first_name: null
           }
     }
-
-
-
-
-
   }
-
-
 
     componentWillMount() {
       axios.get(API_BASE_URL + '/api/user')
@@ -121,18 +114,6 @@ class BookingsHome extends Component {
 
           )
       })
-
-    //   const popover = (
-    //   <Popover id="modal-popover" title="popover">
-    //     very popover. such engagement
-    //   </Popover>
-    // );
-      // const tooltip = (
-      //   <Tooltip id="modal-tooltip">
-      //     wow.
-      //   </Tooltip>
-      // );
-
 
         return (
           <Grid>
