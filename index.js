@@ -168,18 +168,17 @@ app.get('/api/book/:id', (req,res,next)=> {
 
 app.put('/api/setup/services/:id', (req,res,next) => {
   // update price for services by user.id
-  console.log(req.body);
   let dataSent = req.body
-
-
-    Promise.all(dataSent.forEach((x, idx)=> {
+  console.log(req.body);
+    Promise.all(
+      dataSent.map((x, idx)=> {
       return db.updatePrices([x.service_id, x.services_provided_price, x.sprovider_id], (err, data)=>{
         if (err) {return next(err)}
-      }).then(()=>{
-        return res.status(200).json('sent service update to service provided!')
       })
     })
-  )
+  ).then( ()=>{
+    return res.status(200).json('sent service update to service provided!')
+  })
 })
 
 

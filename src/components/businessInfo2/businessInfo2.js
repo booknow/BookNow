@@ -69,8 +69,9 @@ export default class BusinessInfo2 extends Component {
 
 
 
-      axios.put(API_BASE_URL + '/api/setup/services/:id', this.state.servicesProvided).then((response) =>{
-        console.log(response);
+      axios.put(API_BASE_URL + '/api/setup/services/' + this.state.id, this.state.servicesProvided).then((response) =>{
+        console.log(this.state);
+
       })
 
     }
