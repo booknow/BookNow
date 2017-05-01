@@ -77,6 +77,7 @@ class AddAppointment extends Component {
     let total = null;
     // console.log("IN createAppt: ", this.state)
     axios.post(API_BASE_URL + "/createAppointment", this.state)
+    console.log(this.state);
   }
 
 
