@@ -9,7 +9,6 @@ import {
     Row,
     FormControl,
     ControlLabel,
-    Checkbox,
     FormGroup,
     Panel
 } from 'react-bootstrap'
