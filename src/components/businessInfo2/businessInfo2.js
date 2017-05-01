@@ -24,9 +24,7 @@ export default class BusinessInfo2 extends Component {
       id: null,
       servicesProvided: []
 
-
-
-}
+    }
 
 
     this.handleSubmit = this.handleSubmit.bind(this)

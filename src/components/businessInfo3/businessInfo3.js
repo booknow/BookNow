@@ -29,7 +29,10 @@ export default class BusinessInfo3 extends Component {
       this.state = {
         selectedCheckboxes: []
       }
+
+      this.handleFormSubmit = this.handleFormSubmit.bind(this)
     }
+
     componentWillMount() {
      }
 
@@ -78,7 +81,7 @@ export default class BusinessInfo3 extends Component {
 
                             {this.createCheckboxes()}
 
-
+                            <Button onClick={this.handleFormSubmit}>next</Button>
                             <ButtonToolbar>
 
                               <Col sm={6}>
@@ -87,7 +90,7 @@ export default class BusinessInfo3 extends Component {
                               { this.state.selectedCheckboxes.length
                                 ?
                               <Col sm={6}>
-                                    <Button  bsStyle="success" bsSize="large"  block href="/home">Finish</Button>
+                                    <Button  bsStyle="success" bsSize="large" onClick={this.handleFormSubmit} block href="/home">Finish</Button>
                               </Col>
                               :
                               <Col sm={6}>
