@@ -14,13 +14,16 @@ BigCalendar.momentLocalizer(moment);
 
 class MyCalendar extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
           events: []
         }
         let tempArr = []
-        axios.get(API_BASE_URL + '/api/setuppref')
+
+
+
+        axios.get(API_BASE_URL + '/api/setuppref/' + this.props.useridfromparent)
                 .then((response) => {
 
                     console.log(response);

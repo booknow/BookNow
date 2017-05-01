@@ -234,12 +234,12 @@ app.get('/getApptCount/:id', (req,res,next)=>{
   })
 })
 
-app.get('/api/setuppref', (req,res,next) => {
+app.get('/api/setuppref/:id', (req,res,next) => {
 
-  console.log(req.body);
+  console.log(req.params.id);
 
 
-  db.readUserPref([uber.id], (err, pref) => {
+  db.readUserPref([req.params.id], (err, pref) => {
     if (err) {return next(err)}
     return res.status(200).json(pref)
   })

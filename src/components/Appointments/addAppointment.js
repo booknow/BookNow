@@ -48,7 +48,7 @@ class AddAppointment extends Component {
   }
 
   componentWillMount(){
-
+    console.log(this.props.match.params.id)
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
       this.setState({id: response.data})
@@ -108,7 +108,7 @@ class AddAppointment extends Component {
   this.setState({
 
     serviceamt: this.state.services[e.target.value].price,
-    servicetype:this.state.services[e.target.value].name
+    servicetype: this.state.services[e.target.value].name
 
   })
   }
@@ -310,7 +310,7 @@ class AddAppointment extends Component {
             <FormGroup controlId="formControlsSelect">
 
               <Col componentClass={ControlLabel} sm={3}>
-                  <ControlLabel>Date/Time</ControlLabel>
+                  <ControlLabel>Date / Time</ControlLabel>
               </Col>
 
               <Col md={3} sm={5}>
@@ -360,7 +360,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Row>              
+            <Row>
               <Col sm={6}>
                 <Button href="home" bsSize="large" block>Return Home</Button>
               </Col>
