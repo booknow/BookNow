@@ -5,7 +5,9 @@ import API_BASE_URL from '../../utils/api-helper'
 import './apptmnt.css'
 import MyCalendar from './bookingCal';
 
-// import './clientappt.css'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 
@@ -13,7 +15,6 @@ class ClientAppointment extends Component {
 
   constructor(props) {
     super(props)
-    console.log(props);
 
     this.state = {
       servicetype: null,
@@ -32,60 +33,82 @@ class ClientAppointment extends Component {
       extraitem: null,
       paymentmethod: null,
       comments: null,
+      startDate: moment(),
+      time: null,
       totalamt: null,
       servicename:null,
-      services : [ ]
+      services : [ ],
+      provider: null
 
     }
 
-    console.log(this.state);
+    // console.log(this.state);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+
   }
 
   componentWillMount(){
+    // console.log('this is the id?', this.props.match.params.id);
+    // this.setState({exported_id: this.props.match.params.id})
+    // console.log(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id);
 
-    console.log(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id);
+
 
     axios.get(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id).then(response =>{
       console.log(response);
       const serviceArr = response.data.map(service=> {
-        return service.service_name
+
+        return {name: service.service_name, price: service.services_provided_price, provider: service.first_name}
       })
-      console.log(serviceArr);
+
+
+
       this.setState({
-        services: [...this.state.services, ...serviceArr]  //why ...response.data
+        services: [...this.state.services, ...serviceArr],  //why ...response.data,
+        provider: serviceArr[0].provider
       })
+
+      console.log(this.state.provider);
+
+        // const provider = this.state.services[0].provider;
 
     })
 
 
-    // axios.get("http://localhost:3000/servicesProvided").then((response) => {
-    //   console.log(response.data);
-    //
-    //
-    //
-    //
-    // })
+  }
 
 
+
+  handleDateChange(date){
+    this.setState({
+      startDate:date
+    });
 
 
   }
+
+  handleDateSelect(e) {
+    console.log(e)
+    this.setState({realDate: e._d})
+  }
+
 
   handleServiceChange(e){
 
       if(!e.target.value){
         this.setState({
-          serviceamt:0,
+          serviceamt: 0,
           servicetype: ''
         })
       }
 
     this.setState({
 
-      serviceamt: this.state.services[e.target.value].services_provided_price,
-      servicetype:this.state.services[e.target.value].service_name
+      serviceamt: this.state.services[e.target.value].price,
+      servicetype: this.state.services[e.target.value].name,
+
 
     })
 
@@ -114,6 +137,10 @@ class ClientAppointment extends Component {
 
   render() {
 
+    const user_id = this.props.match.params.id
+
+
+
     let { serviceamt
       , extrasamt
       , discountamt
@@ -122,7 +149,7 @@ class ClientAppointment extends Component {
     let total=parseInt(serviceamt, 10) + parseInt(extrasamt, 10) - parseInt(discountamt, 10) + parseInt(tipamt, 10)
 
     const serviceOptions=services.map((service, index) => (
-        <option value={index}>{service}</option>
+        <option value={index}>{service.name}</option>
     ))
 
 
@@ -157,12 +184,16 @@ class ClientAppointment extends Component {
         borderTop:'2px solid #00B29E'
     }
 
+    // const provider = {
+    //   name: this.state.services[0].provider
+    // }
+
 
     return (
       <Grid className="apptcon">
         <Row>
           <Col md={12}>
-            <h1 style={topHeading}>Client, Book Me!</h1>
+            <h1 style={topHeading}>Book {this.state.provider}</h1>
             <p>Complete the fields below to get my awesome services</p>
           </Col>
 
@@ -191,24 +222,6 @@ class ClientAppointment extends Component {
             </FormGroup>
 
             <h2 style={headingMargin}>Booking Location</h2>
-
-            <FormGroup>
-
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Location</ControlLabel>
-              </Col>
-
-
-              <Col className="extras" sm={7} onChange={ this.handleChange.bind(this, 'extraitem') }>
-                <Checkbox value="Extra Item 1">
-                  Not Applicable
-                </Checkbox>
-                <Checkbox value="Extra Item 2">
-                  Specific Location
-                </Checkbox>
-              </Col>
-            </FormGroup>
-
 
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
@@ -263,58 +276,6 @@ class ClientAppointment extends Component {
               </Col>
             </FormGroup>
 
-
-            <FormGroup controlId="formControlsSelect">
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Frequency</ControlLabel>
-              </Col>
-
-              <Col sm={7}>
-                <FormControl componentClass="select" placeholder="select" onChange={ this.handleChange.bind(this, 'frequency') }>
-                  <option></option>
-                  <option value="One Time">One Time</option>
-                  <option value="Monthly">Monthly</option>
-                  <option value="Weekly">Weekly</option>
-                  <option value="Biweekly">Biweekly</option>
-                </FormControl>
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-
-              <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Extras</ControlLabel>
-              </Col>
-
-
-              <Col className="extras" sm={7} onChange={ this.handleChange.bind(this, 'extraitem') }>
-                <Checkbox value="Extra Item 1">
-                  Extra Item 1
-                </Checkbox>
-                <Checkbox value="Extra Item 2">
-                  Extra Item 2
-                </Checkbox>
-                <Checkbox value="Extra Item 3">
-                  Extra Item 3
-                </Checkbox>
-                <Checkbox value="Extra Item 4">
-                  Extra Item 4
-                </Checkbox>
-                <Checkbox value="Extra Item 5">
-                  Extra Item 5
-                </Checkbox>
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-
-            <Col sm={4} smOffset={3} className="addservice">
-              <Button block>Add Service</Button>
-            </Col>
-
-            </FormGroup>
-
-
             <FormGroup controlId="formControlsSelect">
               <Col componentClass={ControlLabel} sm={3}>
                 <ControlLabel>Payment</ControlLabel>
@@ -332,17 +293,47 @@ class ClientAppointment extends Component {
             <h2 style={headingMargin}>When</h2>
 
             <Col sm={12}>
-              <MyCalendar />
+              <MyCalendar
+              useridfromparent={user_id} />
             </Col>
 
             <FormGroup controlId="formControlsSelect">
+
               <Col componentClass={ControlLabel} sm={3}>
-                <ControlLabel>Date / Time</ControlLabel>
+                  <ControlLabel>Date / Time</ControlLabel>
               </Col>
 
-              <Col sm={7}>
+              <Col md={3} sm={5}>
+
+                <DatePicker
+                  className='date-input'
+                  selected={this.state.startDate}
+                  onChange={this.handleDateChange.bind(this)}
+                  onSelect={this.handleDateSelect.bind(this)}
+                  />
 
               </Col>
+
+               <div>
+                 <Col sm={4}>
+                   <FormControl onChange={this.handleChange.bind(this, 'time')} componentClass="select" placeholder="Time">
+                    <option value="8:00am"></option>
+                     <option value="9:00AM">9:00AM</option>
+                     <option value="10:00AM">10:00AM</option>
+                     <option value="11:00AM">11:00AM</option>
+                     <option value="12:00PM">12:00PM</option>
+                     <option value="1:00PM">1:00PM</option>
+                     <option value="2:00PM">2:00PM</option>
+                     <option value="3:00PM">3:00PM</option>
+                     <option value="4:00PM">4:00PM</option>
+                     <option value="5:00PM">5:00PM</option>
+                     <option value="6:00PM">6:00PM</option>
+                     <option value="7:00PM">7:00PM</option>
+                     <option value="8:00PM">8:00PM</option>
+
+                   </FormControl>
+                 </Col>
+               </div>
             </FormGroup>
 
             <h2 style={headingMargin}>Additional Info</h2>
@@ -408,5 +399,7 @@ class ClientAppointment extends Component {
   }
 
 }
+
+
 
 export default ClientAppointment;

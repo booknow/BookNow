@@ -48,7 +48,7 @@ class AddAppointment extends Component {
   }
 
   componentWillMount(){
-
+    console.log(this.props.match.params.id)
     axios.get(API_BASE_URL + '/api/user')
     .then(response => {
       this.setState({id: response.data})
@@ -77,6 +77,10 @@ class AddAppointment extends Component {
     // console.log("IN createAppt: ", this.state)
     axios.post(API_BASE_URL + "/createAppointment", this.state)
     console.log(this.state);
+
+    this.setState({firstname: ''})
+
+
   }
 
 
@@ -104,7 +108,7 @@ class AddAppointment extends Component {
   this.setState({
 
     serviceamt: this.state.services[e.target.value].price,
-    servicetype:this.state.services[e.target.value].name
+    servicetype: this.state.services[e.target.value].name
 
   })
   }
@@ -173,8 +177,6 @@ class AddAppointment extends Component {
     ))
 
 
-
-
     return (
       <Grid className="apptcon">
         <Row>
@@ -185,7 +187,7 @@ class AddAppointment extends Component {
           <Form horizontal onSubmit={this.createAppt.bind(this)}>
 
           <h2 style={headingMargin}>Who</h2>
-            <FormGroup >
+            <FormGroup>
             <Col componentClass={ControlLabel} sm={3}>
                Email
              </Col>
@@ -199,7 +201,7 @@ class AddAppointment extends Component {
                Name
              </Col>
              <Col sm={4}>
-               <FormControl onChange={this.handleChange.bind(this, 'firstname')} type="text" placeholder="First Name" />
+               <FormControl onChange={this.handleChange.bind(this, 'firstname')} ref="firstname" type="text" placeholder="First Name" />
              </Col>
              <Col sm={5}>
                <FormControl onChange={this.handleChange.bind(this, 'lastname')} type="text" placeholder="Last Name" />
@@ -308,7 +310,7 @@ class AddAppointment extends Component {
             <FormGroup controlId="formControlsSelect">
 
               <Col componentClass={ControlLabel} sm={3}>
-                  <ControlLabel>Date/Time</ControlLabel>
+                  <ControlLabel>Date / Time</ControlLabel>
               </Col>
 
               <Col md={3} sm={5}>
@@ -358,7 +360,14 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button className="panel-underbtn" bsSize="large" block type="submit">Create Appointment</Button>
+            <Row>
+              <Col sm={6}>
+                <Button href="home" bsSize="large" block>Return Home</Button>
+              </Col>
+              <Col sm={6}>
+                <Button className="panel-underbtn" bsSize="large" block type="submit">Create Appointment</Button>
+              </Col>
+            </Row>
 
           </Form>
           </Panel>
