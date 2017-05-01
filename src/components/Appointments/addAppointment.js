@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button, Checkbox, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
+import {Button, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
 import API_BASE_URL from '../../utils/api-helper'
 
@@ -30,7 +30,6 @@ class AddAppointment extends Component {
       state: null,
       zip: null,
       frequency: null,
-      extraitem: null,
       paymentmethod: null,
       comments: null,
       id: null,
@@ -39,7 +38,7 @@ class AddAppointment extends Component {
       services: []
     }
 
-    let test = null;
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -59,11 +58,11 @@ class AddAppointment extends Component {
         const serviceArr = response.data.map(service => {
           return {name: service.service_name, price: service.services_provided_price}
         })
-      //  this.setState({servicetype: response.data})
 
-       console.log(serviceArr)
 
-       this.setState({services: [...this.state.services, ... serviceArr]
+
+
+       this.setState({services: [...this.state.services, ...serviceArr]
        })
 
       })
@@ -182,7 +181,9 @@ class AddAppointment extends Component {
           <Col sm={8}>
           <Panel className="appt-panel">
           <h1 style={topHeading}>New Appointment</h1>
+
           <Form horizontal onSubmit={this.createAppt.bind(this)}>
+
           <h2 style={headingMargin}>Who</h2>
             <FormGroup >
             <Col componentClass={ControlLabel} sm={3}>
@@ -357,8 +358,7 @@ class AddAppointment extends Component {
               </Col>
             </FormGroup>
 
-            <Button className="panel-underbtn" bsSize="large" block type='submit'>Create Appointment</Button>
-
+            <Button className="panel-underbtn" bsSize="large" block type="submit">Create Appointment</Button>
 
           </Form>
           </Panel>

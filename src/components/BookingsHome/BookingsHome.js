@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 // var ReactDOM = require('react-dom');
-import { Popover, Well, Tooltip,Modal, Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
+import { Well, Modal, Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
 import API_BASE_URL from '../../utils/api-helper'
 
 import { Link } from 'react-router-dom';
@@ -115,23 +115,23 @@ class BookingsHome extends Component {
               <td>{appointment.date}</td>
               <td><Link to={`/customerInfo/${appointment.id}`}>{appointment.first_name} {appointment.last_name} </Link></td>
               <td>{appointment.address_street}, {appointment.address_city}, {appointment.address_state} {appointment.address_zip}</td>
-              
+
               <td>{appointment.email}</td>
             </tr>
 
           )
       })
 
-      const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-      const tooltip = (
-        <Tooltip id="modal-tooltip">
-          wow.
-        </Tooltip>
-      );
+    //   const popover = (
+    //   <Popover id="modal-popover" title="popover">
+    //     very popover. such engagement
+    //   </Popover>
+    // );
+      // const tooltip = (
+      //   <Tooltip id="modal-tooltip">
+      //     wow.
+      //   </Tooltip>
+      // );
 
 
         return (
