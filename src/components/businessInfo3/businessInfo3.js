@@ -9,9 +9,8 @@ import {
     Panel
 } from 'react-bootstrap'
 import '../businessInfoStart/businessInfoStart.css';
-import Checkbox from '../../utils/Checkbox';
+import Checkbox from '../Checkbox';
 import axios from 'axios';
-import API_BASE_URL from '../../utils/api-helper';
 
 const items = [
   'Monday',
@@ -55,7 +54,7 @@ export default class BusinessInfo3 extends Component {
     )
 
     postToServer() {
-      return axios.post(API_BASE_URL + '/api/setup/dates', this.state.selectedCheckboxes)
+      return axios.post('/api/setup/dates', this.state.selectedCheckboxes)
     }
 
     handleFormSubmit = formSubmitEvent => {

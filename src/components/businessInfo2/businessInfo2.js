@@ -14,7 +14,7 @@ import {
 } from 'react-bootstrap'
 import '../businessInfoStart/businessInfoStart.css';
 import axios from 'axios'
-import API_BASE_URL from '../../utils/api-helper'
+
 
 export default class BusinessInfo2 extends Component {
 
@@ -37,10 +37,10 @@ export default class BusinessInfo2 extends Component {
   componentWillMount(){
 
 
-    axios.get(API_BASE_URL + '/api/user')
+    axios.get('/api/user')
     .then(response => {
       this.setState({id: response.data})
-      axios.get(API_BASE_URL + '/api/setup/services/' + this.state.id).then(response=>{
+      axios.get('/api/setup/services/' + this.state.id).then(response=>{
         this.setState({servicesProvided: response.data})
         })
       })
@@ -69,7 +69,7 @@ export default class BusinessInfo2 extends Component {
 
 
 
-      axios.put(API_BASE_URL + '/api/setup/services/' + this.state.id, this.state.servicesProvided).then((response) =>{
+      axios.put('/api/setup/services/' + this.state.id, this.state.servicesProvided).then((response) =>{
         console.log(this.state);
 
       })

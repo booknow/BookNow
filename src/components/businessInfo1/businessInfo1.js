@@ -13,7 +13,7 @@ import {
 
 import '../businessInfoStart/businessInfoStart.css';
 import axios from 'axios'
-import API_BASE_URL from '../../utils/api-helper';
+;
 
 export default class BusinessInfo1 extends Component {
 
@@ -28,7 +28,7 @@ export default class BusinessInfo1 extends Component {
           selected: []
         }
 
-        axios.get(API_BASE_URL + '/api/setup/services').then((response) => {
+        axios.get('/api/setup/services').then((response) => {
           response.data.map( service => {
             this.setState({selectableServices: [...this.state.selectableServices, {name: service.service_name, id: service.service_id, selected: false}]})
           })
@@ -54,7 +54,7 @@ export default class BusinessInfo1 extends Component {
         }
       })
 
-        axios.post(API_BASE_URL + '/api/setup', {idArr}).then((response) =>{
+        axios.post('/api/setup', {idArr}).then((response) =>{
           console.log(response);
         })
     }

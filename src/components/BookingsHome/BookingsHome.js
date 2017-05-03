@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from "axios";
 // var ReactDOM = require('react-dom');
 import { Well, Modal, Grid, Row, Col, MenuItem, DropdownButton ,FormGroup, InputGroup,FormControl,Jumbotron ,Button, Table} from "react-bootstrap";
-import API_BASE_URL from '../../utils/api-helper'
+
 
 import { Link } from 'react-router-dom';
 
@@ -28,17 +28,17 @@ class BookingsHome extends Component {
   }
 
     componentWillMount() {
-      axios.get(API_BASE_URL + '/api/user')
+      axios.get('/api/user')
       .then(response => {
         this.setState({id: response.data})
 
       }).then(()=> {
-        return axios.get(API_BASE_URL + '/appointments/' + this.state.id).then((response)=>{
+        return axios.get('/appointments/' + this.state.id).then((response)=>{
           this.setState({appointments: response.data})
           console.log(this.state.id);
         })
       }).then(()=>{
-        return axios.get(API_BASE_URL + "/getApptCount/" + this.state.id).then((response)=>{
+        return axios.get("/getApptCount/" + this.state.id).then((response)=>{
           this.setState({ApptCount: response.data[0].count})
         })
       })

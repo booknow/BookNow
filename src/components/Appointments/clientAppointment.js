@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Button, Checkbox, Table, Panel, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
-import API_BASE_URL from '../../utils/api-helper'
+
 import './apptmnt.css'
 import MyCalendar from './bookingCal';
 
@@ -49,11 +49,11 @@ class ClientAppointment extends Component {
   componentWillMount(){
     // console.log('this is the id?', this.props.match.params.id);
     // this.setState({exported_id: this.props.match.params.id})
-    // console.log(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id);
+    // console.log("/api/setup/services/" + this.props.match.params.id);
 
 
 
-    axios.get(API_BASE_URL + "/api/setup/services/" + this.props.match.params.id).then(response =>{
+    axios.get("/api/setup/services/" + this.props.match.params.id).then(response =>{
       console.log(response);
       const serviceArr = response.data.map(service=> {
 
@@ -123,7 +123,7 @@ class ClientAppointment extends Component {
 
     console.log(this.state);
 
-    const booking = axios.post(API_BASE_URL + '/api/book', this.state).then(function(response) {console.log(response);})
+    const booking = axios.post('/api/book', this.state).then(function(response) {console.log(response);})
     .catch(function(err) {console.log(err);})
 
     return booking;
