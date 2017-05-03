@@ -2,12 +2,13 @@ import React, {Component} from "react";
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import './LogIn.css';
+import API_BASE_URL from '../../utils/api-helper';
 
 class LogIn extends Component {
     login(e) {
       e.preventDefault()
       console.log("Logging in")
-      axios.get('http://localhost:3000/auth/facebook')
+      axios.get(API_BASE_URL + '/auth/facebook')
       .then(response => {
         console.log(response)
       })
@@ -33,7 +34,7 @@ class LogIn extends Component {
                         <input className="form_group" type="text" name="password"/>
                     </form>
                     <Button className="btn btn-signIn"> Sign In </Button>
-                    <Button href="http://localhost:3000/auth/facebook" className="btn btn-facebook" >Login with Facebook</Button>
+                    <Button href="{API_BASE_URL}/auth/facebook" className="btn btn-facebook" >Login with Facebook</Button>
 
                 </div>
             </div>
