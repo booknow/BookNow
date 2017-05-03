@@ -4,7 +4,7 @@ import React, {
 import BigCalendar from 'react-big-calendar';
 import axios from 'axios';
 import moment from 'moment';
-import API_BASE_URL from '../../utils/api-helper';
+;
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import later from 'later'
 import './booking.css'
@@ -23,7 +23,7 @@ class MyCalendar extends Component {
 
 
 
-        axios.get(API_BASE_URL + '/api/setuppref/' + this.props.useridfromparent)
+        axios.get('/api/setuppref/' + this.props.useridfromparent)
                 .then((response) => {
 
                     console.log(response);

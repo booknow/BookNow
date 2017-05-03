@@ -9,7 +9,7 @@ import {
     Row,
     Col,
 } from "react-bootstrap";
-import API_BASE_URL from '../../utils/api-helper';
+;
 
 class CustomerInfo extends Component {
 
@@ -78,7 +78,7 @@ class CustomerInfo extends Component {
     }
 
     componentWillMount(){
-      axios.get(API_BASE_URL + "/customer/" + this.props.match.params.id).then(response => {
+      axios.get("/customer/" + this.props.match.params.id).then(response => {
         console.log("Time is:" , response.data.time);
 
         var formattedDate = new Date(response.data.date)

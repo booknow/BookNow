@@ -7,17 +7,14 @@ const db = require('./db')
 const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./config.js')
-const port = 3000;
+const port = 5555;
 
 const app = express();
 
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/build'))
 
 app.use(json());
-app.use(cors({
-  origin: 'http://localhost:4000',
-  credentials: true
-}))
+app.use(cors())
 
 app.use(session({
   secret: config.sessionSecret,
@@ -35,7 +32,7 @@ let uber = {}
 passport.use(new FacebookStrategy({
   clientID: config.facebook.clientId,
   clientSecret: config.facebook.clientSecret,
-  callbackURL: 'http://localhost:3000/auth/facebook/callback'
+  callbackURL: config.facebook.callbackURL
 }, function (token, refreshToken, profile, done) {
   db.findUser(profile.id, function(err, users) {
 
@@ -69,7 +66,7 @@ passport.deserializeUser(function(user, done) {
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    successRedirect: "http://localhost:4000/home" ,failureRedirect:'http://localhost:4000/setup'
+    successRedirect: "/home" ,failureRedirect:'/setup'
   })
 )
 
@@ -256,7 +253,9 @@ app.get('/servicesProvided' , function(req,res,next) {
 
 
 
-
+app.get('*', (req,res,next) => {
+  res.sendFile(__dirname + '/build/index.html')
+})
 app.listen(port , () => {
   console.log(`listenin' to port ${port}`);
 });

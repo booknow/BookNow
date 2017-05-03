@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {Button, Table, Panel, InputGroup, Form, Grid, Col, Row, FormControl, FormGroup, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
-import API_BASE_URL from '../../utils/api-helper'
+
 
 import './apptmnt.css';
 
@@ -49,11 +49,11 @@ class AddAppointment extends Component {
 
   componentWillMount(){
     console.log(this.props.match.params.id)
-    axios.get(API_BASE_URL + '/api/user')
+    axios.get('/api/user')
     .then(response => {
       this.setState({id: response.data})
     }).then(()=> {
-      axios.get(API_BASE_URL + '/api/book/' + this.state.id ).then(response =>{
+      axios.get('/api/book/' + this.state.id ).then(response =>{
 
         const serviceArr = response.data.map(service => {
           return {name: service.service_name, price: service.services_provided_price}
@@ -75,7 +75,7 @@ class AddAppointment extends Component {
 
     let total = null;
     // console.log("IN createAppt: ", this.state)
-    axios.post(API_BASE_URL + "/createAppointment", this.state)
+    axios.post("/createAppointment", this.state)
     console.log(this.state);
 
     this.setState({firstname: ''})
