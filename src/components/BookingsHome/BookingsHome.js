@@ -146,7 +146,7 @@ class BookingsHome extends Component {
                      <Modal.Body>
 
                         <p>Share your link to your schedule! Here is a link to your schedule:</p>
-                        <Well>http://localhost:4000/client/{this.state.id}</Well>
+                        <Well>http://104.131.121.35:5555/client/{this.state.id}</Well>
 
 
                       </Modal.Body>
